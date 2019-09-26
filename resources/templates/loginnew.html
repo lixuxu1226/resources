@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="../static/css/login.css">
+    <script src="../static/js/jquery-3.1.1.min.js" type="text/javascript"></script>
+</head>
+<body>
+<div class="login">
+    <div class="login_title">
+        <p> <img src="../static/img/jinghui.png" style="width:80px;height:80px;margin-right:30px;"/>跨区域押解边缘风险预警平台</p>
+    </div>
+    <div class="login_main">
+<!--        <div class="main_left"></div>-->
+        <div class="main_right">
+            <div class="right_title">用户登录</div>
+            <form>
+                <div class="username" >
+                    <img src="../static/img/username.png" alt="" >
+                    <input id="userName" type="text" placeholder="请输入用户名">
+                </div>
+                <div class="password">
+                    <img src="../static/img/password.png" alt="">
+                    <input id="userPassword" type="text" placeholder="请输入密码">
+                </div>
+                <button type="submit" style="width: 340px;margin-left: 50px;height: 40px;background-color: #0064c8;color: white;font-size: larger;" id="userLogin">登  录</button>
+
+
+                <!--                <button class="yes_login" id="userLogin"><button>登&nbsp;&nbsp;&nbsp;&nbsp;录</button></button>-->
+				<p style="margin-top:20px;font-size:12px;color:#FA6F03;text-align: center">忘记密码</p>
+            </form>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#userLogin').click(function () {
+            var userName = $('#userName').val().toString();
+            var userPassword = $('#userPassword').val().toString();
+
+            // alert(userName+'/'+userPassword);
+            // console.log(userName+'/'+userPassword);
+            var oDate = new Date();
+            oDate.setDate(oDate.getDate() + 7);//保存7天
+
+            if(userName==''||userPassword==''){
+                alert("用户名或密码不能为空");
+
+            }else {
+
+                $.ajax({
+                    url:"http://10.108.122.144:8089/users/login",
+                    type:"POST",
+                    dataType:'json',
+                    data:{userName:userName,password:userPassword},
+
+                    success:function (msg){
+                        if(msg.code==200){
+                            var userName=msg.data.userName;
+                            var token=msg.data.loginToken;
+                            docCookies.setItem(userName,token,oDate);
+                            window.location.href=encodeURI('home.html?userName='+userName);
+                        }else {
+                            alert("用户名或密码不正确，请重新登录");
+                        }
+
+                    },
+                    complete:function (XMLHttpRequest, textStatus) {
+                        // alert(textStatus);
+                    },
+                    error: function (XMLHttpRequest, textStatus, thrownError) {
+                        // console.log("aaaaa")
+                    }
+
+
+
+                })
+            }
+
+        })
+    })
+
+</script>
+
+</body>
+</html>

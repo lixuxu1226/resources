@@ -1,0 +1,1161 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>index</title>
+    <script type="text/javascript" src="../static/js/jquery.js"></script>
+    <link rel="stylesheet" href="../static/css/comon0.css">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport' >
+    <meta name="viewport" content="width=device-width" >
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link href="../static/css/amaze.css" rel="stylesheet" >
+    <link href="../static/css/jquery-ui.css" rel="stylesheet">
+    <link href="../static/css/themify-icons.css" rel="stylesheet">
+    <style>
+
+        .demo-placeholder {
+            width: 100%;
+            height: 100%;
+            font-size: 14px;
+            line-height: 1.2em;
+            position: relative;
+            margin-top: 20px;
+            /*background-color: floralwhite;*/
+
+        }
+        .inner-placeholder{
+            width: 40px;height: 40px;top:0px;
+            position: absolute;
+            /*z-index: ;*/
+
+            right: 10px;
+            top:10px;
+
+        }
+    </style>
+</head>
+<script>
+    $(window).load(function(){
+        $(".loading").fadeOut()
+    })
+
+    /****/
+    $(document).ready(function(){
+        var whei=$(window).width()
+        $("html").css({fontSize:whei/20})
+        $(window).resize(function(){
+            var whei=$(window).width()
+            $("html").css({fontSize:whei/20})
+        });
+    });
+</script>
+<body>
+<div class="canvas" style="opacity: .2">
+    <iframe frameborder="0" src="../static/js/index.html" style="width: 100%; height: 100%"></iframe>
+</div>
+<div class="loading">
+    <div class="loadbox"> <img src="../static/img/loading.gif"> 页面加载中... </div>
+</div>
+<div class="head">
+    <h1 style="margin-top: 5px">跨区域押解边缘风险预警平台</h1>
+    <div class="function" style="left:.1rem; ">
+        <nav class="nav nav5">
+            <ul>
+                <li>
+                    <a href="#">实时监控</a>
+
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="function" style="left:2.1rem; ">
+        <nav class="nav nav5">
+            <ul>
+                <li>
+                    <a href="#">设备管理</a>
+                    <ul>
+                        <li><a href="checkDevice.html">查看设备信息</a></li>
+                        <li><a href="addDevice.html">设备注册</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="function" style="left:4.1rem; ">
+        <nav class="nav nav5">
+            <ul>
+                <li>
+                    <a href="#">用户管理</a>
+                    <ul>
+                        <li><a href="user-profile.html">查看用户信息</a></li>
+                        <li><a href="register.html">用户注册</a></li>
+                        <li><a href="#" id="logout">注销</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="weather"><!--<img src="picture/weather.png"><span>多云转小雨</span>--><span id="showTime"></span></div>
+
+    <script>
+        var t = null;
+        t = setTimeout(time,1000);//開始运行
+        function time()
+        {
+            clearTimeout(t);//清除定时器
+            dt = new Date();
+            var y=dt.getFullYear();
+            var mt=dt.getMonth()+1;
+            var day=dt.getDate();
+            var h=dt.getHours();//获取时
+            var m=dt.getMinutes();//获取分
+            var s=dt.getSeconds();//获取秒
+            document.getElementById("showTime").innerHTML = y+"年"+mt+"月"+day+"日"+h+"时"+m+"分"+s+"秒";
+            t = setTimeout(time,1000); //设定定时器，循环运行
+        }
+
+    </script>
+
+
+</div>
+<div class="mainbox">
+    <ul class="clearfix">
+        <li>
+            <div class="boxall" style="height: 4.3rem">
+                <!--<div class="alltitle">边缘设备</div>-->
+<!--                <div id='deviceFullScreen' class="inner-placeholder" style="background: url(../static/img/fullScreen.png);z-index: 4"></div>-->
+                <!--background: url(../static/img/fullScreen.png)-->
+
+                <div class="content" style="height: 500px" id="device">
+                        <!--<div class="row" style="height: 350px">-->
+                    <div id="device-chart" class="demo-placeholder" style="height: 350px"></div>
+                </div>
+            </div>
+            <div class="boxall" style="height: 2rem">
+                <!--<div class="alltitle">设备状态</div>-->
+                <div class="content">
+                    <div id="deviceInfo-chart" class="demo-placeholder" style="height: 100px"></div>
+                </div>
+            </div>
+            <div class="boxall" style="height: 3.15rem">
+                <!--<div class="alltitle">统计数据</div>-->
+                <div class="content">
+                    <div class="demo-placeholder" style="height: 150px">
+                        <table style="text-align: center">
+                            <thead>
+                            <tr>
+                                <th style="text-align: center"><p>ID</p></th>
+                                <th style="text-align: center"><p>任务</p></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th>1</th>
+                                <th>risk prediction</th>
+
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="map" style="height:6.4rem">
+                <div class="card" style="height:100%; width: 100%;">
+
+                    <div class="content" style="height:100%; width: 100%;">
+                        <div id="map-chart" class="demo-placeholder" style="height: 100%"></div>
+                        <div id='location' class="inner-placeholder" style="right:60px;background: url(../static/img/location.png)"></div>
+
+                        <div id='mapFullScreen' class="inner-placeholder" style="background: url(../static/img/fullScreen.png)"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="boxall" style="margin-top:14px;height: 3.15rem">
+                <div class="alltitle">风险指数以及犯人数据</div>
+                <div class="card" style="height:100%; width: 100%;">
+                    <div id="realtime-chart" class="demo-placeholder"></div>
+                    <div class="inner-placeholder" style="width:100px;height:116px;background:url(../static/img/peo.png);margin-right: 15px;margin-top: -10px">
+
+                    </div>
+                    <div class="inner-placeholder" style="margin-top: 110px;margin-right: 15px;width: 100px;height:50px">
+                        <nav class="nav nav5">
+                            <ul>
+                                <li>
+                                    <a href="#">张三</a>
+                                    <ul id="selectPrisoner">
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="boxall" style="height:3.15rem">
+<!--                <nav class="nav nav5" style="margin-left: 30%;margin-right: 30%; height: .5rem;">-->
+<!--                    <ul>-->
+<!--                        <li>-->
+<!--                            <a id="myDropdown1">A车摄像头1号</a>-->
+<!--                            <ul>-->
+<!--                                <li><a id="A车摄像头2号" onclick="changeCamera(this)">A车摄像头2号</a></li>-->
+<!--                                <li><a id="A车摄像头3号" onclick="changeCamera(this)">A车摄像头3号</a></li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </nav>-->
+                <video id="video1" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 5px">
+                    <source src="../static/img/16.mp4" type="" />
+                </video>
+            </div>
+            <div class="boxall" style="height: 3.15rem">
+<!--                <nav class="nav nav5" style="margin-left: 30%;margin-right: 30%; height: .5rem;">-->
+<!--                    <ul>-->
+<!--                        <li>-->
+<!--                            <a href="#">B车摄像头2号</a>-->
+<!--                            <ul>-->
+<!--                                <li><a id="B车摄像头1号" onclick="changeCamera(this)">B车摄像头1号</a></li>-->
+<!--                                <li><a id="B车摄像头3号" onclick="changeCamera(this)">B车摄像头3号</a></li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </nav>-->
+                <video id="video2" width=100%;  controls playsInline webkit-playsinline [autoplay] style="padding-top: 5px">
+                    <source src="../static/img/16.mp4" type="" />
+                </video>
+            </div>
+            <div class="boxall" style="height: 3.15rem">
+<!--                <nav class="nav nav5" style="margin-left: 30%;margin-right: 30%; height: .5rem;">-->
+<!--                    <ul>-->
+<!--                        <li>-->
+<!--                            <a href="#">C车摄像头1号</a>-->
+<!--                            <ul>-->
+<!--                                <li><a id="C车摄像头2号" onclick="changeCamera(this)">C车摄像头2号</a></li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </nav>-->
+                <video id="video3" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 5px">
+                    <source src="../static/img/16.mp4" type="" />
+                </video>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="back"></div>
+
+
+
+<!--   Core JS Files   -->
+<script src="../static/js/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script src="../static/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../static/js/jquery-ui.js" type="text/javascript"></script>
+<script src="../static/js/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
+<script src="https://webapi.amap.com/maps?v=1.4.14&key=7dd5769916609fcc5c889c1797c4ebd7"></script>
+<script src="../static/js/moment-with-locales.js"></script>
+<script src="../static/js/jquery.flot.js"></script>
+<script src="../static/js/bootstrap-datetimepicker.min.js"></script>
+<script src="../static/js/bootstrap-datetimepicker.zh-CN.js" type="text/javascript"></script>
+<script src="../static/js/amaze.js"></script>
+<script src="../static/js/cookie.js"></script>
+<!--<script src="../static/js/bootstrap-submenu.js"></script>-->
+<script src="../static/js/ezuikit.js"></script>
+<script src="../static/js/flot-charts.js"></script>
+<script type="text/javascript" src="../static/js/echarts.js"></script>
+<script src="../static/js/device.js"></script>
+
+<script type="text/javascript">
+    // 监控
+    // var video1=new EZUIPlayer({
+    //     id: 'video1',
+    //     // autoplay: true,
+    //     // url: 'http://hls.open.ys7.com/openlive/f01018a141094b7fa138b9d0b856507b.m3u8',
+    //     // accessToken: 'at.23hqfag85ypahqi2aty36nck4o22nomx-7eekzi3exi-1dkodox-ng1ybplnu',
+    //     // decoderPath: '../static/img',
+    //     // width: 600,
+    //     // height: 400,
+    //     // handleError: handleError,
+    // });
+    $(document).ready(function () {
+        var video1 = new EZUIKit.EZUIPlayer('video1');
+        video1.play();
+        var video2 = new EZUIKit.EZUIPlayer('video2');
+        video2.play();
+        var video3 = new EZUIKit.EZUIPlayer('video3');
+        video3.play();
+    })
+
+</script>
+<script type="text/javascript">
+    // $(function () {
+    $(".datetimePicker").datetimepicker({
+        language:'zh-CN',
+        autoclose:true,
+        startView:2,
+        tadayBtn:true,
+        format:'yyyy-mm-dd',
+        minView:2,
+        initialDate:new Date()
+    });//当在日期表中选择完时间后日期表就会自动关闭
+    //初始化
+
+    window.addEventListener("resize", function () {
+
+        // mobileDeviceChart.resize();
+        realtimeChart.resize();
+
+    });
+    //changeCamera
+    function changeCamera(obj) {
+        console.log(obj.id);
+        $('#myDropdown1').html(obj.id);
+    }
+
+
+</script>
+<script type="text/javascript">
+    //全屏浏览
+    $(document).ready(function () {
+        var deviceFullScreen = document.getElementById("deviceFullScreen");
+        deviceFullScreen.onclick = function () {
+            // mobileDevice-chart
+            // var mobileDevice=document.getElementById('mobileDevice-chart');
+            var deviceInfo=document.getElementById('deviceInfo-chart');
+            // mobileDevice.style.height='70vh';
+            deviceInfo.style.height='30vh';
+            var deviceScreen = document.getElementById('device');
+            requestFullScreen(deviceScreen)
+        };
+        var mapFullScreen = document.getElementById("mapFullScreen");
+        mapFullScreen.onclick = function () {
+            var deviceScreen = document.getElementById('map-chart');
+            requestFullScreen(deviceScreen);
+
+        };
+
+
+
+        var requestFullScreen = function (element) {
+            var requestMethod = element.requestFullScreen
+                || element.webkitRequestFullScreen //谷歌
+                || element.mozRequestFullScreen  //火狐
+                || element.msRequestFullScreen; //IE11
+            if (requestMethod) {
+                requestMethod.call(element);   //执行这个请求的方法
+            } else if (typeof window.ActiveXObject !== "undefined") {  //window.ActiveXObject判断是否支持ActiveX控件
+                //这里其实就是模拟了按下键盘的F11，使浏览器全屏
+                var wscript = new ActiveXObject("WScript.Shell"); //创建ActiveX
+                if (wscript !== null) {    //创建成功
+                    wscript.SendKeys("{F11}");//触发f11
+                }
+            }
+        };
+
+
+
+    })
+</script>
+
+<script type="text/javascript">
+    // window.init = function(){
+    $(document).ready(function () {
+        var marker,lineArr = [[116.478935,39.997761],[116.478939,39.997825],[116.478912,39.998549],[116.478912,39.998549],[116.478998,39.998555],[116.478998,39.998555],[116.479282,39.99856],[116.479658,39.998528],[116.480151,39.998453],[116.480784,39.998302],[116.480784,39.998302],[116.481149,39.998184],[116.481573,39.997997],[116.481863,39.997846],[116.482072,39.997718],[116.482362,39.997718],[116.483633,39.998935],[116.48367,39.998968],[116.484648,39.999861]];
+
+        var map = new AMap.Map('map-chart', {
+                resizeEnable:true,
+                center: [116.397428, 39.90923],
+                zoom: 17,
+                mapStyle:"amap://styles/darkblue"
+            }
+        );
+        // var polyline = new AMap.Polyline({
+        //     map: map,
+        //     path: lineArr,
+        //     showDir:true,
+        //     strokeColor: "#364150",  //线颜色
+        //     // strokeOpacity: 1,     //线透明度
+        //     strokeWeight: 6,      //线宽
+        //     // strokeStyle: "solid"  //线样式
+        // });
+
+
+        //动态轨迹
+        marker = new AMap.Marker({
+            map: map,
+            position: [116.478935,39.997761],
+            icon: "https://webapi.amap.com/images/car.png",
+            offset: new AMap.Pixel(-26, -13),
+            autoRotation: true,
+            angle:-90,
+        });
+        var passedPolyline = new AMap.Polyline({
+            map: map,
+            // path: lineArr,
+            strokeColor: "#47dbd4",  //线颜色
+            // strokeOpacity: 1,     //线透明度
+            strokeWeight: 6,      //线宽
+            // strokeStyle: "solid"  //线样式
+        });
+
+
+        marker.on('moving', function (e) {
+            passedPolyline.setPath(e.passedPath);
+        });
+        marker.moveAlong(lineArr, 200);
+        var inter=setInterval(function () {
+            map.setCenter(marker.getPosition());
+        },500);
+        //给location添加点击事件 点击之后停止计时，地图可平移；再次点击，回到车辆所在位置
+        var location=document.getElementById("location");
+        var flag=false;
+        location.onclick = function () {
+            if(flag==false){  //地图可平移
+                clearInterval(inter);
+                map.setStatus(true);
+                flag=true;
+                location.setAttribute('style','right:60px;background:url("../static/img/re_location.png")')
+                // console.log(flag);
+            }else { //回到车辆位置
+                map.setCenter(marker.getPosition());
+                inter=setInterval(function () {
+                    map.setCenter(marker.getPosition());
+                },500);
+                flag=false;
+                location.setAttribute('style','right:60px;background:url("../static/img/location.png")')
+
+                // console.log(flag);
+
+            }
+
+        };
+
+
+
+
+
+        map.setFitView();
+
+        // 创建一个 Icon
+        var startIcon = new AMap.Icon({
+            // 图标尺寸
+            size: new AMap.Size(25, 34),
+            // 图标的取图地址
+            image: '//a.amap.com/jsapi_demos/static/demo-center/icons/dir-marker.png',
+            // 图标所用图片大小
+            imageSize: new AMap.Size(135, 40),
+            // 图标取图偏移量
+            imageOffset: new AMap.Pixel(-9, -3)
+        });
+
+        // 将 icon 传入 marker
+        var startMarker = new AMap.Marker({
+            position: new AMap.LngLat(116.478935,39.997761),
+            icon: startIcon,
+            offset: new AMap.Pixel(-13, -30)
+        });
+        map.add(startMarker);
+        //添加一个计算机设备图标
+        var pcIcon = new AMap.Icon({
+            // 图标尺寸
+            size: new AMap.Size(35, 41),
+            // 图标的取图地址
+            image: '../static/img/pc.png',
+            // 图标所用图片大小
+            imageSize: new AMap.Size(35, 41),
+            // 图标取图偏移量
+            imageOffset: new AMap.Pixel(0, 0)
+        });
+
+        // 将 icon 传入 marker
+        var pcMarker1 = new AMap.Marker({
+            position: new AMap.LngLat(116.485699,39.999761),
+            icon: pcIcon,
+            offset: new AMap.Pixel(-13, -30)
+        });
+        var pcMarker2 = new AMap.Marker({
+            position: new AMap.LngLat(116.485769,39.998861),
+            icon: pcIcon,
+            offset: new AMap.Pixel(-13, -30)
+        });
+        map.add(pcMarker1);
+        map.add(pcMarker2);
+        // 添加一个手机设备图标
+        var phIcon = new AMap.Icon({
+            // 图标尺寸
+            size: new AMap.Size(35, 43),
+            // 图标的取图地址
+            image: '../static/img/ph.png',
+            // 图标所用图片大小
+            imageSize: new AMap.Size(35, 43),
+            // 图标取图偏移量
+            imageOffset: new AMap.Pixel(0, 0)
+        });
+
+        // 将 icon 传入 marker
+        var phMarker = new AMap.Marker({
+            position: new AMap.LngLat(116.480151,39.999453),
+            icon: phIcon,
+            offset: new AMap.Pixel(-13, -30)
+        });
+        var phMarker1 = new AMap.Marker({
+            position: new AMap.LngLat(116.483151,39.998453),
+            icon: phIcon,
+            offset: new AMap.Pixel(-13, -30)
+        });
+        map.add(phMarker1);
+        map.add(phMarker);
+        //添加平板设备图标
+        var paIcon = new AMap.Icon({
+            // 图标尺寸
+            size: new AMap.Size(35, 42),
+            // 图标的取图地址
+            image: '../static/img/pa.png',
+            // 图标所用图片大小
+            imageSize: new AMap.Size(35, 42),
+            // 图标取图偏移量
+            imageOffset: new AMap.Pixel(0, 0)
+        });
+
+        // 将 icon 传入 marker
+        var paMarker = new AMap.Marker({
+            position: new AMap.LngLat(116.478708,39.998555),
+            icon: paIcon,
+            offset: new AMap.Pixel(-13, -30)
+        });
+        map.add(paMarker);
+        //小型计算中心
+        var clIcon = new AMap.Icon({
+            // 图标尺寸
+            size: new AMap.Size(35, 42),
+            // 图标的取图地址
+            image: '../static/img/cl.png',
+            // 图标所用图片大小
+            imageSize: new AMap.Size(35, 42),
+            // 图标取图偏移量
+            imageOffset: new AMap.Pixel(0, 0)
+        });
+
+        // 将 icon 传入 marker
+        var clMarker = new AMap.Marker({
+            position: new AMap.LngLat(116.4845508,39.999555),
+            icon: clIcon,
+            offset: new AMap.Pixel(-13, -30)
+        });
+        map.add(clMarker);
+        //添加路由器
+        var lyIcon = new AMap.Icon({
+            // 图标尺寸
+            size: new AMap.Size(35, 42),
+            // 图标的取图地址
+            image: '../static/img/ly.png',
+            // 图标所用图片大小
+            imageSize: new AMap.Size(35, 42),
+            // 图标取图偏移量
+            imageOffset: new AMap.Pixel(0, 0)
+        });
+
+        // 将 icon 传入 marker
+        var lyMarker1 = new AMap.Marker({
+            position: new AMap.LngLat(116.479708,39.998444),
+            icon: lyIcon,
+            offset: new AMap.Pixel(-13, -30)
+        });
+        var lyMarker2 = new AMap.Marker({
+            position: new AMap.LngLat(116.479998,39.9988444),
+            icon: lyIcon,
+            offset: new AMap.Pixel(-13, -30)
+        });
+        var lyMarker3 = new AMap.Marker({
+            position: new AMap.LngLat(116.4799998,39.997944),
+            icon: lyIcon,
+            offset: new AMap.Pixel(-13, -30)
+        });
+        var lyMarker4 = new AMap.Marker({
+            position: new AMap.LngLat(116.483509,39.997944),
+            icon: lyIcon,
+            offset: new AMap.Pixel(-13, -30)
+        });
+        var lyMarker5 = new AMap.Marker({
+            position: new AMap.LngLat(116.4823598,39.998944),
+            icon: lyIcon,
+            offset: new AMap.Pixel(-13, -30)
+        });
+        map.add(lyMarker5);
+        map.add(lyMarker4);
+        map.add(lyMarker1);
+        map.add(lyMarker2);
+        map.add(lyMarker3);
+        //基站
+        var jzIcon = new AMap.Icon({
+            // 图标尺寸
+            size: new AMap.Size(35, 42),
+            // 图标的取图地址
+            image: '../static/img/jz.png',
+            // 图标所用图片大小
+            imageSize: new AMap.Size(35, 42),
+            // 图标取图偏移量
+            imageOffset: new AMap.Pixel(0, 0)
+        });
+
+        // 将 icon 传入 marker
+        var jzMarker1 = new AMap.Marker({
+            position: new AMap.LngLat(116.482008,39.998000),
+            icon: jzIcon,
+            offset: new AMap.Pixel(-13, -30)
+        });
+        map.add(jzMarker1);
+
+
+
+
+
+        AMap.plugin(['AMap.ToolBar','AMap.Scale','AMap.Weather','AMap.OverView'],function(){//异步同时加载多个插件
+            var toolbar = new AMap.ToolBar();
+            map.addControl(toolbar);
+            var scale = new AMap.Scale();
+            map.addControl(scale);
+            var overview = new AMap.OverView({
+                visible: true
+            });
+
+            map.addControl(overview);
+
+
+
+
+        });
+
+        //犯人列表
+        // var getPrisoner=document.getElementById("selectPrisoner");
+        //
+        // $.ajax({
+        //     type:'GET',
+        //     url:'http://10.108.122.144:8089/prisoners/get_all',
+        //     data:{},
+        //     dataType:'json',
+        //     success:function (msg) {
+        //         allPrisoners = ""
+        //         $.each(msg,function (index,item){
+        //             allPrisoners += "<li><a>" + item.prisonerName + "</a></li>"
+        //         })
+        //         getPrisoner.innerHTML = allPrisoners
+        //     }
+        // })
+    })
+
+    // }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#logout').click(function () {
+            var url =window.location.search;
+            var arrUrl=url.substr(1);
+            var userName=decodeURI(arrUrl.split('=')[1]);
+            var token=docCookies.getItem(userName).toString();
+
+            $.ajax({
+                url:'http://10.108.122.144:8089/users/logout' + "?token=" + token,
+                type:'DELETE',
+                dataType:'json',
+                data:{},
+
+                success:function (msg) {
+                    if(msg.code==200){
+                        alert("用户登出成功");
+                        window.location.href='login.html';
+                    }
+                }
+            })
+
+
+        })
+    })
+</script>
+
+<script type="text/javascript">
+    deviceALL=
+    $.ajax({
+        url:'http://10.108.122.144:8089/devices/get_all',
+        type:'GET',
+        dataType:'json',
+        async:false,
+        // data:{},
+        beforeSend: function() {
+            if(opts.init === 1) {
+                console.log('loading')
+                // $('.zh-loading').show();
+            }
+            isLoaded = false;
+        },
+        success:function (msg) {
+            deviceAll=msg;
+            // console.log(deviceAll);
+        },
+        complete: function() {
+            if(opts.init === 1) {
+                // $('.zh-loading').hide();
+                console.log('loaded')
+            }
+            isLoaded = true;
+        },
+
+
+    });
+
+    deviceChart = echarts.init(document.getElementById('device-chart'));
+    deviceOption={
+        series:{
+            name:'树图',
+            type:'tree',
+            orient:'vertical',
+            height:180,
+            symbol: 'circle',
+            symbolSize: 40,
+            itemStyle: {
+                normal: {
+                    label: {
+                        show: true,
+                        position: 'bottom',
+                        textStyle: {
+                            color: '#fdfdff',
+                            fontSize: 10,
+
+                        }
+                    },
+                    lineStyle: {
+                        color: '#fdfdff',
+                        width: 1,
+                        length:20,
+                        type: 'broken' // 'curve'|'broken'|'solid'|'dotted'|'dashed'
+                    }
+                },
+                emphasis: {
+                    label: {
+                        show: true
+                    }
+                }
+            },
+            data: [
+                {
+                    name: '云中心',
+                    value: 6,
+                    symbolSize: [48, 48],
+                    symbol: 'image://../static/img/cloud.png',
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: false
+                            }
+                        }
+                    },
+                    children: [
+                        {
+                            name: '车载服务器',
+                            value: 4,
+                            symbol: 'image://../static/img/serverv3.png',
+                            itemStyle: {
+                                normal: {
+                                    label: {
+                                        show: false
+                                    }
+                                }
+                            },
+                            symbolSize: [48, 48],
+                            children: [
+                                {
+                                    name: '设备1',
+                                    symbol: 'image://../static/img/phone.png',
+                                    symbolSize: [60,60],
+                                    value: 4,
+                                    itemStyle: {
+                                        normal: {
+                                            color: '#fa6900',
+                                            label: {
+                                                show: true,
+                                                position: 'right'
+                                            },
+
+                                        },
+                                        emphasis: {
+                                            label: {
+                                                show: false
+                                            },
+                                            borderWidth: 0
+                                        }
+                                    }
+                                },
+                                {
+                                    name: '设备2',
+                                    value: 4,
+                                    symbol: 'image://../static/img/phone.png',
+                                    symbolSize: [48,48],
+                                    itemStyle: {
+                                        normal: {
+                                            label: {
+                                                show: true,
+                                                position: 'right',
+                                                formatter: "{b}"
+                                            },
+                                            color: '#fa6900',
+                                            borderWidth: 2,
+                                            borderColor: '#cc66ff'
+
+                                        },
+                                        emphasis: {
+                                            borderWidth: 0
+                                        }
+                                    }
+                                },
+                                {
+                                    name: '设备3',
+                                    value: 2,
+                                    symbol: 'image://../static/img/phone.png',
+                                    symbolSize: [48,48],
+                                    itemStyle: {
+                                        normal: {
+                                            label: {
+                                                position: 'right'
+                                            },
+                                            color: '#fa6900',
+                                            brushType: 'stroke',
+                                            borderWidth: 1,
+                                            borderColor: '#999966',
+                                        },
+                                        emphasis: {
+                                            borderWidth: 0
+                                        }
+                                    }
+                                }
+                            ]
+
+                        }
+                    ]
+                }
+            ]
+
+
+
+
+        }
+    };
+    deviceChart.setOption(deviceOption);
+
+    deviceInfoChart=echarts.init(document.getElementById("deviceInfo-chart"));
+
+    deviceInfoOption={
+        title:{
+            show:true,
+            text:'设备1',
+            textStyle: {//主标题文本样式{"fontSize": 18,"fontWeight": "bolder","color": "#333"}
+                fontSize: 16,
+                color:'#fff',
+
+            },
+        },
+        tooltip : {
+            formatter: "{a} <br/>{c}%"
+        },
+        series : [
+            {
+                name: 'cpu占用率',
+                type: 'gauge',
+                z: 3,
+                min: 0,
+                max: 100,
+                // startAngle: 180,
+                // endAngle: 0,
+                splitNumber: 10,
+                radius: '70%',
+
+                axisLine: {            // 坐标轴线
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        width: 5,
+                        color : [ //表盘颜色
+                            [ 0.2, "#0de9ff"],//0-50%处的颜色
+                            // [ 0.7, "#fffe9b" ],//51%-70%处的颜色
+                            [ 0.8, "#ff8018" ],//70%-90%处的颜色
+                            [ 1,"#ff1701" ],//90%-100%处的颜色
+                        ],
+                    }
+
+                },
+
+                axisTick: {            // 坐标轴小标记
+                    length: 10,        // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: 'auto'
+                    }
+                },
+                splitLine: {           // 分隔线
+                    length: 15,         // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                        color: 'auto'
+                    }
+                },
+                axisLabel: {
+                    show:false
+                },
+
+                title : {
+                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    // fontWeight: 'bolder',
+                    fontSize: 12,
+                    color: '#fff',
+                    offsetCenter:['-50%','110%'],
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#fff'
+                    },
+                },
+                pointer:{
+                    length:'80%',
+                    width:4
+                },
+                detail : {
+                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    // formatter: function (value) {
+                    //     value = (value + '').split('.');
+                    //     value.length < 2 && (value.push('00'));
+                    //     return ('00' + value[0]).slice(-2)
+                    //         + '.' + (value[1] + '00').slice(0, 2);
+                    // },
+                    formatter:'{value}%',
+                    fontSize:12,
+                    color:'#fff',
+
+                    offsetCenter:['100%','110%'],
+
+                    rich: {}
+                },
+                data:[{value: 15.6, name: 'cpu占用率 :'}]
+            },
+            {
+                name: '内存占用率',
+                type: 'gauge',
+                center: ['20%', '50%'],    // 默认全局居中
+                radius: '70%',
+                min:0,
+                max:100,
+                splitNumber:10,
+                axisLine: {            // 坐标轴线
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        width: 5,
+                        color : [ //表盘颜色
+                            [ 0.2, "#0de9ff"],//0-50%处的颜色
+                            // [ 0.7, "#fffe9b" ],//51%-70%处的颜色
+                            [ 0.8, "#ff8018" ],//70%-90%处的颜色
+                            [ 1,"#ff1701" ],//90%-100%处的颜色
+                        ],
+                    }
+
+                },
+                pointer:{
+                    length:'80%',
+                    width:4
+                },
+                axisTick: {            // 坐标轴小标记
+                    length: 10,        // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: 'auto'
+                    }
+                },
+                splitLine: {           // 分隔线
+                    length: 15,         // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                        color: 'auto'
+                    }
+                },
+                axisLabel: {
+                    show:false
+                },
+
+                title : {
+                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    // fontWeight: 'bolder',
+                    fontSize: 12,
+                    color: '#fff',
+                    offsetCenter:['-50%','110%'],
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#fff'
+                    },
+                },
+                detail : {
+                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    // formatter: function (value) {
+                    //     value = (value + '').split('.');
+                    //     value.length < 2 && (value.push('00'));
+                    //     return ('00' + value[0]).slice(-2)
+                    //         + '.' + (value[1] + '00').slice(0, 2);
+                    // },
+                    formatter:'{value}%',
+                    fontSize:12,
+                    color:'#fff',
+
+                    offsetCenter:['100%','110%'],
+
+                    rich: {}
+                },
+                data:[{value: 20.5, name: '内存占用率 :'}]
+            },
+            {
+                name: '耗电量',
+                type: 'gauge',
+                center: ['80%', '50%'],    // 默认全局居中
+                radius: '70%',
+                min: 0,
+                max: 100,
+
+                splitNumber: 10,
+                axisLine: {            // 坐标轴线
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        width: 5,
+                        color : [ //表盘颜色
+                            [ 0.2, "#0de9ff"],//0-50%处的颜色
+                            // [ 0.7, "#fffe9b" ],//51%-70%处的颜色
+                            [ 0.8, "#ff8018" ],//70%-90%处的颜色
+                            [ 1,"#ff1701" ],//90%-100%处的颜色
+                        ],
+                    }
+
+                },
+                axisTick: {            // 坐标轴小标记
+                    length: 10,        // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: 'auto'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#fff'
+                    },
+                },
+                splitLine: {           // 分隔线
+                    length: 15,         // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                        color: 'auto'
+                    }
+                },
+                axisLabel: {
+                    show:false
+                },
+                pointer:{
+                    length:'80%',
+                    width:4
+                },
+
+                title : {
+                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    // fontWeight: 'bolder',
+                    fontSize: 12,
+                    color: '#fff',
+                    offsetCenter:['-50%','110%'],
+                },
+                detail : {
+                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    // formatter: function (value) {
+                    //     value = (value + '').split('.');
+                    //     value.length < 2 && (value.push('00'));
+                    //     return ('00' + value[0]).slice(-2)
+                    //         + '.' + (value[1] + '00').slice(0, 2);
+                    // },
+                    formatter:'{value}%',
+                    fontSize:12,
+                    color:'#fff',
+
+                    offsetCenter:['70%','110%'],
+
+                    rich: {}
+                },
+                data:[{value: 16.4, name: '耗电量 :'}]
+            }
+        ]
+
+    };
+    deviceInfoChart.setOption(deviceInfoOption);
+    setInterval(function (){
+        deviceInfoOption.series[0].data[0].value = (Math.random()*20).toFixed(1) - 0;
+        deviceInfoOption.series[1].data[0].value = (Math.random()*20).toFixed(1) - 0;
+        // deviceInfoOption.series[2].data[0].value = (Math.random()*8).toFixed(2) - 0;
+        // deviceInfoOption.series[3].data[0].value = (Math.random()*2).toFixed(2) - 0;
+        deviceInfoChart.setOption(deviceInfoOption,true);
+    },5000);
+
+
+
+    var socket;
+    var battery;
+    var cpuRate ;
+    var memRate ;
+    var devId;
+    if (typeof (WebSocket) == "undefined") {
+        console.log("遗憾：您的浏览器不支持WebSocket");
+    } else {
+        console.log("恭喜：您的浏览器支持WebSocket");
+
+        socket = new WebSocket("ws://10.108.122.144:8089//ws/webSocket/1");
+        //连接打开事件
+        socket.onopen = function() {
+            console.log("Socket 已打开");
+            socket.send("消息发送测试(From Client)");
+        };
+        //收到消息事件
+        socket.onmessage = function(msg) {
+            console.log(msg.data);
+            var netDelay;
+            var temp;
+
+
+            var reg0 = new RegExp( '{' , "g" );
+            var reg1 = new RegExp("}","g");
+            temp=msg.data.replace('data:','').replace(reg0,'').replace(reg1,'').split(';');
+            // console.log(temp);
+            //设备的实时数据
+            // devId=temp[0].replace('device:','').split(';')[0].split(':')[1];
+            // battery=temp[0].replace('device:','').split(';')[1].split(':')[1];
+            // cpuRate=temp[0].replace('device:','').split(';')[2].split(':')[1];
+            // memRate=temp[0].replace('device:','').split(';')[3].split(':')[1];
+            // console.log(devId);
+            // mobileDeviceOption.series[0].data[].des = battery;
+
+
+
+            //网络时延
+            netDelay=temp[1].replace('Network:','').split(',')[0].split(':')[1];
+            document.getElementById("delay").innerHTML=netDelay+'ms';
+            //得到select的
+
+
+
+
+
+
+
+
+        };
+        //连接关闭事件
+        socket.onclose = function() {
+            console.log("Socket已关闭");
+        };
+        //发生了错误事件
+        socket.onerror = function() {
+            alert("Socket发生了错误");
+        }
+
+        //窗口关闭时，关闭连接
+        window.unload=function() {
+            socket.close();
+        };
+    }
+</script>
+
+
+</body>
+</html>
