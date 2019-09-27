@@ -656,7 +656,7 @@
             break;
           case Hls.ErrorTypes.MEDIA_ERROR:
             console.log("fatal media error encountered, try to recover");
-            //hls.recoverMediaError();
+            hls.recoverMediaError();
             break;
           default:
             // cannot recover

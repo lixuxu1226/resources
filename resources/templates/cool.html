@@ -208,7 +208,8 @@
 <!--                        </li>-->
 <!--                    </ul>-->
 <!--                </nav>-->
-                <video id="video1" src="http://ivi.bupt.edu.cn/hls/cctv14.m3u8" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 5px">
+                <video id="video1" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 5px">
+                    <source src="../static/img/16.mp4" type="" />
                 </video>
             </div>
             <div class="boxall" style="height: 3.15rem">
@@ -223,7 +224,8 @@
 <!--                        </li>-->
 <!--                    </ul>-->
 <!--                </nav>-->
-                <video id="video2" src="http://ivi.bupt.edu.cn/hls/cctv6.m3u8" width=100%;  controls playsInline webkit-playsinline [autoplay] style="padding-top: 5px">
+                <video id="video2" width=100%;  controls playsInline webkit-playsinline [autoplay] style="padding-top: 5px">
+                    <source src="../static/img/16.mp4" type="" />
                 </video>
             </div>
             <div class="boxall" style="height: 3.15rem">
@@ -237,7 +239,8 @@
 <!--                        </li>-->
 <!--                    </ul>-->
 <!--                </nav>-->
-                <video id="video3" src="../static/img/16.mp4" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 5px">
+                <video id="video3" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 5px">
+                    <source src="../static/img/16.mp4" type="" />
                 </video>
             </div>
         </li>
@@ -406,33 +409,6 @@
         var inter=setInterval(function () {
             map.setCenter(marker.getPosition());
         },500);
-        marker.on('click', function (e) {
-            switchVideo();
-        });
-
-        function switchVideo() {
-            var video1 = new EZUIKit.EZUIPlayer('video1');
-            video1.stop();
-            var video1_dom = document.getElementById("video1")
-            var parent1 = video1_dom.parentElement;
-            console.log(video1_dom)
-            parent1.removeChild(video1_dom);
-            video1_dom.setAttribute('src', 'http://vd3.bdstatic.com/mda-jirfihmvj1uddwd6/mda-jirfihmvj1uddwd6.mp4');
-            console.log(video1_dom)
-            parent1.appendChild(video1_dom);
-            video1 = new EZUIKit.EZUIPlayer('video1');
-            video1.play();
-
-            var video3 = new EZUIKit.EZUIPlayer('video3');
-            video3.stop();
-            var video3_dom = document.getElementById("video3")
-            var parent3 = video3_dom.parentElement;
-            parent3.removeChild(video3_dom);
-            video3_dom.setAttribute('src', 'http://ivi.bupt.edu.cn/hls/cctv1.m3u8');
-            parent3.appendChild(video3_dom);
-            video3 = new EZUIKit.EZUIPlayer('video3');
-            video3.play();
-        }
         //给location添加点击事件 点击之后停止计时，地图可平移；再次点击，回到车辆所在位置
         var location=document.getElementById("location");
         var flag=false;
