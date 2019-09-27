@@ -406,6 +406,20 @@
         var inter=setInterval(function () {
             map.setCenter(marker.getPosition());
         },500);
+        marker.on('click', function (e) {
+            switchVideo('video1', 'http://ivi.bupt.edu.cn/hls/cctv1.m3u8');
+        });
+        function switchVideo(videoId, url) {
+            var video = new EZUIKit.EZUIPlayer(videoId);
+            video.stop();
+            var video_dom = document.getElementById(videoId)
+            var parent = video_dom.parentElement;
+            parent.removeChild(video_dom);
+            video_dom.setAttribute('src', url);
+            parent.appendChild(video_dom);
+            video = new EZUIKit.EZUIPlayer(videoId);
+            video.play();
+        }
         //给location添加点击事件 点击之后停止计时，地图可平移；再次点击，回到车辆所在位置
         var location=document.getElementById("location");
         var flag=false;
