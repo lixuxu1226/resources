@@ -208,8 +208,7 @@
 <!--                        </li>-->
 <!--                    </ul>-->
 <!--                </nav>-->
-                <video id="video1" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 5px">
-                    <source src="../static/img/16.mp4" type="" />
+                <video id="video1" src="http://ivi.bupt.edu.cn/hls/cctv14.m3u8" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 5px">
                 </video>
             </div>
             <div class="boxall" style="height: 3.15rem">
@@ -224,8 +223,7 @@
 <!--                        </li>-->
 <!--                    </ul>-->
 <!--                </nav>-->
-                <video id="video2" width=100%;  controls playsInline webkit-playsinline [autoplay] style="padding-top: 5px">
-                    <source src="../static/img/16.mp4" type="" />
+                <video id="video2" src="http://ivi.bupt.edu.cn/hls/cctv6.m3u8" width=100%;  controls playsInline webkit-playsinline [autoplay] style="padding-top: 5px">
                 </video>
             </div>
             <div class="boxall" style="height: 3.15rem">
@@ -239,8 +237,7 @@
 <!--                        </li>-->
 <!--                    </ul>-->
 <!--                </nav>-->
-                <video id="video3" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 5px">
-                    <source src="../static/img/16.mp4" type="" />
+                <video id="video3" src="../static/img/16.mp4" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 5px">
                 </video>
             </div>
         </li>
@@ -409,6 +406,20 @@
         var inter=setInterval(function () {
             map.setCenter(marker.getPosition());
         },500);
+        marker.on('click', function (e) {
+            switchVideo('video1', 'http://ivi.bupt.edu.cn/hls/cctv1.m3u8');
+        });
+        function switchVideo(videoId, url) {
+            var video = new EZUIKit.EZUIPlayer(videoId);
+            video.stop();
+            var video_dom = document.getElementById(videoId)
+            var parent = video_dom.parentElement;
+            parent.removeChild(video_dom);
+            video_dom.setAttribute('src', url);
+            parent.appendChild(video_dom);
+            video = new EZUIKit.EZUIPlayer(videoId);
+            video.play();
+        }
         //给location添加点击事件 点击之后停止计时，地图可平移；再次点击，回到车辆所在位置
         var location=document.getElementById("location");
         var flag=false;
