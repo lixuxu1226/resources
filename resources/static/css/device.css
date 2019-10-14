@@ -1,0 +1,51 @@
+.device-table {
+     border-collapse: collapse;
+     font-family: Futura, Arial, sans-serif;
+     margin: auto;
+}
+
+.device-table caption {
+     font-size: larger;
+     margin: 1em auto;
+}
+
+.device-table th,td {
+     padding: .65em;
+}
+
+.device-table th,td {
+	border-bottom: 1px solid #ddd;
+	border-top: 1px solid #ddd;
+	text-align: center;
+}
+
+.device-table tbody tr:hover {
+    font-size: 17px;
+}
+
+.btn {
+  border-radius: 4px;
+  padding: 15px 25px;
+  font-size: 18px;
+  text-decoration: none;
+  margin: 10px;
+  margin-left: 5%;
+  color: #fff;
+  position: relative;
+  display: inline-block;
+}
+
+.btn:active {
+  transform: translate(0px, 5px);
+  -webkit-transform: translate(0px, 5px);
+  box-shadow: 0px 1px 0px 0px;
+}
+
+.blue {
+  background-color: #55acee;
+  box-shadow: 0px 5px 0px 0px #3C93D5;
+}
+
+.blue:hover {
+  background-color: #6FC6FF;
+}

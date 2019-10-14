@@ -12,6 +12,8 @@
     <link href="../static/css/amaze.css" rel="stylesheet" >
     <link href="../static/css/jquery-ui.css" rel="stylesheet">
     <link href="../static/css/themify-icons.css" rel="stylesheet">
+    <link href="../static/css/main.css" rel="stylesheet">
+    <link href="../static/css/input.css" rel="stylesheet">
     <style>
 
         .demo-placeholder {
@@ -20,7 +22,7 @@
             font-size: 14px;
             line-height: 1.2em;
             position: relative;
-            margin-top: 20px;
+            margin-top: 8px;
             /*background-color: floralwhite;*/
 
         }
@@ -75,8 +77,8 @@
                 <li>
                     <a href="#">设备管理</a>
                     <ul>
-                        <li><a href="checkDevice.html">查看设备信息</a></li>
-                        <li><a href="addDevice.html">设备注册</a></li>
+                        <li><a href="checkDevice_2.html">查看设备信息</a></li>
+                        <li><a href="useDeviceLog.html">操作日志</a></li>
                     </ul>
                 </li>
             </ul>
@@ -88,8 +90,7 @@
                 <li>
                     <a href="#">用户管理</a>
                     <ul>
-                        <li><a href="user-profile.html">查看用户信息</a></li>
-                        <li><a href="register.html">用户注册</a></li>
+                        <li><a href="user-profile_2.html">查看用户信息</a></li>
                         <li><a href="#" id="logout">注销</a></li>
                     </ul>
                 </li>
@@ -114,10 +115,7 @@
             document.getElementById("showTime").innerHTML = y+"年"+mt+"月"+day+"日"+h+"时"+m+"分"+s+"秒";
             t = setTimeout(time,1000); //设定定时器，循环运行
         }
-
     </script>
-
-
 </div>
 <div class="mainbox">
     <ul class="clearfix">
@@ -127,34 +125,34 @@
 <!--                <div id='deviceFullScreen' class="inner-placeholder" style="background: url(../static/img/fullScreen.png);z-index: 4"></div>-->
                 <!--background: url(../static/img/fullScreen.png)-->
 
-                <div class="content" style="height: 500px" id="device">
+                <div class="content" style="height: 270px" id="device">
                         <!--<div class="row" style="height: 350px">-->
-                    <div id="device-chart" class="demo-placeholder" style="height: 350px"></div>
+                    <div id="device-chart" class="demo-placeholder" style="height: 100%"></div>
+                    <div id='refresh-device-chart' class="inner-placeholder" style="background: url(../static/img/refresh.png)"></div>
                 </div>
             </div>
             <div class="boxall" style="height: 2rem">
                 <!--<div class="alltitle">设备状态</div>-->
                 <div class="content">
-                    <div id="deviceInfo-chart" class="demo-placeholder" style="height: 100px"></div>
+                    <div id="deviceInfo-chart" class="demo-placeholder" style="height: 100%"></div>
                 </div>
             </div>
             <div class="boxall" style="height: 3.15rem">
                 <!--<div class="alltitle">统计数据</div>-->
                 <div class="content">
-                    <div class="demo-placeholder" style="height: 150px">
-                        <table style="text-align: center">
+                    <div class="demo-placeholder" style="height:170px; overflow:scroll; overflow-x:hidden">
+                        <table id="task-table" style="text-align: center; border-collapse: separate;border-spacing: 8px 0px;">
                             <thead>
-                            <tr>
-                                <th style="text-align: center"><p>ID</p></th>
-                                <th style="text-align: center"><p>任务</p></th>
-                            </tr>
+	                            <tr>
+	                                <th><p>ID</p></th>
+	                                <th><p>任务</p></th>
+	                            </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th>1</th>
-                                <th>risk prediction</th>
-
-                            </tr>
+	                            <tr>
+	                                <th>0</th>
+	                                <th>暂无任务</th>
+	                            </tr>
                             </tbody>
                         </table>
 
@@ -185,9 +183,7 @@
                         <nav class="nav nav5">
                             <ul>
                                 <li>
-                                    <a href="#">张三</a>
-                                    <ul id="selectPrisoner">
-                                    </ul>
+                                    <a href="#" id="prisoner">选择</a>
                                 </li>
                             </ul>
                         </nav>
@@ -244,7 +240,25 @@
     </ul>
 </div>
 <div class="back"></div>
-
+<!-- Modal -->
+<div class="modal fade" id="choosePrisonerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+<!--             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" style='color:#0000E3'>×</span></button>
+            </div> -->
+            <div class="modal-body">
+                <input id="filter-prisoner" type="text" placeholder="搜索" style="color:#ffffff;width: 90%;display:block;margin-left:auto;margin-right:auto;"></input>
+                <table id="prisoner-table" style="margin: auto; border-collapse: separate; border-spacing:8px 5px">
+                    <tbody>
+                        <tr><td>暂无</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!--   Core JS Files   -->
@@ -264,6 +278,9 @@
 <script src="../static/js/flot-charts.js"></script>
 <script type="text/javascript" src="../static/js/echarts.js"></script>
 <script src="../static/js/device.js"></script>
+<script src="../static/js/constants.js"></script>
+<script type="text/javascript" src="../static/js/input.js"></script>
+<script type="text/javascript" src="../static/js/logout.js"></script>
 
 <script type="text/javascript">
     // 监控
@@ -284,6 +301,7 @@
         video2.play();
         var video3 = new EZUIKit.EZUIPlayer('video3');
         video3.play();
+        //getAllDevices();
     })
 
 </script>
@@ -317,21 +335,21 @@
 <script type="text/javascript">
     //全屏浏览
     $(document).ready(function () {
-        var deviceFullScreen = document.getElementById("deviceFullScreen");
-        deviceFullScreen.onclick = function () {
-            // mobileDevice-chart
-            // var mobileDevice=document.getElementById('mobileDevice-chart');
-            var deviceInfo=document.getElementById('deviceInfo-chart');
-            // mobileDevice.style.height='70vh';
-            deviceInfo.style.height='30vh';
-            var deviceScreen = document.getElementById('device');
-            requestFullScreen(deviceScreen)
-        };
+        // var deviceFullScreen = document.getElementById("deviceFullScreen");
+        // deviceFullScreen.onclick = function () {
+        //     // mobileDevice-chart
+        //     // var mobileDevice=document.getElementById('mobileDevice-chart');
+        //     var deviceInfo=document.getElementById('deviceInfo-chart');
+        //     // mobileDevice.style.height='70vh';
+        //     deviceInfo.style.height='30vh';
+        //     var deviceScreen = document.getElementById('device');
+        //     requestFullScreen(deviceScreen)
+        // };
         var mapFullScreen = document.getElementById("mapFullScreen");
         mapFullScreen.onclick = function () {
             var deviceScreen = document.getElementById('map-chart');
+            console.log('fullScreen')
             requestFullScreen(deviceScreen);
-
         };
 
 
@@ -420,6 +438,8 @@
             video = new EZUIKit.EZUIPlayer(videoId);
             video.play();
         }
+
+
         //给location添加点击事件 点击之后停止计时，地图可平移；再次点击，回到车辆所在位置
         var location=document.getElementById("location");
         var flag=false;
@@ -439,14 +459,8 @@
                 location.setAttribute('style','right:60px;background:url("../static/img/location.png")')
 
                 // console.log(flag);
-
             }
-
         };
-
-
-
-
 
         map.setFitView();
 
@@ -645,7 +659,7 @@
         //
         // $.ajax({
         //     type:'GET',
-        //     url:'http://10.108.122.144:8089/prisoners/get_all',
+        //     url:'http://' + server_ip_port + '/prisoners/get_all',
         //     data:{},
         //     dataType:'json',
         //     success:function (msg) {
@@ -661,63 +675,94 @@
     // }
 </script>
 
+
+<script type="text/javascript">
+    var prisoners = [{'id': 'fdaf', 'img': '../static/img/peo.png'}, {'id': 'adf', 'img': '../static/img/peo.png'}, {'id': 'sadf', 'img': '../static/img/peo.png'}, {'id': 'daads', 'img': '../static/img/peo.png'}, {'id': 'sdf', 'img': '../static/img/peo.png'}, {'id': 'asda', 'img': '../static/img/peo.png'}, {'id': 'sdfa', 'img': '../static/img/peo.png'}, {'id': 'sdcs', 'img': '../static/img/peo.png'}, {'id': 'ffasa', 'img': '../static/img/peo.png'}, {'id': 'fff', 'img': '../static/img/peo.png'}, {'id': 'asaa', 'img': '../static/img/peo.png'}, {'id': 'asaa', 'img': '../static/img/peo.png'}, {'id': 'mkjs', 'img': '../static/img/peo.png'}, {'id': 'ffff', 'img': '../static/img/peo.png'}, {'id': 'gdsa', 'img': '../static/img/peo.png'}, {'id': 'aaaa', 'img': '../static/img/peo.png'}, {'id': 'rwew', 'img': '../static/img/peo.png'}, {'id': 'fsdf', 'img': '../static/img/peo.png'}, {'id': 'aasf', 'img': '../static/img/peo.png'}, {'id': 'afcs', 'img': '../static/img/peo.png'}, ]
+    var selected_prisoner = {'id': 'null'}
+    var row_num = 4
+    function setPrisonersTable(data, filter) {
+        var table_string = "<tr>";
+        var count = 0;
+        var filter_data = []
+        data.forEach(prisoner => {
+            if(prisoner.id.indexOf(filter) > -1) {
+                filter_data.push(prisoner)
+            }
+        })
+        filter_data.forEach(prisoner => {
+            if(count % row_num == 0) {
+                table_string += "</tr><tr>"
+            }
+            table_string += '<th><div class="cardBox"><img src="' + prisoner.img + '" style="width:100px;height:auto;"/><a href="#">' + prisoner.id + "</a></div></th>"
+            //table_string += '<th><a href="#">' + prisoner.id + "</a></th>"
+            count += 1
+        })
+        table_string += "</tr>"
+        $('#prisoner-table tbody').html(table_string)
+        $("#prisoner-table th").click(function(){
+            var thSeq = $(this).parent().find("th").index($(this)[0]);
+            var trSeq = $(this).parent().parent().find("tr").index($(this).parent()[0]) - 1;
+            selected_prisoner = filter_data[row_num * trSeq + thSeq];
+            $('#prisoner').html(selected_prisoner.id);
+            $('#choosePrisonerModal').modal('hide')
+        });
+    }
+</script>
+
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#logout').click(function () {
-            var url =window.location.search;
-            var arrUrl=url.substr(1);
-            var userName=decodeURI(arrUrl.split('=')[1]);
-            var token=docCookies.getItem(userName).toString();
-
-            $.ajax({
-                url:'http://10.108.122.144:8089/users/logout' + "?token=" + token,
-                type:'DELETE',
-                dataType:'json',
-                data:{},
-
-                success:function (msg) {
-                    if(msg.code==200){
-                        alert("用户登出成功");
-                        window.location.href='login.html';
-                    }
-                }
-            })
-
-
+        $('#prisoner').click(function () {
+            $('#choosePrisonerModal').modal('show')
+            setPrisonersTable(prisoners, '')
+            // $.ajax({
+            //     url:'http://' + server_ip_port + '/prisoner/get_all' + "?token=" + token,
+            //     type:'GET',
+            //     dataType:'json',
+            //     success:function (msg) {
+            //         prisoners = msg
+            //         setPrisonersTable(prisoners, '')
+            //         $('#choosePrisonerModal').modal('show')
+            //     }
+            // })
+        })
+        $("#filter-prisoner").bind("input propertychange",function(event){
+            var filter = $("#filter-prisoner").val()
+            setPrisonersTable(prisoners, filter)
+        });
+        $('#refresh-device-chart').click(function () {
+            getAllDevices()
         })
     })
 </script>
 
 <script type="text/javascript">
-    deviceALL=
-    $.ajax({
-        url:'http://10.108.122.144:8089/devices/get_all',
-        type:'GET',
-        dataType:'json',
-        async:false,
-        // data:{},
-        beforeSend: function() {
-            if(opts.init === 1) {
-                console.log('loading')
-                // $('.zh-loading').show();
-            }
-            isLoaded = false;
-        },
-        success:function (msg) {
-            deviceAll=msg;
-            // console.log(deviceAll);
-        },
-        complete: function() {
-            if(opts.init === 1) {
-                // $('.zh-loading').hide();
-                console.log('loaded')
-            }
-            isLoaded = true;
-        },
+	var tasks = []
+	// setInterval(function () {
+	// 	$.ajax({
+	//         url:'http://' + server_ip_port + '/tasks/get_all',
+	//         type:'GET',
+	//         dataType:'json',
+	//         async:false,
+	//         success:function (msg) {
+	//             tasks = msg;
+	//             setTasks(tasks)
+	//         }
+	//     });
+	// }, 5000)
 
+	function setTasks(tasks) {
+		var tasks_string = ""
+		tasks.forEach(task => {
+			tasks_string += "<tr><th>" + task.id + "</th><th>" + task.description + "</th></tr>"
+		})
+		$('#task-table tbody').html(tasks_string)
+	}
+	setTasks([{'id':'41','description':'i like you'},{'id':'42','description':'i do not like you'}])
+</script>
 
-    });
-
+<script type="text/javascript">
+	var deviceAll = []
+	var currentDevice = {'name': '无设备', 'id': ''}
     deviceChart = echarts.init(document.getElementById('device-chart'));
     deviceOption={
         series:{
@@ -751,120 +796,67 @@
                     }
                 }
             },
-            data: [
-                {
-                    name: '云中心',
-                    value: 6,
-                    symbolSize: [48, 48],
-                    symbol: 'image://../static/img/cloud.png',
-                    itemStyle: {
-                        normal: {
-                            label: {
-                                show: false
-                            }
-                        }
-                    },
-                    children: [
-                        {
-                            name: '车载服务器',
-                            value: 4,
-                            symbol: 'image://../static/img/serverv3.png',
-                            itemStyle: {
-                                normal: {
-                                    label: {
-                                        show: false
-                                    }
-                                }
-                            },
-                            symbolSize: [48, 48],
-                            children: [
-                                {
-                                    name: '设备1',
-                                    symbol: 'image://../static/img/phone.png',
-                                    symbolSize: [60,60],
-                                    value: 4,
-                                    itemStyle: {
-                                        normal: {
-                                            color: '#fa6900',
-                                            label: {
-                                                show: true,
-                                                position: 'right'
-                                            },
-
-                                        },
-                                        emphasis: {
-                                            label: {
-                                                show: false
-                                            },
-                                            borderWidth: 0
-                                        }
-                                    }
-                                },
-                                {
-                                    name: '设备2',
-                                    value: 4,
-                                    symbol: 'image://../static/img/phone.png',
-                                    symbolSize: [48,48],
-                                    itemStyle: {
-                                        normal: {
-                                            label: {
-                                                show: true,
-                                                position: 'right',
-                                                formatter: "{b}"
-                                            },
-                                            color: '#fa6900',
-                                            borderWidth: 2,
-                                            borderColor: '#cc66ff'
-
-                                        },
-                                        emphasis: {
-                                            borderWidth: 0
-                                        }
-                                    }
-                                },
-                                {
-                                    name: '设备3',
-                                    value: 2,
-                                    symbol: 'image://../static/img/phone.png',
-                                    symbolSize: [48,48],
-                                    itemStyle: {
-                                        normal: {
-                                            label: {
-                                                position: 'right'
-                                            },
-                                            color: '#fa6900',
-                                            brushType: 'stroke',
-                                            borderWidth: 1,
-                                            borderColor: '#999966',
-                                        },
-                                        emphasis: {
-                                            borderWidth: 0
-                                        }
-                                    }
-                                }
-                            ]
-
-                        }
-                    ]
-                }
-            ]
-
-
-
-
+            data: []
         }
     };
     deviceChart.setOption(deviceOption);
 
-    deviceInfoChart=echarts.init(document.getElementById("deviceInfo-chart"));
+    function getAllDevices() {
+    	$.ajax({
+	        url:'http://' + server_ip_port + '/devices/get_all',
+	        type:'GET',
+	        dataType:'json',
+	        async:false,
+	        success:function (msg) {
+	            deviceAll=msg;
+	            deviceOption.series.data = setDeviceTree(msg);
+    			deviceChart.setOption(deviceOption);
+	        }
+	    });
+    }
 
+    function setDeviceTree(devices) {
+    	var res = []
+    	devices.forEach(device => {
+    		var temp = {}
+    		temp.name = device.name
+    		temp.device_id = device.device_id
+    		temp.symbolSize = [48, 48]
+    		if(device.kind === 'cloud') {
+    			temp.value = 0
+    			temp.symbol = 'image://../static/img/cloud.png'
+    			temp.itemStyle = '{normal: {label: {show: false}}}'
+    			if(device.children != undefined) {
+    				temp.children = setDeviceTree(device.children)
+    			}
+    		} else if(device.kind == 'server') {
+    			temp.value = 1
+    			temp.symbol = 'image://../static/img/serverv3.png'
+    			temp.itemStyle = '{normal: {label: {show: false}}}'
+    			if(device.children != undefined) {
+    				temp.children = setDeviceTree(device.children)
+    			}
+    		} else {
+    			temp.value = 2
+    			temp.symbol = 'image://../static/img/phone.png'
+    			temp.itemStyle = "{normal: {color: '#fa6900',label: {show: true,position: 'right'},},emphasis: {label: {show: false}, borderWidth: 0}}"
+    		}
+    		res.push(temp)
+    	})
+    	return res
+    }
+    deviceOption.series.data = setDeviceTree([{'name': 'cloud', 'device_id': '213', 'kind': 'cloud','children':[{'name': 'server1', 'device_id': '321', 'kind': 'server','children':[{'name': 'device1', 'device_id': '123', 'kind': 'device'},{'name': 'device2', 'device_id': '555', 'kind': 'device'},{'name': 'device3', 'device_id': '53', 'kind': 'device'}],}],}])
+    deviceChart.setOption(deviceOption);
+
+
+    deviceInfoChart=echarts.init(document.getElementById("deviceInfo-chart"));
     deviceInfoOption={
         title:{
-            show:true,
-            text:'设备1',
+            show: true,
+            text: currentDevice.name,
             textStyle: {//主标题文本样式{"fontSize": 18,"fontWeight": "bolder","color": "#333"}
                 fontSize: 16,
-                color:'#fff',
+                color: '#fff',
 
             },
         },
@@ -944,7 +936,7 @@
 
                     rich: {}
                 },
-                data:[{value: 15.6, name: 'cpu占用率 :'}]
+                data:[{value: 0, name: 'cpu占用率 :'}]
             },
             {
                 name: '内存占用率',
@@ -1014,7 +1006,7 @@
 
                     rich: {}
                 },
-                data:[{value: 20.5, name: '内存占用率 :'}]
+                data:[{value: 0, name: '内存占用率 :'}]
             },
             {
                 name: '耗电量',
@@ -1085,23 +1077,86 @@
 
                     rich: {}
                 },
-                data:[{value: 16.4, name: '耗电量 :'}]
+                data:[{value: 0, name: '耗电量 :'}]
             }
         ]
 
     };
     deviceInfoChart.setOption(deviceInfoOption);
-    setInterval(function (){
-        deviceInfoOption.series[0].data[0].value = (Math.random()*20).toFixed(1) - 0;
-        deviceInfoOption.series[1].data[0].value = (Math.random()*20).toFixed(1) - 0;
-        // deviceInfoOption.series[2].data[0].value = (Math.random()*8).toFixed(2) - 0;
-        // deviceInfoOption.series[3].data[0].value = (Math.random()*2).toFixed(2) - 0;
-        deviceInfoChart.setOption(deviceInfoOption,true);
-    },5000);
-
-
-
     var socket;
+    deviceChart.on('click', function(params) {
+    	if(params.value === 2 && currentDevice.id != params.data.device_id) {
+    		currentDevice.id = params.data.device_id
+    		currentDevice.name = params.name
+    		
+    		deviceInfoOption.title.text = params.name
+    		deviceInfoChart.setOption(deviceInfoOption);
+    		getDeviceStates()
+		}
+	})
+
+	function getDeviceStates() {
+		if (typeof (WebSocket) == "undefined") {
+		        console.log("遗憾：您的浏览器不支持WebSocket");
+		    } else {
+		        console.log("恭喜：您的浏览器支持WebSocket");
+
+		        if(socket != undefined && socket.readyState == 1) {
+	    			socket.close();
+	    		}
+		        socket = new WebSocket("ws://" + server_ip_port + "//ws/webSocket/" + currentDevice.id);
+		        //连接打开事件
+		        socket.onopen = function() {
+		            console.log("Socket 已打开");
+		            socket.send("消息发送测试(From Client)");
+		        };
+		        //收到消息事件
+		        socket.onmessage = function(msg) {
+		            console.log(msg.data);
+		            var reg0 = new RegExp( '{' , "g" );
+		            var reg1 = new RegExp("}","g");
+		            var temp=msg.data.replace('data:','').replace(reg0,'').replace(reg1,'').split(';');
+		            // console.log(temp);
+		            //设备的实时数据
+		            var devId=temp[0].replace('device:','').split(';')[0].split(':')[1];
+		            var battery=temp[0].replace('device:','').split(';')[1].split(':')[1];
+		            var cpuRate=temp[0].replace('device:','').split(';')[2].split(':')[1];
+		            var memRate=temp[0].replace('device:','').split(';')[3].split(':')[1];
+		            var netDelay=temp[1].replace('Network:','').split(',')[0].split(':')[1];
+
+		            deviceInfoOption.series[3].data[0].value = memRate;
+		            deviceInfoOption.series[3].data[1].value = cpuRate;
+		            deviceInfoOption.series[3].data[2].value = battery;
+		            deviceInfoChart.setOption(deviceInfoOption, true);
+		            //document.getElementById("delay").innerHTML=netDelay+'ms';
+		            //得到select的
+		        };
+		        //连接关闭事件
+		        socket.onclose = function() {
+		            console.log("Socket已关闭");
+		        };
+		        //发生了错误事件
+		        socket.onerror = function() {
+		            alert("Socket发生了错误");
+		        }
+
+		        //窗口关闭时，关闭连接
+		        window.unload=function() {
+		            socket.close();
+		        };
+		    }
+	}
+    // setInterval(function (){
+    //     deviceInfoOption.series[0].data[0].value = (Math.random()*20).toFixed(1) - 0;
+    //     deviceInfoOption.series[1].data[0].value = (Math.random()*20).toFixed(1) - 0;
+    //     // deviceInfoOption.series[2].data[0].value = (Math.random()*8).toFixed(2) - 0;
+    //     // deviceInfoOption.series[3].data[0].value = (Math.random()*2).toFixed(2) - 0;
+    //     deviceInfoChart.setOption(deviceInfoOption,true);
+    // },5000);
+
+
+
+    /*var socket;
     var battery;
     var cpuRate ;
     var memRate ;
@@ -1111,7 +1166,7 @@
     } else {
         console.log("恭喜：您的浏览器支持WebSocket");
 
-        socket = new WebSocket("ws://10.108.122.144:8089//ws/webSocket/1");
+        socket = new WebSocket("ws://" + server_ip_port + "//ws/webSocket/1");
         //连接打开事件
         socket.onopen = function() {
             console.log("Socket 已打开");
@@ -1122,7 +1177,6 @@
             console.log(msg.data);
             var netDelay;
             var temp;
-
 
             var reg0 = new RegExp( '{' , "g" );
             var reg1 = new RegExp("}","g");
@@ -1135,21 +1189,10 @@
             // memRate=temp[0].replace('device:','').split(';')[3].split(':')[1];
             // console.log(devId);
             // mobileDeviceOption.series[0].data[].des = battery;
-
-
-
             //网络时延
             netDelay=temp[1].replace('Network:','').split(',')[0].split(':')[1];
             document.getElementById("delay").innerHTML=netDelay+'ms';
             //得到select的
-
-
-
-
-
-
-
-
         };
         //连接关闭事件
         socket.onclose = function() {
@@ -1164,9 +1207,8 @@
         window.unload=function() {
             socket.close();
         };
-    }
+    }*/
 </script>
-
 
 </body>
 </html>

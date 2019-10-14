@@ -176,256 +176,256 @@
     <script type="text/javascript">
 
         $(document).ready(function() {
-            // var data=[
-            //     {
-            //         "id": "1",
-            //         "deviceNo": "pad20190506190918",
-            //         "deviceStatus": true,
-            //         "deviceType": "pad",
-            //         "createAt": 1557140958000,
-            //         "user": {
-            //             "id": "1",
-            //             "uid": null,
-            //             "userName": "jojo",
-            //             "password": "123456",
-            //             "phone": null,
-            //             "createAt": 1557140947000,
-            //             "tokenCreateAt": null,
-            //             "loginToken": null
-            //         },
-            //         "uid": "1"
-            //     },
-            //     {
-            //         "id": "2",
-            //         "deviceNo": "phone20190508210627",
-            //         "deviceStatus": false,
-            //         "deviceType": "phone",
-            //         "createAt": 1557320787000,
-            //         "user": {
-            //             "id": "1",
-            //             "uid": null,
-            //             "userName": "jojo",
-            //             "password": "123456",
-            //             "phone": null,
-            //             "createAt": 1557140947000,
-            //             "tokenCreateAt": null,
-            //             "loginToken": null
-            //         },
-            //         "uid": "1"
-            //     },
-            //     {
-            //         "id": "3",
-            //         "deviceNo": "phone20190508214135",
-            //         "deviceStatus": false,
-            //         "deviceType": "phone",
-            //         "createAt": 1557322895000,
-            //         "user": null,
-            //         "uid": null
-            //     },
-            //     {
-            //         "id": "4",
-            //         "deviceNo": "000000000050000",
-            //         "deviceStatus": true,
-            //         "deviceType": "phone",
-            //         "createAt": 1557327549000,
-            //         "user": {
-            //             "id": "2",
-            //             "uid": null,
-            //             "userName": "wzy",
-            //             "password": "123456",
-            //             "phone": null,
-            //             "createAt": 1557327524000,
-            //             "tokenCreateAt": null,
-            //             "loginToken": null
-            //         },
-            //         "uid": "2"
-            //     },
-            //     {
-            //         "id": "5",
-            //         "deviceNo": "000004000000000",
-            //         "deviceStatus": false,
-            //         "deviceType": "phone",
-            //         "createAt": 1557328253000,
-            //         "user": null,
-            //         "uid": null
-            //     },
-            //     {
-            //         "id": "6",
-            //         "deviceNo": "000000000800000",
-            //         "deviceStatus": false,
-            //         "deviceType": "phone",
-            //         "createAt": 1557328404000,
-            //         "user": {
-            //             "id": "4",
-            //             "uid": null,
-            //             "userName": "aaa",
-            //             "password": "123456",
-            //             "phone": null,
-            //             "createAt": 1557328400000,
-            //             "tokenCreateAt": null,
-            //             "loginToken": null
-            //         },
-            //         "uid": "4"
-            //     },
-            //     {
-            //         "id": "7",
-            //         "deviceNo": "000000007000000",
-            //         "deviceStatus": false,
-            //         "deviceType": "pad",
-            //         "createAt": 1557328679000,
-            //         "user": {
-            //             "id": "4",
-            //             "uid": null,
-            //             "userName": "aaa",
-            //             "password": "123456",
-            //             "phone": null,
-            //             "createAt": 1557328400000,
-            //             "tokenCreateAt": null,
-            //             "loginToken": null
-            //         },
-            //         "uid": "4"
-            //     },
-            //     {
-            //         "id": "8",
-            //         "deviceNo": "000000000000006",
-            //         "deviceStatus": false,
-            //         "deviceType": "phone",
-            //         "createAt": 1557329039000,
-            //         "user": {
-            //             "id": "5",
-            //             "uid": null,
-            //             "userName": "test",
-            //             "password": "123456",
-            //             "phone": null,
-            //             "createAt": 1557328790000,
-            //             "tokenCreateAt": null,
-            //             "loginToken": null
-            //         },
-            //         "uid": "5"
-            //     },
-            //     {
-            //         "id": "9",
-            //         "deviceNo": "000000000000001",
-            //         "deviceStatus": false,
-            //         "deviceType": "phone",
-            //         "createAt": 1557371620000,
-            //         "user": {
-            //             "id": "10",
-            //             "uid": null,
-            //             "userName": "qwe",
-            //             "password": "123456",
-            //             "phone": null,
-            //             "createAt": 1557371611000,
-            //             "tokenCreateAt": "2019-05-09 11:41:34.0",
-            //             "loginToken": null
-            //         },
-            //         "uid": "10"
-            //     },
-            //     {
-            //         "id": "10",
-            //         "deviceNo": "000000000000009",
-            //         "deviceStatus": true,
-            //         "deviceType": "phone",
-            //         "createAt": 1557372422000,
-            //         "user": {
-            //             "id": "12",
-            //             "uid": null,
-            //             "userName": "987",
-            //             "password": "123456",
-            //             "phone": null,
-            //             "createAt": 1557372406000,
-            //             "tokenCreateAt": "2019-05-09 11:28:27.0",
-            //             "loginToken": null
-            //         },
-            //         "uid": "12"
-            //     },
-            //     {
-            //         "id": "11",
-            //         "deviceNo": "000000000000002",
-            //         "deviceStatus": false,
-            //         "deviceType": "phone",
-            //         "createAt": 1557386560000,
-            //         "user": {
-            //             "id": "14",
-            //             "uid": null,
-            //             "userName": "edge",
-            //             "password": "123456",
-            //             "phone": null,
-            //             "createAt": 1557386507000,
-            //             "tokenCreateAt": "2019-05-09 15:21:52.0",
-            //             "loginToken": null
-            //         },
-            //         "uid": "14"
-            //     },
-            //     {
-            //         "id": "12",
-            //         "deviceNo": "000000000000007",
-            //         "deviceStatus": true,
-            //         "deviceType": "phone",
-            //         "createAt": 1557387981000,
-            //         "user": {
-            //             "id": "19",
-            //             "uid": null,
-            //             "userName": "1111",
-            //             "password": "123456",
-            //             "phone": null,
-            //             "createAt": 1557387941000,
-            //             "tokenCreateAt": "2019-05-09 15:46:39.0",
-            //             "loginToken": null
-            //         },
-            //         "uid": "19"
-            //     },
-            //     {
-            //         "id": "13",
-            //         "deviceNo": "000000000000008",
-            //         "deviceStatus": true,
-            //         "deviceType": "phone",
-            //         "createAt": 1557388166000,
-            //         "user": {
-            //             "id": "20",
-            //             "uid": null,
-            //             "userName": "2222",
-            //             "password": "123456",
-            //             "phone": null,
-            //             "createAt": 1557388139000,
-            //             "tokenCreateAt": "2019-05-09 15:49:38.0",
-            //             "loginToken": null
-            //         },
-            //         "uid": "20"
-            //     },
-            //     {
-            //         "id": "14",
-            //         "deviceNo": "000000000000000",
-            //         "deviceStatus": true,
-            //         "deviceType": "phone",
-            //         "createAt": 1557388251000,
-            //         "user": {
-            //             "id": "21",
-            //             "uid": null,
-            //             "userName": "3333",
-            //             "password": "123456",
-            //             "phone": null,
-            //             "createAt": 1557388217000,
-            //             "tokenCreateAt": null,
-            //             "loginToken": null
-            //         },
-            //         "uid": "21"
-            //     }
-            // ]
-            var data;
-            $.ajax({
-                    url:"http://10.108.122.144:8089/devices/get_all",
-                    type: "GET",
-                    dataType:"JSON",
-                    async:false,
-                    success: function(msg) {
-                        // console.log(msg);
-                        data = msg;
+            var data=[
+                {
+                    "id": "1",
+                    "deviceNo": "pad20190506190918",
+                    "deviceStatus": true,
+                    "deviceType": "pad",
+                    "createAt": 1557140958000,
+                    "user": {
+                        "id": "1",
+                        "uid": null,
+                        "userName": "jojo",
+                        "password": "123456",
+                        "phone": null,
+                        "createAt": 1557140947000,
+                        "tokenCreateAt": null,
+                        "loginToken": null
+                    },
+                    "uid": "1"
+                },
+                {
+                    "id": "2",
+                    "deviceNo": "phone20190508210627",
+                    "deviceStatus": false,
+                    "deviceType": "phone",
+                    "createAt": 1557320787000,
+                    "user": {
+                        "id": "1",
+                        "uid": null,
+                        "userName": "jojo",
+                        "password": "123456",
+                        "phone": null,
+                        "createAt": 1557140947000,
+                        "tokenCreateAt": null,
+                        "loginToken": null
+                    },
+                    "uid": "1"
+                },
+                {
+                    "id": "3",
+                    "deviceNo": "phone20190508214135",
+                    "deviceStatus": false,
+                    "deviceType": "phone",
+                    "createAt": 1557322895000,
+                    "user": null,
+                    "uid": null
+                },
+                {
+                    "id": "4",
+                    "deviceNo": "000000000050000",
+                    "deviceStatus": true,
+                    "deviceType": "phone",
+                    "createAt": 1557327549000,
+                    "user": {
+                        "id": "2",
+                        "uid": null,
+                        "userName": "wzy",
+                        "password": "123456",
+                        "phone": null,
+                        "createAt": 1557327524000,
+                        "tokenCreateAt": null,
+                        "loginToken": null
+                    },
+                    "uid": "2"
+                },
+                {
+                    "id": "5",
+                    "deviceNo": "000004000000000",
+                    "deviceStatus": false,
+                    "deviceType": "phone",
+                    "createAt": 1557328253000,
+                    "user": null,
+                    "uid": null
+                },
+                {
+                    "id": "6",
+                    "deviceNo": "000000000800000",
+                    "deviceStatus": false,
+                    "deviceType": "phone",
+                    "createAt": 1557328404000,
+                    "user": {
+                        "id": "4",
+                        "uid": null,
+                        "userName": "aaa",
+                        "password": "123456",
+                        "phone": null,
+                        "createAt": 1557328400000,
+                        "tokenCreateAt": null,
+                        "loginToken": null
+                    },
+                    "uid": "4"
+                },
+                {
+                    "id": "7",
+                    "deviceNo": "000000007000000",
+                    "deviceStatus": false,
+                    "deviceType": "pad",
+                    "createAt": 1557328679000,
+                    "user": {
+                        "id": "4",
+                        "uid": null,
+                        "userName": "aaa",
+                        "password": "123456",
+                        "phone": null,
+                        "createAt": 1557328400000,
+                        "tokenCreateAt": null,
+                        "loginToken": null
+                    },
+                    "uid": "4"
+                },
+                {
+                    "id": "8",
+                    "deviceNo": "000000000000006",
+                    "deviceStatus": false,
+                    "deviceType": "phone",
+                    "createAt": 1557329039000,
+                    "user": {
+                        "id": "5",
+                        "uid": null,
+                        "userName": "test",
+                        "password": "123456",
+                        "phone": null,
+                        "createAt": 1557328790000,
+                        "tokenCreateAt": null,
+                        "loginToken": null
+                    },
+                    "uid": "5"
+                },
+                {
+                    "id": "9",
+                    "deviceNo": "000000000000001",
+                    "deviceStatus": false,
+                    "deviceType": "phone",
+                    "createAt": 1557371620000,
+                    "user": {
+                        "id": "10",
+                        "uid": null,
+                        "userName": "qwe",
+                        "password": "123456",
+                        "phone": null,
+                        "createAt": 1557371611000,
+                        "tokenCreateAt": "2019-05-09 11:41:34.0",
+                        "loginToken": null
+                    },
+                    "uid": "10"
+                },
+                {
+                    "id": "10",
+                    "deviceNo": "000000000000009",
+                    "deviceStatus": true,
+                    "deviceType": "phone",
+                    "createAt": 1557372422000,
+                    "user": {
+                        "id": "12",
+                        "uid": null,
+                        "userName": "987",
+                        "password": "123456",
+                        "phone": null,
+                        "createAt": 1557372406000,
+                        "tokenCreateAt": "2019-05-09 11:28:27.0",
+                        "loginToken": null
+                    },
+                    "uid": "12"
+                },
+                {
+                    "id": "11",
+                    "deviceNo": "000000000000002",
+                    "deviceStatus": false,
+                    "deviceType": "phone",
+                    "createAt": 1557386560000,
+                    "user": {
+                        "id": "14",
+                        "uid": null,
+                        "userName": "edge",
+                        "password": "123456",
+                        "phone": null,
+                        "createAt": 1557386507000,
+                        "tokenCreateAt": "2019-05-09 15:21:52.0",
+                        "loginToken": null
+                    },
+                    "uid": "14"
+                },
+                {
+                    "id": "12",
+                    "deviceNo": "000000000000007",
+                    "deviceStatus": true,
+                    "deviceType": "phone",
+                    "createAt": 1557387981000,
+                    "user": {
+                        "id": "19",
+                        "uid": null,
+                        "userName": "1111",
+                        "password": "123456",
+                        "phone": null,
+                        "createAt": 1557387941000,
+                        "tokenCreateAt": "2019-05-09 15:46:39.0",
+                        "loginToken": null
+                    },
+                    "uid": "19"
+                },
+                {
+                    "id": "13",
+                    "deviceNo": "000000000000008",
+                    "deviceStatus": true,
+                    "deviceType": "phone",
+                    "createAt": 1557388166000,
+                    "user": {
+                        "id": "20",
+                        "uid": null,
+                        "userName": "2222",
+                        "password": "123456",
+                        "phone": null,
+                        "createAt": 1557388139000,
+                        "tokenCreateAt": "2019-05-09 15:49:38.0",
+                        "loginToken": null
+                    },
+                    "uid": "20"
+                },
+                {
+                    "id": "14",
+                    "deviceNo": "000000000000000",
+                    "deviceStatus": true,
+                    "deviceType": "phone",
+                    "createAt": 1557388251000,
+                    "user": {
+                        "id": "21",
+                        "uid": null,
+                        "userName": "3333",
+                        "password": "123456",
+                        "phone": null,
+                        "createAt": 1557388217000,
+                        "tokenCreateAt": null,
+                        "loginToken": null
+                    },
+                    "uid": "21"
+                }
+            ]
+            //var data;
+            // $.ajax({
+            //         url:"http://10.108.122.144:8089/devices/get_all",
+            //         type: "GET",
+            //         dataType:"JSON",
+            //         async:false,
+            //         success: function(msg) {
+            //             // console.log(msg);
+            //             data = msg;
 
 
-                    }
+            //         }
 
-                });
+            //     });
             // console.log(data);
 
 
