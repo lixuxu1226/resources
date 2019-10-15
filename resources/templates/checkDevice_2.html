@@ -99,7 +99,7 @@
 </div>
 <div class="boxall clearfix">
     <input id="filter-device" type="text" placeholder="搜索" style="width:80%;"></input>
-    <a id="addDeviceBtn" href="#" class="btn blue">添加新设备</a>
+    <a id="addDeviceBtn" href="#" class="button" data-title="添加新设备"></a>
     <table id="datatables" class="device-table" style="width:99%;" >
         <thead >
         <tr>
@@ -167,9 +167,14 @@
 <!--<script type="text/javascript" src="../static/js/echarts.js"></script>-->
 <script type="text/javascript" src="../static/js/device.js"></script>
 <script src="../static/js/jquery.datatables.js"></script>
-<script type="text/javascript" src="../static/js/input.js"></script>
+<!-- <script type="text/javascript" src="../static/js/input.js"></script> -->
 <script type="text/javascript" src="../static/js/logout.js"></script>
 <script type="text/javascript">
+
+    window.addEventListener('resize', function() {
+        var canvas = document.getElementsByClassName("canvas")[0];
+        canvas.style.height = "" + document.body.scrollHeight + "px";
+    });
     $(document).ready(function() {
             var data=[
                 {
@@ -556,7 +561,7 @@
             }
         });
         $("#addDeviceBtn").click(function() {
-            //$("#addNewDeviceModal").modal("show")
+            $("#addNewDeviceModal").modal("show")
         });
     });
 </script>

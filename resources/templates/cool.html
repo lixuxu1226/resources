@@ -128,23 +128,23 @@
                 <div class="content" style="height: 270px" id="device">
                         <!--<div class="row" style="height: 350px">-->
                     <div id="device-chart" class="demo-placeholder" style="height: 100%"></div>
-                    <div id='refresh-device-chart' class="inner-placeholder" style="background: url(../static/img/refresh.png)"></div>
+                    <!-- <div id='refresh-device-chart' class="inner-placeholder" style="background: url(../static/img/refresh.png)"></div> -->
                 </div>
             </div>
-            <div class="boxall" style="height: 2rem">
+            <div class="boxall" style="height: 2.1rem">
                 <!--<div class="alltitle">设备状态</div>-->
                 <div class="content">
                     <div id="deviceInfo-chart" class="demo-placeholder" style="height: 100%"></div>
                 </div>
             </div>
-            <div class="boxall" style="height: 3.15rem">
+            <div class="boxall" style="height: 3.1rem">
                 <!--<div class="alltitle">统计数据</div>-->
                 <div class="content">
                     <div class="demo-placeholder" style="height:170px; overflow:scroll; overflow-x:hidden">
-                        <table id="task-table" style="text-align: center; border-collapse: separate;border-spacing: 8px 0px;">
+                        <table id="task-table" style="text-align: center; border-collapse: separate;border-spacing: 8px 0px;width:99%;max-height:98%;">
                             <thead>
 	                            <tr>
-	                                <th><p>ID</p></th>
+	                                <th><p>设备名</p></th>
 	                                <th><p>任务</p></th>
 	                            </tr>
                             </thead>
@@ -172,7 +172,7 @@
                     </div>
                 </div>
             </div>
-            <div class="boxall" style="margin-top:14px;height: 3.15rem">
+            <div class="boxall" style="margin-top:14px;height: 3.1rem">
                 <div class="alltitle">风险指数以及犯人数据</div>
                 <div class="card" style="height:100%; width: 100%;">
                     <div id="realtime-chart" class="demo-placeholder"></div>
@@ -192,7 +192,7 @@
             </div>
         </li>
         <li>
-            <div class="boxall" style="height:3.15rem">
+            <div class="boxall" style="height:3.17rem">
 <!--                <nav class="nav nav5" style="margin-left: 30%;margin-right: 30%; height: .5rem;">-->
 <!--                    <ul>-->
 <!--                        <li>-->
@@ -204,10 +204,10 @@
 <!--                        </li>-->
 <!--                    </ul>-->
 <!--                </nav>-->
-                <video id="video1" src="http://ivi.bupt.edu.cn/hls/cctv14.m3u8" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 5px">
+                <video id="video1" src="http://ivi.bupt.edu.cn/hls/cctv14.m3u8" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 1%">
                 </video>
             </div>
-            <div class="boxall" style="height: 3.15rem">
+            <div class="boxall" style="height: 3.17rem">
 <!--                <nav class="nav nav5" style="margin-left: 30%;margin-right: 30%; height: .5rem;">-->
 <!--                    <ul>-->
 <!--                        <li>-->
@@ -219,10 +219,10 @@
 <!--                        </li>-->
 <!--                    </ul>-->
 <!--                </nav>-->
-                <video id="video2" src="http://ivi.bupt.edu.cn/hls/cctv6.m3u8" width=100%;  controls playsInline webkit-playsinline [autoplay] style="padding-top: 5px">
+                <video id="video2" src="http://ivi.bupt.edu.cn/hls/cctv6.m3u8" width=100%;  controls playsInline webkit-playsinline [autoplay] style="padding-top: 1%">
                 </video>
             </div>
-            <div class="boxall" style="height: 3.15rem">
+            <div class="boxall" style="height: 3.16rem">
 <!--                <nav class="nav nav5" style="margin-left: 30%;margin-right: 30%; height: .5rem;">-->
 <!--                    <ul>-->
 <!--                        <li>-->
@@ -233,7 +233,7 @@
 <!--                        </li>-->
 <!--                    </ul>-->
 <!--                </nav>-->
-                <video id="video3" src="../static/img/16.mp4" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 5px">
+                <video id="video3" src="../static/img/16.mp4" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 1%">
                 </video>
             </div>
         </li>
@@ -244,10 +244,6 @@
 <div class="modal fade" id="choosePrisonerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-<!--             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true" style='color:#0000E3'>×</span></button>
-            </div> -->
             <div class="modal-body">
                 <input id="filter-prisoner" type="text" placeholder="搜索" style="color:#ffffff;width: 90%;display:block;margin-left:auto;margin-right:auto;"></input>
                 <table id="prisoner-table" style="margin: auto; border-collapse: separate; border-spacing:8px 5px">
@@ -279,7 +275,7 @@
 <script type="text/javascript" src="../static/js/echarts.js"></script>
 <script src="../static/js/device.js"></script>
 <script src="../static/js/constants.js"></script>
-<script type="text/javascript" src="../static/js/input.js"></script>
+<!-- <script type="text/javascript" src="../static/js/input.js"></script> 加了这个会出现底部滚动条，有bug -->
 <script type="text/javascript" src="../static/js/logout.js"></script>
 
 <script type="text/javascript">
@@ -302,8 +298,12 @@
         var video3 = new EZUIKit.EZUIPlayer('video3');
         video3.play();
         //getAllDevices();
-    })
+    });
 
+    window.addEventListener('resize', function() {
+        var canvas = document.getElementsByClassName("canvas")[0];
+        canvas.style.height = "" + document.body.scrollHeight + "px";
+    });
 </script>
 <script type="text/javascript">
     // $(function () {
@@ -677,7 +677,7 @@
 
 
 <script type="text/javascript">
-    var prisoners = [{'id': 'fdaf', 'img': '../static/img/peo.png'}, {'id': 'adf', 'img': '../static/img/peo.png'}, {'id': 'sadf', 'img': '../static/img/peo.png'}, {'id': 'daads', 'img': '../static/img/peo.png'}, {'id': 'sdf', 'img': '../static/img/peo.png'}, {'id': 'asda', 'img': '../static/img/peo.png'}, {'id': 'sdfa', 'img': '../static/img/peo.png'}, {'id': 'sdcs', 'img': '../static/img/peo.png'}, {'id': 'ffasa', 'img': '../static/img/peo.png'}, {'id': 'fff', 'img': '../static/img/peo.png'}, {'id': 'asaa', 'img': '../static/img/peo.png'}, {'id': 'asaa', 'img': '../static/img/peo.png'}, {'id': 'mkjs', 'img': '../static/img/peo.png'}, {'id': 'ffff', 'img': '../static/img/peo.png'}, {'id': 'gdsa', 'img': '../static/img/peo.png'}, {'id': 'aaaa', 'img': '../static/img/peo.png'}, {'id': 'rwew', 'img': '../static/img/peo.png'}, {'id': 'fsdf', 'img': '../static/img/peo.png'}, {'id': 'aasf', 'img': '../static/img/peo.png'}, {'id': 'afcs', 'img': '../static/img/peo.png'}, ]
+    var prisoners = [{'id': '张三', 'img': '../static/img/peo.png'}, {'id': '李四', 'img': '../static/img/peo.png'}, {'id': '王五', 'img': '../static/img/peo.png'}, {'id': '赵家宝', 'img': '../static/img/peo.png'}, {'id': '万子聪', 'img': '../static/img/peo.png'}, {'id': '王志鹏', 'img': '../static/img/peo.png'}, {'id': '秦晔', 'img': '../static/img/peo.png'}, {'id': '傅威', 'img': '../static/img/peo.png'}, {'id': '谢飞', 'img': '../static/img/peo.png'}, {'id': '本拉登', 'img': '../static/img/peo.png'}, {'id': '崔剑飞', 'img': '../static/img/peo.png'}, {'id': '陈积源', 'img': '../static/img/peo.png'}, {'id': '单傲', 'img': '../static/img/peo.png'}, {'id': '董卓', 'img': '../static/img/peo.png'}, {'id': '孙晟', 'img': '../static/img/peo.png'}, {'id': '甄姬', 'img': '../static/img/peo.png'}, {'id': '典韦', 'img': '../static/img/peo.png'}, {'id': '夏侯惇', 'img': '../static/img/peo.png'}, {'id': '郭嘉', 'img': '../static/img/peo.png'}, {'id': '袁绍', 'img': '../static/img/peo.png'}, ]
     var selected_prisoner = {'id': 'null'}
     var row_num = 4
     function setPrisonersTable(data, filter) {
@@ -729,9 +729,9 @@
             var filter = $("#filter-prisoner").val()
             setPrisonersTable(prisoners, filter)
         });
-        $('#refresh-device-chart').click(function () {
-            getAllDevices()
-        })
+        // $('#refresh-device-chart').click(function () {
+        //     getAllDevices()
+        // })
     })
 </script>
 
@@ -757,7 +757,7 @@
 		})
 		$('#task-table tbody').html(tasks_string)
 	}
-	setTasks([{'id':'41','description':'i like you'},{'id':'42','description':'i do not like you'}])
+	setTasks([{'id':'device1','description':'监视犯人赵家宝'},{'id':'device2','description':'监视犯人王志鹏'},{'id':'device3','description':'监视犯人万子聪'}])
 </script>
 
 <script type="text/javascript">
@@ -814,6 +814,10 @@
 	        }
 	    });
     }
+
+    // setInterval(function (){
+    //     getAllDevices()
+    // },5000);
 
     function setDeviceTree(devices) {
     	var res = []

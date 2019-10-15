@@ -23,8 +23,8 @@ body {
 <canvas id="canv" width="1920" height="572"></canvas>
 <script>
 var num = 200;
-var w = window.innerWidth;
-var h = window.innerHeight;
+var w = window.outerWidth;
+var h = window.outerHeight;
 var max = 100;
 var _x = 0;
 var _y = 0;
@@ -207,8 +207,8 @@ var trans = {
 
   Build.prototype.go = function() {
     this.canvas = document.getElementById("canv");
-    this.canvas.width = window.innerWidth;
-    this.canvas.height = window.innerHeight;
+    this.canvas.width = window.outerWidth;
+    this.canvas.height = window.outerHeight;
     this.$ = canv.getContext("2d");
     this.$.globalCompositeOperation = 'source-over';
     this.varr = [];
@@ -346,8 +346,9 @@ var trans = {
   app.run();
 })();
 window.addEventListener('resize', function() {
-  canvas.width = w = window.innerWidth;
-  canvas.height = h = window.innerHeight;
+  var canvas = document.getElementById("canv");
+  canvas.width = w = window.outerWidth;
+  canvas.height = h = window.outerHeight;
 }, false);
 </script>
 </body></html>
