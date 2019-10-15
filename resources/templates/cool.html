@@ -677,7 +677,7 @@
 
 
 <script type="text/javascript">
-    var prisoners = [{'id': '张三', 'img': '../static/img/peo.png'}, {'id': '李四', 'img': '../static/img/peo.png'}, {'id': '王五', 'img': '../static/img/peo.png'}, {'id': '赵家宝', 'img': '../static/img/peo.png'}, {'id': '万子聪', 'img': '../static/img/peo.png'}, {'id': '王志鹏', 'img': '../static/img/peo.png'}, {'id': '秦晔', 'img': '../static/img/peo.png'}, {'id': '傅威', 'img': '../static/img/peo.png'}, {'id': '谢飞', 'img': '../static/img/peo.png'}, {'id': '本拉登', 'img': '../static/img/peo.png'}, {'id': '崔剑飞', 'img': '../static/img/peo.png'}, {'id': '陈积源', 'img': '../static/img/peo.png'}, {'id': '单傲', 'img': '../static/img/peo.png'}, {'id': '董卓', 'img': '../static/img/peo.png'}, {'id': '孙晟', 'img': '../static/img/peo.png'}, {'id': '甄姬', 'img': '../static/img/peo.png'}, {'id': '典韦', 'img': '../static/img/peo.png'}, {'id': '夏侯惇', 'img': '../static/img/peo.png'}, {'id': '郭嘉', 'img': '../static/img/peo.png'}, {'id': '袁绍', 'img': '../static/img/peo.png'}, ]
+    var prisoners = [{'id': '肖申克', 'img': 'http://img2.imgtn.bdimg.com/it/u=1973309565,2827282113&fm=26&gp=0.jpg'}, {'id': '摩根', 'img': 'http://img0.imgtn.bdimg.com/it/u=3755574069,3463185667&fm=26&gp=0.jpg'}, {'id': '希特勒', 'img': 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=941443254,970138554&fm=179&app=42&f=JPEG?w=121&h=140'}, {'id': '赵家宝', 'img': '../static/img/peo.png'}, {'id': '万梓聪', 'img': '../static/img/peo.png'}, {'id': '王志鹏', 'img': '../static/img/peo.png'}, {'id': '秦晔', 'img': '../static/img/peo.png'}, {'id': '特朗普', 'img': 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3281731419,3181491992&fm=26&gp=0.jpg'}, {'id': '谢非', 'img': '../static/img/peo.png'}, {'id': '本拉登', 'img': 'https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=3565236029,2292350226&fm=179&app=42&f=PNG?w=121&h=140&s=FD19A9574433B384949139070300E0E1'}, {'id': '崔剑飞', 'img': '../static/img/peo.png'}, {'id': '陈积源', 'img': '../static/img/peo.png'}, {'id': '单傲', 'img': '../static/img/peo.png'}, {'id': '孙晟', 'img': '../static/img/peo.png'}]
     var selected_prisoner = {'id': 'null'}
     var row_num = 4
     function setPrisonersTable(data, filter) {
@@ -693,7 +693,7 @@
             if(count % row_num == 0) {
                 table_string += "</tr><tr>"
             }
-            table_string += '<th><div class="cardBox"><img src="' + prisoner.img + '" style="width:100px;height:auto;"/><a href="#">' + prisoner.id + "</a></div></th>"
+            table_string += '<th><div class="cardBox"><div style="vertical-align:middle;text-align: center;display: table-cell;border: 0px;height: 120px;"><img src="' + prisoner.img + '" style="vertical-align: middle;width:100%;max-height: 100%;"/></div><a href="#">' + prisoner.id + "</a></div></th>"
             //table_string += '<th><a href="#">' + prisoner.id + "</a></th>"
             count += 1
         })
@@ -757,7 +757,7 @@
 		})
 		$('#task-table tbody').html(tasks_string)
 	}
-	setTasks([{'id':'device1','description':'监视犯人赵家宝'},{'id':'device2','description':'监视犯人王志鹏'},{'id':'device3','description':'监视犯人万子聪'}])
+	setTasks([{'id':'device1','description':'监视犯人赵家宝'},{'id':'device2','description':'监视犯人王志鹏'},{'id':'device4','description':'监视犯人万梓聪'}])
 </script>
 
 <script type="text/javascript">
@@ -840,7 +840,11 @@
     			if(device.children != undefined) {
     				temp.children = setDeviceTree(device.children)
     			}
-    		} else {
+    		} else if(device.state == '0') {
+                temp.value = 3
+                temp.symbol = 'image://../static/img/re_phone.png'
+                temp.itemStyle = "{normal: {color: '#fa6900',label: {show: true,position: 'right'},},emphasis: {label: {show: false}, borderWidth: 0}}"
+            } else {
     			temp.value = 2
     			temp.symbol = 'image://../static/img/phone.png'
     			temp.itemStyle = "{normal: {color: '#fa6900',label: {show: true,position: 'right'},},emphasis: {label: {show: false}, borderWidth: 0}}"
@@ -849,7 +853,7 @@
     	})
     	return res
     }
-    deviceOption.series.data = setDeviceTree([{'name': 'cloud', 'device_id': '213', 'kind': 'cloud','children':[{'name': 'server1', 'device_id': '321', 'kind': 'server','children':[{'name': 'device1', 'device_id': '123', 'kind': 'device'},{'name': 'device2', 'device_id': '555', 'kind': 'device'},{'name': 'device3', 'device_id': '53', 'kind': 'device'}],}],}])
+    deviceOption.series.data = setDeviceTree([{'name': 'cloud', 'device_id': '213', 'kind': 'cloud','children':[{'name': 'server1', 'device_id': '321', 'kind': 'server','children':[{'name': 'device1', 'device_id': '123', 'kind': 'device', 'state': '1'},{'name': 'device2', 'device_id': '555', 'kind': 'device', 'state': '1'},{'name': 'device3', 'device_id': '53', 'kind': 'device', 'state': '0'},{'name': 'device4', 'device_id': '53', 'kind': 'device', 'state': '1'}],}],}])
     deviceChart.setOption(deviceOption);
 
 
