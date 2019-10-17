@@ -38,9 +38,9 @@
     </style>
 </head>
 <script>
-    $(window).load(function(){
-        $(".loading").fadeOut()
-    })
+    // $(window).load(function(){
+    //     $(".loading").fadeOut()
+    // })
 
     /****/
     $(document).ready(function(){
@@ -56,9 +56,9 @@
 <!-- <div class="canvas" style="opacity: .2">
     <iframe frameborder="0" src="../static/js/index.html" style="width: 100%; height: 100%"></iframe>
 </div> -->
-<div class="loading">
+<!-- <div class="loading">
     <div class="loadbox"> <img src="../static/img/loading.gif"> 页面加载中... </div>
-</div>
+</div> -->
 <div class="head">
     <h1 style="margin-top: 5px">跨区域押解边缘风险预警平台</h1>
     <div class="function" style="left:.1rem; ">
@@ -97,7 +97,7 @@
             </ul>
         </nav>
     </div>
-    <div class="weather"><img src="../static/img/wifi.png" style="width: 7%"><span id="delay">  40ms </span><span id="showTime"></span></div>
+    <div class="weather"><img src="../static/img/wifi.png" style="width: 6%;"><span id="delay">40ms</span><span id="showTime"></span></div>
 
     <script>
         var t = null;
@@ -112,7 +112,7 @@
             var h=dt.getHours();//获取时
             var m=dt.getMinutes();//获取分
             var s=dt.getSeconds();//获取秒
-            document.getElementById("showTime").innerHTML = y+"年"+mt+"月"+day+"日"+h+"时"+m+"分"+s+"秒";
+            document.getElementById("showTime").innerHTML = " " + y+"年"+mt+"月"+day+"日"+h+"时"+m+"分"+s+"秒";
             t = setTimeout(time,1000); //设定定时器，循环运行
         }
     </script>
@@ -125,16 +125,16 @@
 <!--                <div id='deviceFullScreen' class="inner-placeholder" style="background: url(../static/img/fullScreen.png);z-index: 4"></div>-->
                 <!--background: url(../static/img/fullScreen.png)-->
 
-                <div class="content" style="height: 270px" id="device">
+                <div class="content" style="height: 100%" id="device">
                         <!--<div class="row" style="height: 350px">-->
-                    <div id="device-chart" class="demo-placeholder" style="height: 100%"></div>
+                    <div id="device-chart" class="demo-placeholder" style="height: 300px"></div>
                     <!-- <div id='refresh-device-chart' class="inner-placeholder" style="background: url(../static/img/refresh.png)"></div> -->
                 </div>
             </div>
             <div class="boxall" style="height: 2.1rem">
                 <!--<div class="alltitle">设备状态</div>-->
-                <div class="content">
-                    <div id="deviceInfo-chart" class="demo-placeholder" style="height: 100%"></div>
+                <div class="content" style="height: 100%">
+                    <div id="deviceInfo-chart" class="demo-placeholder" style="height: 120px"></div>
                 </div>
             </div>
             <div class="boxall" style="height: 3.1rem">
@@ -175,18 +175,10 @@
             <div class="boxall" style="margin-top:14px;height: 3.1rem">
                 <div class="alltitle">风险指数以及犯人数据</div>
                 <div class="card" style="height:100%; width: 100%;">
-                    <div id="realtime-chart" class="demo-placeholder"></div>
-                    <div class="inner-placeholder" style="width:100px;height:116px;background:url(../static/img/peo.png);margin-right: 15px;margin-top: -10px">
-
-                    </div>
-                    <div class="inner-placeholder" style="margin-top: 110px;margin-right: 15px;width: 100px;height:50px">
-                        <nav class="nav nav5">
-                            <ul>
-                                <li>
-                                    <a href="#" id="prisoner">选择</a>
-                                </li>
-                            </ul>
-                        </nav>
+                    <div id="realtime-chart" class="demo-placeholder" style="height: 100%"></div>
+                    <div class="inner-placeholder" style="width:20%;height: 100%;">
+                        <img src="../static/img/peo.png" style="vertical-align: middle;width:100%;max-height: 100%;"/>
+                        <a href="#" id="prisoner" style="text-align: center;vertical-align: middle;display: inline-block;width: 100%;">选择</a>
                     </div>
                 </div>
             </div>
@@ -299,11 +291,6 @@
         video3.play();
         //getAllDevices();
     });
-
-    window.addEventListener('resize', function() {
-        var canvas = document.getElementsByClassName("canvas")[0];
-        canvas.style.height = "" + document.body.scrollHeight + "px";
-    });
 </script>
 <script type="text/javascript">
     // $(function () {
@@ -351,7 +338,7 @@
             console.log('fullScreen')
             requestFullScreen(deviceScreen);
         };
-
+        
 
 
         var requestFullScreen = function (element) {
@@ -769,9 +756,8 @@
             name:'树图',
             type:'tree',
             orient:'vertical',
-            height:180,
             symbol: 'circle',
-            symbolSize: 40,
+            symbolSize: 30,
             itemStyle: {
                 normal: {
                     label: {
@@ -779,8 +765,6 @@
                         position: 'bottom',
                         textStyle: {
                             color: '#fdfdff',
-                            fontSize: 10,
-
                         }
                     },
                     lineStyle: {
@@ -825,7 +809,6 @@
     		var temp = {}
     		temp.name = device.name
     		temp.device_id = device.device_id
-    		temp.symbolSize = [48, 48]
     		if(device.kind === 'cloud') {
     			temp.value = 0
     			temp.symbol = 'image://../static/img/cloud.png'
@@ -863,9 +846,7 @@
             show: true,
             text: currentDevice.name,
             textStyle: {//主标题文本样式{"fontSize": 18,"fontWeight": "bolder","color": "#333"}
-                fontSize: 16,
                 color: '#fff',
-
             },
         },
         tooltip : {
@@ -881,7 +862,8 @@
                 // startAngle: 180,
                 // endAngle: 0,
                 splitNumber: 10,
-                radius: '70%',
+                radius: '80%',
+                center: ['50%', '70%'],
 
                 axisLine: {            // 坐标轴线
                     lineStyle: {       // 属性lineStyle控制线条样式
@@ -913,11 +895,7 @@
                 },
 
                 title : {
-                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    // fontWeight: 'bolder',
-                    fontSize: 12,
                     color: '#fff',
-                    offsetCenter:['-50%','110%'],
                 },
                 itemStyle: {
                     normal: {
@@ -940,17 +918,17 @@
                     fontSize:12,
                     color:'#fff',
 
-                    offsetCenter:['100%','110%'],
+                    offsetCenter:['0','50%'],
 
                     rich: {}
                 },
-                data:[{value: 0, name: 'cpu占用率 :'}]
+                data:[{value: 0, name: 'cpu'}]
             },
             {
                 name: '内存占用率',
                 type: 'gauge',
-                center: ['20%', '50%'],    // 默认全局居中
-                radius: '70%',
+                center: ['20%', '70%'],    // 默认全局居中
+                radius: '80%',
                 min:0,
                 max:100,
                 splitNumber:10,
@@ -991,7 +969,6 @@
                     // fontWeight: 'bolder',
                     fontSize: 12,
                     color: '#fff',
-                    offsetCenter:['-50%','110%'],
                 },
                 itemStyle: {
                     normal: {
@@ -1010,17 +987,17 @@
                     fontSize:12,
                     color:'#fff',
 
-                    offsetCenter:['100%','110%'],
+                    offsetCenter:['0%','50%'],
 
                     rich: {}
                 },
-                data:[{value: 0, name: '内存占用率 :'}]
+                data:[{value: 0, name: '内存'}]
             },
             {
                 name: '耗电量',
                 type: 'gauge',
-                center: ['80%', '50%'],    // 默认全局居中
-                radius: '70%',
+                center: ['80%', '70%'],    // 默认全局居中
+                radius: '80%',
                 min: 0,
                 max: 100,
 
@@ -1067,7 +1044,6 @@
                     // fontWeight: 'bolder',
                     fontSize: 12,
                     color: '#fff',
-                    offsetCenter:['-50%','110%'],
                 },
                 detail : {
                     // 其余属性默认使用全局文本样式，详见TEXTSTYLE
@@ -1081,11 +1057,11 @@
                     fontSize:12,
                     color:'#fff',
 
-                    offsetCenter:['70%','110%'],
+                    offsetCenter:['0%','50%'],
 
                     rich: {}
                 },
-                data:[{value: 0, name: '耗电量 :'}]
+                data:[{value: 0, name: '耗电量'}]
             }
         ]
 
@@ -1102,6 +1078,25 @@
     		getDeviceStates()
 		}
 	})
+
+    window.addEventListener('resize', function() {
+        chartResize();
+        // var canvas = document.getElementsByClassName("canvas")[0];
+        // canvas.style.height = "" + document.body.scrollHeight + "px";
+    });
+
+    function chartResize() {
+        var device_chart = document.getElementById("device-chart");
+        device_chart.style.height = "" + (device_chart.parentNode.offsetHeight) + "px";
+        deviceOption.series.symbolSize = device_chart.parentNode.offsetHeight * 0.1
+        console.log(deviceOption.series.symbolSize)
+        deviceChart.setOption(deviceOption)
+        deviceChart.resize();
+
+        var deviceInfo_chart = document.getElementById("deviceInfo-chart");
+        deviceInfo_chart.style.height = "" + (deviceInfo_chart.parentNode.offsetHeight) + "px";
+        deviceInfoChart.resize()
+    }
 
 	function getDeviceStates() {
 		if (typeof (WebSocket) == "undefined") {

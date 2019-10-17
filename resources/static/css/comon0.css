@@ -43,13 +43,13 @@ a:hover{ color: #0e334a; text-decoration: none!important}
 .copyright{ background:rgba(19,31,64,.32); border: 1px solid rgba(255,255,255,.05); line-height:.5rem; text-align: center; padding-right: 15px; bottom: 0; color:rgba(255,255,255,.7); font-size: .16rem; }
 
 .head{ height:0.8rem; background: url(../img/head_bg.png) no-repeat center center; background-size: 100% 100%; position: relative; z-index: 100;}
-.head h1{ color:#fff; text-align: center; font-size: .4rem; line-height:.8rem;}
+.head h1{ color:#fff; text-align: center; font-size: .45rem; line-height:.8rem;}
 .head h1 img{ width:1.5rem; display: inline-block; vertical-align: middle; margin-right: .2rem}
-.function{ position:absolute; top:0; line-height: .75rem;}
+.function{ position:absolute; top: 3%; line-height: .75rem;}
 .function nav{color:rgba(255,255,255,.7); font-size: .24rem; padding-left: .1rem;}
-.weather{ position:absolute; right:.3rem; top:0; line-height: .75rem;}
-.weather img{ width:.37rem; display: inline-block; vertical-align: middle;}
-.weather span{color:rgba(255,255,255,.7); font-size: .18rem; padding-right: .1rem;}
+.weather{ width:20%;position:absolute;display: inline-block; right:.3rem; top:0; line-height: .75rem;}
+.weather img{ display: inline-block; padding-bottom: 2%;padding-right:1%}
+.weather span{color:rgba(255,255,255,.7); font-size: .18rem;display: inline-block;padding-right: 2%}
 .mainbox{ padding:.1rem .1rem 0rem .1rem;}
 .mainbox>ul{}
 .mainbox>ul>li{ float: left; padding: 0 .1rem}

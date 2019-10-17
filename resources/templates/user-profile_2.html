@@ -15,9 +15,9 @@
     <link href="../static/css/profile.css" rel="stylesheet">
 </head>
 <script>
-    $(window).load(function(){
-        $(".loading").fadeOut()
-    })
+    // $(window).load(function(){
+    //     $(".loading").fadeOut()
+    // })
 
     /****/
     $(document).ready(function(){
@@ -30,12 +30,12 @@
     });
 </script>
 <body>
-<div class="canvas" style="opacity: .2">
+<!-- <div class="canvas" style="opacity: .2">
     <iframe frameborder="0" src="../static/js/index.html" style="width: 100%; height: 100%"></iframe>
 </div>
 <div class="loading">
     <div class="loadbox"> <img src="../static/img/loading.gif"> 页面加载中... </div>
-</div>
+</div> -->
 <div class="head">
     <h1 style="margin-top: 5px">跨区域押解边缘风险预警平台</h1>
     <div class="function" style="left:.1rem; ">
@@ -91,7 +91,7 @@
 
     </script>
 </div>
-<div class="boxall clearfix" style="min-height:600px;padding-top: 10%">
+<div class="boxall clearfix" style="padding-top: 10%">
     <div class="left">
         <img id="photo" src="http://news.youth.cn/sh/201605/W020160505290782405754.png" style="width:60%;height:auto;" alt=""/>
     </div>
@@ -149,12 +149,14 @@
 <!-- <script type="text/javascript" src="../static/js/device.js"></script> -->
 <script type="text/javascript" src="../static/js/logout.js"></script>
 <script type="text/javascript">
-    window.addEventListener('resize', function() {
-        var canvas = document.getElementsByClassName("canvas")[0];
-        canvas.style.height = "" + document.body.scrollHeight + "px";
-    });
+    // window.addEventListener('resize', function() {
+    //     var canvas = document.getElementsByClassName("canvas")[0];
+    //     canvas.style.height = "" + document.body.scrollHeight + "px";
+    // });
 
     $(document).ready(function () {
+        var main = document.getElementsByClassName("clearfix")[0];
+        main.style.height = "" + (window.innerHeight * 0.9) + "px";
         // var user={'id':'', 'name':'', 'occupation','department','phone':'','mobile':'','email':'', 'phone':''};
         // $.ajax({
         //     type:'GET',
