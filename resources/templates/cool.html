@@ -53,9 +53,9 @@
     });
 </script>
 <body>
-<div class="canvas" style="opacity: .2">
+<!-- <div class="canvas" style="opacity: .2">
     <iframe frameborder="0" src="../static/js/index.html" style="width: 100%; height: 100%"></iframe>
-</div>
+</div> -->
 <div class="loading">
     <div class="loadbox"> <img src="../static/img/loading.gif"> 页面加载中... </div>
 </div>
@@ -75,29 +75,29 @@
         <nav class="nav nav5">
             <ul>
                 <li>
-                    <a href="#">设备管理</a>
-                    <ul>
+                    <a href="checkDevice_2.html">设备管理</a>
+<!--                     <ul>
                         <li><a href="checkDevice_2.html">查看设备信息</a></li>
                         <li><a href="useDeviceLog.html">操作日志</a></li>
-                    </ul>
+                    </ul> -->
                 </li>
             </ul>
         </nav>
     </div>
-    <div class="function" style="left:4.1rem; ">
+    <div class="function" style="left:4.1rem;">
         <nav class="nav nav5">
             <ul>
                 <li>
-                    <a href="#">用户管理</a>
+                    <a href="#">个人管理</a>
                     <ul>
-                        <li><a href="user-profile_2.html">查看用户信息</a></li>
+                        <li><a href="user-profile_2.html">管理员信息</a></li>
                         <li><a href="#" id="logout">注销</a></li>
                     </ul>
                 </li>
             </ul>
         </nav>
     </div>
-    <div class="weather"><!--<img src="picture/weather.png"><span>多云转小雨</span>--><span id="showTime"></span></div>
+    <div class="weather"><img src="../static/img/wifi.png" style="width: 7%"><span id="delay">  40ms </span><span id="showTime"></span></div>
 
     <script>
         var t = null;

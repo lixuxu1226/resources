@@ -9,12 +9,12 @@ p {
 .left {
     float: left;
     margin-left: 10%;
-    margin-top: 3%;
-    width: 400px;
-    height: 400px;
+    margin-top: 2%;
+    width: 30%;
+    height: 40%;
 }
 .right {
-    margin-left: 200px;
+    margin-left: 10%;
 }
 ul,label{
 	margin:0;

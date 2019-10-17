@@ -237,7 +237,9 @@ to {transform: rotate(-359deg);}
 	border: none;
 	background: rgba(115, 205, 225, 0.2);
 }
-.nav li ul li:nth-child(1) a{ -webkit-animation-iteration-count: infinite;  -webkit-animation-name:inout1 ; -webkit-animation-duration: .1ms; }
+
+/*闪烁下拉框科幻*/
+/*.nav li ul li:nth-child(1) a{ -webkit-animation-iteration-count: infinite;  -webkit-animation-name:inout1 ; -webkit-animation-duration: .1ms; }
 .nav li ul li:nth-child(2) a{ -webkit-animation-iteration-count: infinite;  -webkit-animation-name:inout2 ; -webkit-animation-duration: .2ms; }
 .nav li ul li:nth-child(3) a{ -webkit-animation-iteration-count: infinite;  -webkit-animation-name:inout3 ; -webkit-animation-duration: .3ms; }
 .nav li ul li:nth-child(4) a{ -webkit-animation-iteration-count: infinite;  -webkit-animation-name:inout4 ; -webkit-animation-duration: .2ms; }
@@ -245,7 +247,7 @@ to {transform: rotate(-359deg);}
 .nav li ul li:nth-child(6) a{ -webkit-animation-iteration-count: infinite;  -webkit-animation-name:inout2 ; -webkit-animation-duration: .2ms; }
 .nav li ul li:nth-child(7) a{ -webkit-animation-iteration-count: infinite;  -webkit-animation-name:inout3 ; -webkit-animation-duration: .3ms; }
 .nav li ul li:nth-child(8) a{ -webkit-animation-iteration-count: infinite;  -webkit-animation-name:inout4 ; -webkit-animation-duration: .2ms; }
-
+*/
 @-webkit-keyframes inout1{
 	0%{opacity:.6;}
 	100%{opacity:1;}
