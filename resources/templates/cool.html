@@ -196,7 +196,7 @@
 <!--                        </li>-->
 <!--                    </ul>-->
 <!--                </nav>-->
-                <video id="video1" src="http://ivi.bupt.edu.cn/hls/cctv14.m3u8" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 1%">
+                <video id="video1" src="../static/img/16.mp4" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 1%">
                 </video>
             </div>
             <div class="boxall" style="height: 3.17rem">
@@ -211,7 +211,7 @@
 <!--                        </li>-->
 <!--                    </ul>-->
 <!--                </nav>-->
-                <video id="video2" src="http://ivi.bupt.edu.cn/hls/cctv6.m3u8" width=100%;  controls playsInline webkit-playsinline [autoplay] style="padding-top: 1%">
+                <video id="video2" src="../static/img/16.mp4" width=100%;  controls playsInline webkit-playsinline [autoplay] style="padding-top: 1%">
                 </video>
             </div>
             <div class="boxall" style="height: 3.16rem">
@@ -303,6 +303,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
+                <video id="video4" src="../static/img/16.mp4" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 1%;width: 100%;">
+                </video>
             	<div class="left">
 			        <img id="photo" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4190027971,3083551657&fm=26&gp=0.jpg" style="width:100%;height:auto;" alt=""/>
 			    </div>
@@ -663,18 +665,6 @@
                 map.setCenter(markers[0].getPosition());
             }
         },500);
-        function switchVideo(videoId, url) {
-            var video = new EZUIKit.EZUIPlayer(videoId);
-            video.stop();
-            var video_dom = document.getElementById(videoId)
-            var parent = video_dom.parentElement;
-            parent.removeChild(video_dom);
-            video_dom.setAttribute('src', url);
-            parent.appendChild(video_dom);
-            video = new EZUIKit.EZUIPlayer(videoId);
-            video.play();
-        }
-
 
         //给location添加点击事件 点击之后停止计时，地图可平移；再次点击，回到车辆所在位置
         var location=document.getElementById("location");
@@ -1018,6 +1008,18 @@
 	}
 	setTasks(tasks)
 
+    function switchVideo(videoId, url) {
+        var video = new EZUIKit.EZUIPlayer(videoId);
+        video.stop();
+        var video_dom = document.getElementById(videoId)
+        var parent = video_dom.parentElement;
+        parent.removeChild(video_dom);
+        video_dom.setAttribute('src', url);
+        parent.appendChild(video_dom);
+        video = new EZUIKit.EZUIPlayer(videoId);
+        video.play();
+    }
+
 	$("#task-table td a").click(function(){
         var tdSeq = $(this).parent()[0].cellIndex;
         var trSeq = $(this).parent().parent()[0].rowIndex - 1;
@@ -1026,6 +1028,7 @@
         if(tdSeq === 0) {
         	$('#taskInfoModal').modal('show')
         } else {
+            switchVideo('video4', '../static/img/16.mp4');
         	$('#carInfoModal').modal('show')
         }
     });
