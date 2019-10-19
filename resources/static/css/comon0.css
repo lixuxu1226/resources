@@ -62,7 +62,7 @@ a:hover{ color: #0e334a; text-decoration: none!important}
 .boxall:after{ position:absolute; width: .1rem; height: .1rem; content: "";  border-top: 2px solid #02a6b5; top: 0;}
 .boxall:before,.boxfoot:before{border-left: 2px solid #02a6b5;left: 0;}
 .boxall:after,.boxfoot:after{border-right: 2px solid #02a6b5; right: 0;}
-.alltitle{ font-size:.2rem; color:#fff; text-align: center; line-height: .5rem;}
+.alltitle{ font-size:.25rem; color:#84C1FF; text-align: center; line-height: .5rem;}
 
 .boxfoot{ position:absolute; bottom: 0; width: 100%; left: 0;}
 .boxfoot:before,

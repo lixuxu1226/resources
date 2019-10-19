@@ -1,3 +1,43 @@
+#task-table tr:nth-child(2n){
+    background-color: rgba(208,208,208,0.2);
+}
+
+#task-table tr:nth-child(2n+1){
+    background-color: rgba(142,142,142,0.2);
+}
+
+#task-table th {
+    text-align: center;
+    padding: 1%;
+    color: #FFFF6F;
+}
+
+#task-table td {
+    text-align: center;
+    padding: 1%;
+    color: #ffffff;
+}
+
+#alert-table tr:nth-child(2n+1){
+    background-color: rgba(208,208,208,0.2);
+}
+
+#alert-table tr:nth-child(2n){
+    background-color: rgba(142,142,142,0.2);
+}
+
+#alert-table th {
+    text-align: center;
+    padding: 1%;
+    color: #FFFF6F;
+}
+
+#alert-table td {
+    text-align: center;
+    padding: 1%;
+    color: #ffffff;
+}
+
 .cardBox {
     width: 110px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -14,13 +54,42 @@
     content: "";
     background: #282E33;
     width: 100%;
-    border-radius: 12px 12px 0 0;
+    border-radius: 12px 12px 12px 12px;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 0;
 }
 
-#task-table th,td {
-    padding: .2em;
+.left {
+    float: left;
+    margin-left: 2%;
+    width: 30%;
+    margin-top:20%;
+}
+.right {
+    padding-left: 40%;
+}
+
+ul.profile li {
+    display: block;
+}
+ul.profile li ul.profile-text li {
+    display: inline-block;
+    font-size: 1.2em;
+    color: #fff;
+    margin-top: 1em;
+    font-weight: 100;
+    max-width:78%;
+}
+ul.profile li ul.profile-text li:nth-child(1){
+    vertical-align:top;
+    width: 20%;
+}
+ul.profile li ul.profile-text li a {
+    color: #fff;
+    text-decoration:none;
+}
+ul.profile li ul.profile-text li a:hover{
+    color: #0FF;
 }

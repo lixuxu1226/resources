@@ -124,10 +124,9 @@
                 <!--<div class="alltitle">边缘设备</div>-->
 <!--                <div id='deviceFullScreen' class="inner-placeholder" style="background: url(../static/img/fullScreen.png);z-index: 4"></div>-->
                 <!--background: url(../static/img/fullScreen.png)-->
-
                 <div class="content" style="height: 100%" id="device">
                         <!--<div class="row" style="height: 350px">-->
-                    <div id="device-chart" class="demo-placeholder" style="height: 300px"></div>
+                    <div id="device-chart" class="demo-placeholder" style="height: 260px"></div>
                     <!-- <div id='refresh-device-chart' class="inner-placeholder" style="background: url(../static/img/refresh.png)"></div> -->
                 </div>
             </div>
@@ -138,25 +137,24 @@
                 </div>
             </div>
             <div class="boxall" style="height: 3.1rem">
-                <!--<div class="alltitle">统计数据</div>-->
-                <div class="content">
-                    <div class="demo-placeholder" style="height:170px; overflow:scroll; overflow-x:hidden">
-                        <table id="task-table" style="text-align: center; border-collapse: separate;border-spacing: 8px 0px;width:99%;max-height:98%;">
-                            <thead>
-	                            <tr>
-	                                <th><p>设备名</p></th>
-	                                <th><p>任务</p></th>
-	                            </tr>
-                            </thead>
-                            <tbody>
-	                            <tr>
-	                                <th>0</th>
-	                                <th>暂无任务</th>
-	                            </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
+                <div class="alltitle">押解信息</div>
+                <div class="demo-placeholder" id="rollingTaskDiv" style="overflow: auto;height:90%">
+                    <table id="task-table" style="text-align: center; border-collapse: separate;width:99%;max-height:98%;">
+                        <thead>
+                            <tr>
+                                <th>任务号</th>
+                                <th>车牌号</th>
+                                <th>犯人数</th>
+                                <th>警员数</th>
+                                <th>级别</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>暂无</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </li>
@@ -173,12 +171,14 @@
                 </div>
             </div>
             <div class="boxall" style="margin-top:14px;height: 3.1rem">
-                <div class="alltitle">风险指数以及犯人数据</div>
+                <div class="alltitle">犯人风险数据</div>
                 <div class="card" style="height:100%; width: 100%;">
                     <div id="realtime-chart" class="demo-placeholder" style="height: 100%"></div>
-                    <div class="inner-placeholder" style="width:20%;height: 100%;">
-                        <img src="../static/img/peo.png" style="vertical-align: middle;width:100%;max-height: 100%;"/>
+                    <div class="inner-placeholder" style="width:20%;height: 100%;text-align: center;">
+                        <img id="prisoner-avatar" src="../static/img/peo.png" onclick="showPrisonerInfo()" style="cursor:pointer;text-align: center;vertical-align: middle;max-width:100%;height:50%;"/>
                         <a href="#" id="prisoner" style="text-align: center;vertical-align: middle;display: inline-block;width: 100%;">选择</a>
+                        <a href="#" id="prisoner_risk" style="padding-left:10%;text-align: left;display: inline-block;width: 100%;">风险：0</a>
+                        <a href="#" id="prisoner_heartbeat" style="padding-left:10%;text-align: left;display: inline-block;width: 100%;">心率：0</a>
                     </div>
                 </div>
             </div>
@@ -215,18 +215,24 @@
                 </video>
             </div>
             <div class="boxall" style="height: 3.16rem">
-<!--                <nav class="nav nav5" style="margin-left: 30%;margin-right: 30%; height: .5rem;">-->
-<!--                    <ul>-->
-<!--                        <li>-->
-<!--                            <a href="#">C车摄像头1号</a>-->
-<!--                            <ul>-->
-<!--                                <li><a id="C车摄像头2号" onclick="changeCamera(this)">C车摄像头2号</a></li>-->
-<!--                            </ul>-->
-<!--                        </li>-->
-<!--                    </ul>-->
-<!--                </nav>-->
-                <video id="video3" src="../static/img/16.mp4" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 1%">
-                </video>
+                <div class="alltitle">异常事件列表</div>
+                <div class="demo-placeholder" id="rollingAlertDiv" style="overflow: auto;height:90%">
+                    <table id="alert-table" style="text-align: center; border-collapse: separate;width:99%;max-height:98%;">
+                        <thead>
+                            <tr>
+                                <th>事件名称</th>
+                                <th>地点</th>
+                                <th>处理状态</th>
+                                <th>级别</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>暂无</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </li>
     </ul>
@@ -247,7 +253,179 @@
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="taskInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <ul class="profile">
+		            <li>
+		                <ul class="profile-text">
+		                    <li><b>任务编号</b></li>
+		                    <li id="department">YJ1235</li>
+		                </ul>
+		            </li>
+		            <li>
+		                <ul class="profile-text">
+		                    <li><b>车牌号</b></li>
+		                    <li id="occupation">京A1234</li>
+		                </ul>
+		            </li>
+		            <li>
+		                <ul class="profile-text">
+		                    <li><b>犯人</b></li>
+		                    <li id="occupation">张某某、李某某、王某某、赵某某、陈某某</li>
+		                </ul>
+		            </li>
+		            <li>
+		                <ul class="profile-text">
+		                    <li><b>警员</b></li>
+		                    <li id="occupation">张警官、李警官、王警官、刘警官</li>
+		                </ul>
+		            </li>
+		            <li>
+		                <ul class="profile-text">
+		                    <li><b>级别</b></li>
+		                    <li>一级</li>
+		                </ul>
+		            </li>
+		        </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="alertInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <ul class="profile">
+		            <li>
+		                <ul class="profile-text">
+		                    <li><b>任务编号</b></li>
+		                    <li id="department">YJ1235</li>
+		                </ul>
+		            </li>
+		            <li>
+		                <ul class="profile-text">
+		                    <li><b>事件描述</b></li>
+		                    <li id="occupation">手环状态异常</li>
+		                </ul>
+		            </li>
+		            <li>
+		                <ul class="profile-text">
+		                    <li><b>级别</b></li>
+		                    <li>一般</li>
+		                </ul>
+		            </li>
+		            <li>
+		                <ul class="profile-text">
+		                    <li><b>处理状态</b></li>
+		                    <li>处理中</li>
+		                </ul>
+		            </li>
+		            <li>
+		                <ul class="profile-text">
+		                    <li><b>时间</b></li>
+		                    <li id="occupation">2019年10月19日13点25分</li>
+		                </ul>
+		            </li>
+		            <li>
+		                <ul class="profile-text">
+		                    <li><b>地点</b></li>
+		                    <li id="occupation">女子监狱</li>
+		                </ul>
+		            </li>
+		            <li>
+		                <ul class="profile-text">
+		                    <li><b>涉及犯人</b></li>
+		                    <li>赵某某</li>
+		                </ul>
+		            </li>
+		            <li>
+		                <ul class="profile-text">
+		                    <li><b>涉及警察</b></li>
+		                    <li>张警官</li>
+		                </ul>
+		            </li>
+		        </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="prisonerInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+            	<div class="left">
+			        <img id="photo" src="http://img2.imgtn.bdimg.com/it/u=1973309565,2827282113&fm=26&gp=0.jpg" style="width:100%;height:auto;" alt=""/>
+			    </div>
+			    <div class="right">
+	                <ul class="profile">
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>犯人</b></li>
+			                    <li id="department">张某某</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>年龄</b></li>
+			                    <li id="occupation">23</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>性别</b></li>
+			                    <li id="occupation">男</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>学历</b></li>
+			                    <li id="occupation">高中</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>身高</b></li>
+			                    <li>178cm</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>体重</b></li>
+			                    <li>74kg</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>体脂率</b></li>
+			                    <li>15.2%</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>罪行</b></li>
+			                    <li>使用炸药袭击五角大楼</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>前科</b></li>
+			                    <li>使用炸药袭击白宫，窃取FBI机密情报，组织针对好莱坞的恐怖袭击</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>备注</b></li>
+			                    <li>擅长炸药制作</li>
+			                </ul>
+			            </li>
+			        </ul>
+			    </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!--   Core JS Files   -->
 <script src="../static/js/jquery-3.1.1.min.js" type="text/javascript"></script>
@@ -269,6 +447,7 @@
 <script src="../static/js/constants.js"></script>
 <!-- <script type="text/javascript" src="../static/js/input.js"></script> 加了这个会出现底部滚动条，有bug -->
 <script type="text/javascript" src="../static/js/logout.js"></script>
+<script type="text/javascript" src="../static/js/rolling.js"></script>
 
 <script type="text/javascript">
     // 监控
@@ -365,13 +544,13 @@
 <script type="text/javascript">
     // window.init = function(){
     $(document).ready(function () {
-        var marker,lineArr = [[116.478935,39.997761],[116.478939,39.997825],[116.478912,39.998549],[116.478912,39.998549],[116.478998,39.998555],[116.478998,39.998555],[116.479282,39.99856],[116.479658,39.998528],[116.480151,39.998453],[116.480784,39.998302],[116.480784,39.998302],[116.481149,39.998184],[116.481573,39.997997],[116.481863,39.997846],[116.482072,39.997718],[116.482362,39.997718],[116.483633,39.998935],[116.48367,39.998968],[116.484648,39.999861]];
+        var lineArr = [[116.478935,39.997761],[116.478939,39.997825],[116.478912,39.998549],[116.478912,39.998549],[116.478998,39.998555],[116.478998,39.998555],[116.479282,39.99856],[116.479658,39.998528],[116.480151,39.998453],[116.480784,39.998302],[116.480784,39.998302],[116.481149,39.998184],[116.481573,39.997997],[116.481863,39.997846],[116.482072,39.997718],[116.482362,39.997718],[116.483633,39.998935],[116.48367,39.998968],[116.484648,39.999861]];
 
         var map = new AMap.Map('map-chart', {
                 resizeEnable:true,
                 center: [116.397428, 39.90923],
                 zoom: 17,
-                mapStyle:"amap://styles/darkblue"
+                mapStyle:"amap://styles/normal"
             }
         );
         // var polyline = new AMap.Polyline({
@@ -386,14 +565,6 @@
 
 
         //动态轨迹
-        marker = new AMap.Marker({
-            map: map,
-            position: [116.478935,39.997761],
-            icon: "https://webapi.amap.com/images/car.png",
-            offset: new AMap.Pixel(-26, -13),
-            autoRotation: true,
-            angle:-90,
-        });
         var passedPolyline = new AMap.Polyline({
             map: map,
             // path: lineArr,
@@ -402,18 +573,33 @@
             strokeWeight: 6,      //线宽
             // strokeStyle: "solid"  //线样式
         });
-
-
-        marker.on('moving', function (e) {
-            passedPolyline.setPath(e.passedPath);
-        });
-        marker.moveAlong(lineArr, 200);
+        var car_num = 5
+        var current_car_num = 0;
+        var markers = []
+        setInterval(function () {
+            if(current_car_num < car_num) {
+                var marker = new AMap.Marker({
+                    map: map,
+                    position: [116.478935,39.997761],
+                    icon: "https://webapi.amap.com/images/car.png",
+                    offset: new AMap.Pixel(-26, -13),
+                    autoRotation: true,
+                    angle:-90,
+                });
+                marker.on('moving', function (e) {
+                    passedPolyline.setPath(e.passedPath);
+                });
+                marker.moveAlong(lineArr, 200);
+                markers.push(marker);
+                current_car_num++;
+                console.log(current_car_num)
+            }
+        },800);
         var inter=setInterval(function () {
-            map.setCenter(marker.getPosition());
+            if(markers.length > 0) {
+                map.setCenter(markers[0].getPosition());
+            }
         },500);
-        marker.on('click', function (e) {
-            switchVideo('video1', 'http://ivi.bupt.edu.cn/hls/cctv1.m3u8');
-        });
         function switchVideo(videoId, url) {
             var video = new EZUIKit.EZUIPlayer(videoId);
             video.stop();
@@ -680,20 +866,27 @@
             if(count % row_num == 0) {
                 table_string += "</tr><tr>"
             }
-            table_string += '<th><div class="cardBox"><div style="vertical-align:middle;text-align: center;display: table-cell;border: 0px;height: 120px;"><img src="' + prisoner.img + '" style="vertical-align: middle;width:100%;max-height: 100%;"/></div><a href="#">' + prisoner.id + "</a></div></th>"
+            table_string += '<td><div class="cardBox"><div style="vertical-align:middle;text-align: center;display: table-cell;border: 0px;height: 120px;"><img src="' + prisoner.img + '" style="vertical-align: middle;width:100%;max-height: 100%;"/></div><a href="#">' + prisoner.id + "</a></div></td>"
             //table_string += '<th><a href="#">' + prisoner.id + "</a></th>"
             count += 1
         })
         table_string += "</tr>"
         $('#prisoner-table tbody').html(table_string)
-        $("#prisoner-table th").click(function(){
-            var thSeq = $(this).parent().find("th").index($(this)[0]);
+        $("#prisoner-table td").click(function(){
+            var thSeq = $(this).parent().find("td").index($(this)[0]);
             var trSeq = $(this).parent().parent().find("tr").index($(this).parent()[0]) - 1;
             selected_prisoner = filter_data[row_num * trSeq + thSeq];
             $('#prisoner').html(selected_prisoner.id);
+            document.getElementById('prisoner-avatar').src = selected_prisoner.img
             $('#choosePrisonerModal').modal('hide')
         });
+        
     }
+    function showPrisonerInfo(){
+     	console.log('prisoner-avatar')
+        // $('#prisoner').html(selected_prisoner.id);
+        $('#prisonerInfoModal').modal('show')
+    };
 </script>
 
 <script type="text/javascript">
@@ -723,7 +916,8 @@
 </script>
 
 <script type="text/javascript">
-	var tasks = []
+	var tasks = [{'id':'YJ1234','level':'1','car':{'id':'京A1234','prisonerNum':'3','policeNum':'3'}},{'id':'YJ1234','level':'2','car':{'id':'京A1236','prisonerNum':'3','policeNum':'3'}},{'id':'YJ1234','level':'3','car':{'id':'京A1234','prisonerNum':'3','policeNum':'3'}},{'id':'YJ1235','level':'4','car':{'id':'京A1241','prisonerNum':'3','policeNum':'3'}},{'id':'YJ1234','level':'1','car':{'id':'京A1234','prisonerNum':'3','policeNum':'3'}},{'id':'YJ1234','level':'2','car':{'id':'京A1236','prisonerNum':'3','policeNum':'3'}},{'id':'YJ1234','level':'3','car':{'id':'京A1234','prisonerNum':'3','policeNum':'3'}},{'id':'YJ1235','level':'4','car':{'id':'京A1241','prisonerNum':'3','policeNum':'3'}},{'id':'YJ1234','level':'1','car':{'id':'京A1234','prisonerNum':'3','policeNum':'3'}},{'id':'YJ1234','level':'2','car':{'id':'京A1236','prisonerNum':'3','policeNum':'3'}},{'id':'YJ1234','level':'3','car':{'id':'京A1234','prisonerNum':'3','policeNum':'3'}},{'id':'YJ1235','level':'4','car':{'id':'京A1241','prisonerNum':'3','policeNum':'3'}}]
+	var selected_task
 	// setInterval(function () {
 	// 	$.ajax({
 	//         url:'http://' + server_ip_port + '/tasks/get_all',
@@ -740,11 +934,76 @@
 	function setTasks(tasks) {
 		var tasks_string = ""
 		tasks.forEach(task => {
-			tasks_string += "<tr><th>" + task.id + "</th><th>" + task.description + "</th></tr>"
+            var color = "#ffffff"
+            var level = "无"
+            if(task.level == '1') {
+                color = "#FF2D2D"
+                level = "一级"
+            } else if(task.level == '2') {
+                color = "#FFA042"
+                level = "二级"
+            } else if(task.level == '3') {
+                color = "#FFED97"
+                level = "三级"
+            } else if(task.level == '4') {
+                level = "四级"
+            }
+			tasks_string += "<tr><td>" + task.id + "</td><td>" + task.car.id + "</td><td>" + task.car.prisonerNum  
+            + "</td><td>" + task.car.policeNum + "</td><td style='color:" + color + "'>" + level + "</td></tr>"
 		})
 		$('#task-table tbody').html(tasks_string)
 	}
-	setTasks([{'id':'device1','description':'监视犯人赵家宝'},{'id':'device2','description':'监视犯人王志鹏'},{'id':'device4','description':'监视犯人万梓聪'}])
+	setTasks(tasks)
+
+	$("#task-table td").click(function(){
+        var thSeq = $(this).parent().find("td").index($(this)[0]);
+        var trSeq = $(this).parent().parent().find("tr").index($(this).parent()[0]) - 1;
+        selected_task = tasks[row_num * trSeq + thSeq];
+        // $('#prisoner').html(selected_prisoner.id);
+        $('#taskInfoModal').modal('show')
+    });
+
+    var alerts = [{'id': '1', 'name': '押解车辆肇事', 'location': '西土城路', 'state': '1', 'level': '1'}, {'id': '2', 'name': '押解车辆抛锚', 'location': '学院南路', 'state': '2', 'level': '1'}, {'id': '3', 'name': '矫正人员越界', 'location': 'xxx社区', 'state': '1', 'level': '2'}, {'id': '4', 'name': '手环状态异常', 'location': '女子监狱', 'state': '2', 'level': '2'},{'id': '1', 'name': '押解车辆肇事', 'location': '西土城路', 'state': '1', 'level': '1'}, {'id': '2', 'name': '押解车辆抛锚', 'location': '学院南路', 'state': '2', 'level': '1'}, {'id': '3', 'name': '矫正人员越界', 'location': 'xxx社区', 'state': '1', 'level': '2'}, {'id': '4', 'name': '手环状态异常', 'location': '女子监狱', 'state': '2', 'level': '2'},{'id': '1', 'name': '押解车辆肇事', 'location': '西土城路', 'state': '1', 'level': '1'}, {'id': '2', 'name': '押解车辆抛锚', 'location': '学院南路', 'state': '2', 'level': '1'}, {'id': '3', 'name': '矫正人员越界', 'location': 'xxx社区', 'state': '1', 'level': '2'}, {'id': '4', 'name': '手环状态异常', 'location': '女子监狱', 'state': '2', 'level': '2'},{'id': '1', 'name': '押解车辆肇事', 'location': '西土城路', 'state': '1', 'level': '1'}, {'id': '2', 'name': '押解车辆抛锚', 'location': '学院南路', 'state': '2', 'level': '1'}, {'id': '3', 'name': '矫正人员越界', 'location': 'xxx社区', 'state': '1', 'level': '2'}, {'id': '4', 'name': '手环状态异常', 'location': '女子监狱', 'state': '2', 'level': '2'}]
+    var selected_alert
+
+    function setAlerts(alerts) {
+        var alerts_string = ""
+        alerts.forEach(alert => {
+            var color = "#ffffff"
+            var level = "一般"
+            var state = "处理完成"
+            if(alert.level == '1') {
+                level = "紧急"
+                if(alert.state == '1') {
+                    color = "#FF2D2D"
+                    state = '未处理'
+                } else if(alert.state == '2') {
+                    color = "#FFA042"
+                    state = '处理中'
+                }
+            } else {
+                level = "一般"
+                if(alert.state == '1') {
+                    color = "#FFDC35"
+                    state = '未处理'
+                } else if(alert.state == '2') {
+                    color = "#FFFFB9"
+                    state = '处理中'
+                }
+            }
+            alerts_string += "<tr><td>" + alert.name + "</td><td>" + "<img src='../static/img/locate.png' style='height:50%'/>" + alert.location  
+            + "</td><td style='color:" + color + "'>" + state + "</td><td style='color:" + color + "'>" + level + "</td></tr>"
+        })
+        $('#alert-table tbody').html(alerts_string)
+    }
+    setAlerts(alerts)
+    $("#alert-table td").click(function(){
+        var thSeq = $(this).parent().find("td").index($(this)[0]);
+        var trSeq = $(this).parent().parent().find("tr").index($(this).parent()[0]) - 1;
+        selected_alert = alerts[row_num * trSeq + thSeq];
+        // $('#prisoner').html(selected_prisoner.id);
+        $('#alertInfoModal').modal('show')
+    });
 </script>
 
 <script type="text/javascript">

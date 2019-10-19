@@ -41,10 +41,10 @@
                //     data:['心率','风险指数']
                // },
                grid:{
-                   x:30,
-                   y:10,
-                   x2:200,
-                   y2:100,
+                   x:'8%',
+                   y:'5%',
+                   x2:'30%',
+                   y2:'28%',
                },
                tooltip: {
                    trigger: 'axis',
@@ -77,8 +77,9 @@
                    type: 'slider',
                    show: true,
                    xAxisIndex: [0],
-                   left: '5%',
-                   bottom: 50,
+                   left: '7%',
+                   bottom: '13%',
+                   height:'10%',
                    start: 90,
                    end: 100 //初始化滚动条
                }],
@@ -125,9 +126,11 @@
                    }
                    ]
                });
+              $('#prisoner_risk').html('风险：' + _data.value[1] + '%')
+              $('#prisoner_heartbeat').html('心率：' + (_data.value[1] * 5))
            }, 1000);
            realtimeChart.setOption(realtimeOption);
-
+           
 
        })
 
