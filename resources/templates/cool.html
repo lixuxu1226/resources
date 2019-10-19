@@ -260,14 +260,14 @@
                 <ul class="profile">
 		            <li>
 		                <ul class="profile-text">
-		                    <li><b>任务编号</b></li>
+		                    <li><b>任务号</b></li>
 		                    <li id="department">YJ1235</li>
 		                </ul>
 		            </li>
 		            <li>
 		                <ul class="profile-text">
-		                    <li><b>车牌号</b></li>
-		                    <li id="occupation">京A1234</li>
+		                    <li><b>押解车</b></li>
+		                    <li id="occupation">京A1234、京A1234、京A1234、京A1234</li>
 		                </ul>
 		            </li>
 		            <li>
@@ -288,7 +288,70 @@
 		                    <li>一级</li>
 		                </ul>
 		            </li>
+		            <li>
+		                <ul class="profile-text">
+		                    <li><b>详情</b></li>
+		                    <li>押解犯人从A监狱到B监狱</li>
+		                </ul>
+		            </li>
 		        </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="carInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+            	<div class="left">
+			        <img id="photo" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4190027971,3083551657&fm=26&gp=0.jpg" style="width:100%;height:auto;" alt=""/>
+			    </div>
+			    <div class="right">
+	                <ul class="profile">
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>任务号</b></li>
+			                    <li id="department">YJ1235</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>车牌号</b></li>
+			                    <li id="occupation">京A1234</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>车型</b></li>
+			                    <li id="occupation">一汽大众</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>颜色</b></li>
+			                    <li id="occupation">黑色</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>犯人</b></li>
+			                    <li id="occupation">张某某、李某某、王某某、赵某某、陈某某</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>警员</b></li>
+			                    <li id="occupation">张警官、李警官、王警官、刘警官</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>级别</b></li>
+			                    <li>一级</li>
+			                </ul>
+			            </li>
+			        </ul>
+		    	</div>
             </div>
         </div>
     </div>
@@ -948,19 +1011,23 @@
             } else if(task.level == '4') {
                 level = "四级"
             }
-			tasks_string += "<tr><td>" + task.id + "</td><td>" + task.car.id + "</td><td>" + task.car.prisonerNum  
+			tasks_string += "<tr><td><a href='#'>" + task.id + "</a></td><td><a href='#'>" + task.car.id + "</a></td><td>" + task.car.prisonerNum  
             + "</td><td>" + task.car.policeNum + "</td><td style='color:" + color + "'>" + level + "</td></tr>"
 		})
 		$('#task-table tbody').html(tasks_string)
 	}
 	setTasks(tasks)
 
-	$("#task-table td").click(function(){
-        var thSeq = $(this).parent().find("td").index($(this)[0]);
-        var trSeq = $(this).parent().parent().find("tr").index($(this).parent()[0]) - 1;
-        selected_task = tasks[row_num * trSeq + thSeq];
+	$("#task-table td a").click(function(){
+        var tdSeq = $(this).parent()[0].cellIndex;
+        var trSeq = $(this).parent().parent()[0].rowIndex - 1;
+        selected_task = tasks[trSeq];
         // $('#prisoner').html(selected_prisoner.id);
-        $('#taskInfoModal').modal('show')
+        if(tdSeq === 0) {
+        	$('#taskInfoModal').modal('show')
+        } else {
+        	$('#carInfoModal').modal('show')
+        }
     });
 
     var alerts = [{'id': '1', 'name': '押解车辆肇事', 'location': '西土城路', 'state': '1', 'level': '1'}, {'id': '2', 'name': '押解车辆抛锚', 'location': '学院南路', 'state': '2', 'level': '1'}, {'id': '3', 'name': '矫正人员越界', 'location': 'xxx社区', 'state': '1', 'level': '2'}, {'id': '4', 'name': '手环状态异常', 'location': '女子监狱', 'state': '2', 'level': '2'},{'id': '1', 'name': '押解车辆肇事', 'location': '西土城路', 'state': '1', 'level': '1'}, {'id': '2', 'name': '押解车辆抛锚', 'location': '学院南路', 'state': '2', 'level': '1'}, {'id': '3', 'name': '矫正人员越界', 'location': 'xxx社区', 'state': '1', 'level': '2'}, {'id': '4', 'name': '手环状态异常', 'location': '女子监狱', 'state': '2', 'level': '2'},{'id': '1', 'name': '押解车辆肇事', 'location': '西土城路', 'state': '1', 'level': '1'}, {'id': '2', 'name': '押解车辆抛锚', 'location': '学院南路', 'state': '2', 'level': '1'}, {'id': '3', 'name': '矫正人员越界', 'location': 'xxx社区', 'state': '1', 'level': '2'}, {'id': '4', 'name': '手环状态异常', 'location': '女子监狱', 'state': '2', 'level': '2'},{'id': '1', 'name': '押解车辆肇事', 'location': '西土城路', 'state': '1', 'level': '1'}, {'id': '2', 'name': '押解车辆抛锚', 'location': '学院南路', 'state': '2', 'level': '1'}, {'id': '3', 'name': '矫正人员越界', 'location': 'xxx社区', 'state': '1', 'level': '2'}, {'id': '4', 'name': '手环状态异常', 'location': '女子监狱', 'state': '2', 'level': '2'}]
