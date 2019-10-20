@@ -175,8 +175,8 @@
                 <div class="card" style="height:100%; width: 100%;">
                     <div id="realtime-chart" class="demo-placeholder" style="height: 100%"></div>
                     <div class="inner-placeholder" style="width:20%;height: 100%;text-align: center;">
-                        <img id="prisoner-avatar" src="../static/img/peo.png" onclick="showPrisonerInfo()" style="cursor:pointer;text-align: center;vertical-align: middle;max-width:100%;height:50%;"/>
-                        <a href="#" id="prisoner" style="text-align: center;vertical-align: middle;display: inline-block;width: 100%;">选择</a>
+                        <img id="prisoner-avatar" src="../static/img/peo.png" onclick="showPrisonerInfo()" title="点击查看犯人详情" style="cursor:pointer;text-align: center;vertical-align: middle;max-width:100%;height:50%;"/>
+                        <a href="#" id="prisoner" title="点击选择犯人" style="text-align: center;vertical-align: middle;display: inline-block;max-width: 100%;max-height:80%">选择</a>
                         <a href="#" id="prisoner_risk" style="padding-left:10%;text-align: left;display: inline-block;width: 100%;">风险：0</a>
                         <a href="#" id="prisoner_heartbeat" style="padding-left:10%;text-align: left;display: inline-block;width: 100%;">心率：0</a>
                     </div>
@@ -196,7 +196,7 @@
 <!--                        </li>-->
 <!--                    </ul>-->
 <!--                </nav>-->
-                <video id="video1" src="../static/img/16.mp4" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 1%">
+                <video id="video1" title="车内监控" src="../static/img/16.mp4" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 1%">
                 </video>
             </div>
             <div class="boxall" style="height: 3.17rem">
@@ -211,7 +211,7 @@
 <!--                        </li>-->
 <!--                    </ul>-->
 <!--                </nav>-->
-                <video id="video2" src="../static/img/16.mp4" width=100%;  controls playsInline webkit-playsinline [autoplay] style="padding-top: 1%">
+                <video id="video2" title="周围环境" src="../static/img/16.mp4" width=100%;  controls playsInline webkit-playsinline [autoplay] style="padding-top: 1%">
                 </video>
             </div>
             <div class="boxall" style="height: 3.16rem">
@@ -303,7 +303,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <video id="video4" src="../static/img/16.mp4" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 1%;width: 100%;">
+                <video id="video3" src="../static/img/16.mp4" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 1%;width: 100%;">
                 </video>
             	<div class="left">
 			        <img id="photo" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4190027971,3083551657&fm=26&gp=0.jpg" style="width:100%;height:auto;" alt=""/>
@@ -531,8 +531,6 @@
         video1.play();
         var video2 = new EZUIKit.EZUIPlayer('video2');
         video2.play();
-        var video3 = new EZUIKit.EZUIPlayer('video3');
-        video3.play();
         //getAllDevices();
     });
 </script>
@@ -646,7 +644,8 @@
                 var marker = new AMap.Marker({
                     map: map,
                     position: [116.478935,39.997761],
-                    icon: "https://webapi.amap.com/images/car.png",
+                    //https://webapi.amap.com/images/car.png
+                    icon: "../static/img/car.png",
                     offset: new AMap.Pixel(-26, -13),
                     autoRotation: true,
                     angle:-90,
@@ -659,7 +658,7 @@
                 current_car_num++;
                 console.log(current_car_num)
             }
-        },800);
+        },900);
         var inter=setInterval(function () {
             if(markers.length > 0) {
                 map.setCenter(markers[0].getPosition());
@@ -677,9 +676,9 @@
                 location.setAttribute('style','right:60px;background:url("../static/img/re_location.png")')
                 // console.log(flag);
             }else { //回到车辆位置
-                map.setCenter(marker.getPosition());
+                map.setCenter(markers[0].getPosition());
                 inter=setInterval(function () {
-                    map.setCenter(marker.getPosition());
+                    map.setCenter(markers[0].getPosition());
                 },500);
                 flag=false;
                 location.setAttribute('style','right:60px;background:url("../static/img/location.png")')
@@ -1001,7 +1000,7 @@
             } else if(task.level == '4') {
                 level = "四级"
             }
-			tasks_string += "<tr><td><a href='#'>" + task.id + "</a></td><td><a href='#'>" + task.car.id + "</a></td><td>" + task.car.prisonerNum  
+			tasks_string += "<tr title='任务号，车牌号，犯人数，警员数，级别'><td><a href='#' title='点击查看任务详情'>" + task.id + "</a></td><td><a href='#' title='点击查看警车详情'>" + task.car.id + "</a></td><td>" + task.car.prisonerNum  
             + "</td><td>" + task.car.policeNum + "</td><td style='color:" + color + "'>" + level + "</td></tr>"
 		})
 		$('#task-table tbody').html(tasks_string)
@@ -1028,7 +1027,7 @@
         if(tdSeq === 0) {
         	$('#taskInfoModal').modal('show')
         } else {
-            switchVideo('video4', '../static/img/16.mp4');
+            switchVideo('video3', '../static/img/16.mp4');
         	$('#carInfoModal').modal('show')
         }
     });
@@ -1061,7 +1060,7 @@
                     state = '处理中'
                 }
             }
-            alerts_string += "<tr><td>" + alert.name + "</td><td>" + "<img src='../static/img/locate.png' style='height:50%'/>" + alert.location  
+            alerts_string += "<tr title='点击查看事件详情'><td>" + alert.name + "</td><td>" + "<img src='../static/img/locate.png' style='height:50%'/>" + alert.location  
             + "</td><td style='color:" + color + "'>" + state + "</td><td style='color:" + color + "'>" + level + "</td></tr>"
         })
         $('#alert-table tbody').html(alerts_string)
@@ -1110,7 +1109,16 @@
                 }
             },
             data: []
-        }
+        },
+        tooltip: {
+	        trigger: 'item',
+	        formatter: function (params, ticket, callback) {
+	        	if (params.value == 2) {
+	        		return "点击切换设备"
+	        	}
+	        	return ""
+	        }
+	    }
     };
     deviceChart.setOption(deviceOption);
 
