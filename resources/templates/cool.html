@@ -125,14 +125,16 @@
 <!--                <div id='deviceFullScreen' class="inner-placeholder" style="background: url(../static/img/fullScreen.png);z-index: 4"></div>-->
                 <!--background: url(../static/img/fullScreen.png)-->
                 <div class="content" style="height: 100%" id="device">
+                	<div class="alltitle">设备云图</div>
                         <!--<div class="row" style="height: 350px">-->
-                    <div id="device-chart" class="demo-placeholder" style="height: 260px"></div>
+                    <div id="device-chart" class="demo-placeholder" style="height: 230px"></div>
                     <!-- <div id='refresh-device-chart' class="inner-placeholder" style="background: url(../static/img/refresh.png)"></div> -->
                 </div>
             </div>
             <div class="boxall" style="height: 2.1rem">
                 <!--<div class="alltitle">设备状态</div>-->
                 <div class="content" style="height: 100%">
+                	<div class="alltitle" id="device-title">无设备</div>
                     <div id="deviceInfo-chart" class="demo-placeholder" style="height: 120px"></div>
                 </div>
             </div>
@@ -261,37 +263,37 @@
 		            <li>
 		                <ul class="profile-text">
 		                    <li><b>任务号</b></li>
-		                    <li id="department">YJ1235</li>
+		                    <li id="task-id">YJ1235</li>
 		                </ul>
 		            </li>
 		            <li>
 		                <ul class="profile-text">
 		                    <li><b>押解车</b></li>
-		                    <li id="occupation">京A1234、京A1234、京A1234、京A1234</li>
+		                    <li id="task-cars">京A1234、京A1234、京A1234、京A1234</li>
 		                </ul>
 		            </li>
 		            <li>
 		                <ul class="profile-text">
 		                    <li><b>犯人</b></li>
-		                    <li id="occupation">张某某、李某某、王某某、赵某某、陈某某</li>
+		                    <li id="task-prisoners">张某某、李某某、王某某、赵某某、陈某某</li>
 		                </ul>
 		            </li>
 		            <li>
 		                <ul class="profile-text">
 		                    <li><b>警员</b></li>
-		                    <li id="occupation">张警官、李警官、王警官、刘警官</li>
+		                    <li id="task-polices">张警官、李警官、王警官、刘警官</li>
 		                </ul>
 		            </li>
 		            <li>
 		                <ul class="profile-text">
 		                    <li><b>级别</b></li>
-		                    <li>一级</li>
+		                    <li id="task-level">一级</li>
 		                </ul>
 		            </li>
 		            <li>
 		                <ul class="profile-text">
 		                    <li><b>详情</b></li>
-		                    <li>押解犯人从A监狱到B监狱</li>
+		                    <li id="task-detail">押解犯人从A监狱到B监狱</li>
 		                </ul>
 		            </li>
 		        </ul>
@@ -306,50 +308,56 @@
                 <video id="video3" src="../static/img/16.mp4" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 1%;width: 100%;">
                 </video>
             	<div class="left">
-			        <img id="photo" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4190027971,3083551657&fm=26&gp=0.jpg" style="width:100%;height:auto;" alt=""/>
+			        <img id="car-photo" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4190027971,3083551657&fm=26&gp=0.jpg" style="width:100%;height:auto;" alt=""/>
 			    </div>
 			    <div class="right">
 	                <ul class="profile">
 			            <li>
 			                <ul class="profile-text">
 			                    <li><b>任务号</b></li>
-			                    <li id="department">YJ1235</li>
+			                    <li id="car-task">YJ1235</li>
 			                </ul>
 			            </li>
 			            <li>
 			                <ul class="profile-text">
 			                    <li><b>车牌号</b></li>
-			                    <li id="occupation">京A1234</li>
+			                    <li id="car-id">京A1234</li>
 			                </ul>
 			            </li>
+                        <li>
+                            <ul class="profile-text">
+                                <li><b>车型</b></li>
+                                <li id="car-type">单厢车</li>
+                            </ul>
+                        </li>
 			            <li>
 			                <ul class="profile-text">
-			                    <li><b>车型</b></li>
-			                    <li id="occupation">一汽大众</li>
+			                    <li><b>品牌</b></li>
+			                    <li id="car-brand">一汽大众</li>
 			                </ul>
 			            </li>
 			            <li>
 			                <ul class="profile-text">
 			                    <li><b>颜色</b></li>
-			                    <li id="occupation">黑色</li>
+			                    <li id="car-color">黑色</li>
 			                </ul>
 			            </li>
 			            <li>
 			                <ul class="profile-text">
 			                    <li><b>犯人</b></li>
-			                    <li id="occupation">张某某、李某某、王某某、赵某某、陈某某</li>
+			                    <li id="car-prisoners">张某某、李某某、王某某、赵某某、陈某某</li>
 			                </ul>
 			            </li>
 			            <li>
 			                <ul class="profile-text">
 			                    <li><b>警员</b></li>
-			                    <li id="occupation">张警官、李警官、王警官、刘警官</li>
+			                    <li id="car-polices">张警官、李警官、王警官、刘警官</li>
 			                </ul>
 			            </li>
 			            <li>
 			                <ul class="profile-text">
 			                    <li><b>级别</b></li>
-			                    <li>一级</li>
+			                    <li id="car-level">一级</li>
 			                </ul>
 			            </li>
 			        </ul>
@@ -366,49 +374,49 @@
 		            <li>
 		                <ul class="profile-text">
 		                    <li><b>任务编号</b></li>
-		                    <li id="department">YJ1235</li>
+		                    <li id="alert-task">YJ1235</li>
 		                </ul>
 		            </li>
 		            <li>
 		                <ul class="profile-text">
 		                    <li><b>事件描述</b></li>
-		                    <li id="occupation">手环状态异常</li>
+		                    <li id="alert-detail">手持机状态异常</li>
 		                </ul>
 		            </li>
 		            <li>
 		                <ul class="profile-text">
 		                    <li><b>级别</b></li>
-		                    <li>一般</li>
+		                    <li id="alert-level">一般</li>
 		                </ul>
 		            </li>
 		            <li>
 		                <ul class="profile-text">
 		                    <li><b>处理状态</b></li>
-		                    <li>处理中</li>
+		                    <li id="alert-state">处理中</li>
 		                </ul>
 		            </li>
 		            <li>
 		                <ul class="profile-text">
 		                    <li><b>时间</b></li>
-		                    <li id="occupation">2019年10月19日13点25分</li>
+		                    <li id="alert-time">2019年10月19日13点25分</li>
 		                </ul>
 		            </li>
 		            <li>
 		                <ul class="profile-text">
 		                    <li><b>地点</b></li>
-		                    <li id="occupation">女子监狱</li>
+		                    <li id="alert-location">女子监狱</li>
 		                </ul>
 		            </li>
 		            <li>
 		                <ul class="profile-text">
 		                    <li><b>涉及犯人</b></li>
-		                    <li>赵某某</li>
+		                    <li id="alert-prisoners">赵某某</li>
 		                </ul>
 		            </li>
 		            <li>
 		                <ul class="profile-text">
 		                    <li><b>涉及警察</b></li>
-		                    <li>张警官</li>
+		                    <li id="alert-polices">张警官</li>
 		                </ul>
 		            </li>
 		        </ul>
@@ -421,68 +429,68 @@
         <div class="modal-content">
             <div class="modal-body">
             	<div class="left">
-			        <img id="photo" src="http://img2.imgtn.bdimg.com/it/u=1973309565,2827282113&fm=26&gp=0.jpg" style="width:100%;height:auto;" alt=""/>
+			        <img id="prisoner-photo" src="http://img2.imgtn.bdimg.com/it/u=1973309565,2827282113&fm=26&gp=0.jpg" style="width:100%;height:auto;" alt=""/>
 			    </div>
 			    <div class="right">
 	                <ul class="profile">
 			            <li>
 			                <ul class="profile-text">
 			                    <li><b>犯人</b></li>
-			                    <li id="department">张某某</li>
+			                    <li id="prisoner-name">张某某</li>
 			                </ul>
 			            </li>
 			            <li>
 			                <ul class="profile-text">
 			                    <li><b>年龄</b></li>
-			                    <li id="occupation">23</li>
+			                    <li id="prisoner-age">23</li>
 			                </ul>
 			            </li>
 			            <li>
 			                <ul class="profile-text">
 			                    <li><b>性别</b></li>
-			                    <li id="occupation">男</li>
+			                    <li id="prisoner-sex">男</li>
 			                </ul>
 			            </li>
 			            <li>
 			                <ul class="profile-text">
 			                    <li><b>学历</b></li>
-			                    <li id="occupation">高中</li>
+			                    <li id="prisoner-education">高中</li>
 			                </ul>
 			            </li>
 			            <li>
 			                <ul class="profile-text">
 			                    <li><b>身高</b></li>
-			                    <li>178cm</li>
+			                    <li id="prisoner-height">178cm</li>
 			                </ul>
 			            </li>
 			            <li>
 			                <ul class="profile-text">
 			                    <li><b>体重</b></li>
-			                    <li>74kg</li>
+			                    <li id="prisoner-weight">74kg</li>
 			                </ul>
 			            </li>
 			            <li>
 			                <ul class="profile-text">
 			                    <li><b>体脂率</b></li>
-			                    <li>15.2%</li>
+			                    <li id="prisoner-bodyfat">15.2%</li>
 			                </ul>
 			            </li>
 			            <li>
 			                <ul class="profile-text">
 			                    <li><b>罪行</b></li>
-			                    <li>使用炸药袭击五角大楼</li>
+			                    <li id="prisoner-crime">使用炸药袭击五角大楼</li>
 			                </ul>
 			            </li>
 			            <li>
 			                <ul class="profile-text">
 			                    <li><b>前科</b></li>
-			                    <li>使用炸药袭击白宫，窃取FBI机密情报，组织针对好莱坞的恐怖袭击</li>
+			                    <li id="prisoner-record">使用炸药袭击白宫，窃取FBI机密情报，组织针对好莱坞的恐怖袭击</li>
 			                </ul>
 			            </li>
 			            <li>
 			                <ul class="profile-text">
 			                    <li><b>备注</b></li>
-			                    <li>擅长炸药制作</li>
+			                    <li id="prisoner-remark">擅长炸药制作</li>
 			                </ul>
 			            </li>
 			        </ul>
@@ -513,6 +521,7 @@
 <!-- <script type="text/javascript" src="../static/js/input.js"></script> 加了这个会出现底部滚动条，有bug -->
 <script type="text/javascript" src="../static/js/logout.js"></script>
 <script type="text/javascript" src="../static/js/rolling.js"></script>
+<script type="text/javascript" src="../static/js/route.js"></script>
 
 <script type="text/javascript">
     // 监控
@@ -534,7 +543,7 @@
         //getAllDevices();
     });
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     // $(function () {
     $(".datetimePicker").datetimepicker({
         language:'zh-CN',
@@ -545,22 +554,14 @@
         minView:2,
         initialDate:new Date()
     });//当在日期表中选择完时间后日期表就会自动关闭
-    //初始化
 
-    window.addEventListener("resize", function () {
-
-        // mobileDeviceChart.resize();
-        realtimeChart.resize();
-
-    });
     //changeCamera
     function changeCamera(obj) {
         console.log(obj.id);
         $('#myDropdown1').html(obj.id);
     }
 
-
-</script>
+</script> -->
 <script type="text/javascript">
     //全屏浏览
     $(document).ready(function () {
@@ -581,8 +582,6 @@
             requestFullScreen(deviceScreen);
         };
         
-
-
         var requestFullScreen = function (element) {
             var requestMethod = element.requestFullScreen
                 || element.webkitRequestFullScreen //谷歌
@@ -599,16 +598,12 @@
             }
         };
 
-
-
     })
 </script>
 
 <script type="text/javascript">
     // window.init = function(){
     $(document).ready(function () {
-        var lineArr = [[116.478935,39.997761],[116.478939,39.997825],[116.478912,39.998549],[116.478912,39.998549],[116.478998,39.998555],[116.478998,39.998555],[116.479282,39.99856],[116.479658,39.998528],[116.480151,39.998453],[116.480784,39.998302],[116.480784,39.998302],[116.481149,39.998184],[116.481573,39.997997],[116.481863,39.997846],[116.482072,39.997718],[116.482362,39.997718],[116.483633,39.998935],[116.48367,39.998968],[116.484648,39.999861]];
-
         var map = new AMap.Map('map-chart', {
                 resizeEnable:true,
                 center: [116.397428, 39.90923],
@@ -639,7 +634,7 @@
         var car_num = 5
         var current_car_num = 0;
         var markers = []
-        setInterval(function () {
+        var setCarTimer = setInterval(function () {
             if(current_car_num < car_num) {
                 var marker = new AMap.Marker({
                     map: map,
@@ -657,9 +652,11 @@
                 markers.push(marker);
                 current_car_num++;
                 console.log(current_car_num)
+            } else {
+            	clearInterval(setCarTimer)
             }
         },900);
-        var inter=setInterval(function () {
+        var mapCenterTimer=setInterval(function () {
             if(markers.length > 0) {
                 map.setCenter(markers[0].getPosition());
             }
@@ -670,19 +667,27 @@
         var flag=false;
         location.onclick = function () {
             if(flag==false){  //地图可平移
-                clearInterval(inter);
+                clearInterval(mapCenterTimer);
                 map.setStatus(true);
                 flag=true;
                 location.setAttribute('style','right:60px;background:url("../static/img/re_location.png")')
                 // console.log(flag);
+                markers.forEach(marker => {
+                	marker.pauseMove( )
+                })
+                markers[0].setIcon('../static/img/red_car.png')
             }else { //回到车辆位置
                 map.setCenter(markers[0].getPosition());
-                inter=setInterval(function () {
+                mapCenterTimer=setInterval(function () {
                     map.setCenter(markers[0].getPosition());
                 },500);
                 flag=false;
                 location.setAttribute('style','right:60px;background:url("../static/img/location.png")')
 
+                markers.forEach(marker => {
+                	marker.resumeMove( )
+                })
+                markers[0].setIcon('../static/img/car.png')
                 // console.log(flag);
             }
         };
@@ -860,9 +865,6 @@
         map.add(jzMarker1);
 
 
-
-
-
         AMap.plugin(['AMap.ToolBar','AMap.Scale','AMap.Weather','AMap.OverView'],function(){//异步同时加载多个插件
             var toolbar = new AMap.ToolBar();
             map.addControl(toolbar);
@@ -873,10 +875,6 @@
             });
 
             map.addControl(overview);
-
-
-
-
         });
 
         //犯人列表
@@ -902,7 +900,7 @@
 
 
 <script type="text/javascript">
-    var prisoners = [{'id': '肖某某', 'img': 'http://img2.imgtn.bdimg.com/it/u=1973309565,2827282113&fm=26&gp=0.jpg'}, {'id': '李某某', 'img': 'http://img0.imgtn.bdimg.com/it/u=3755574069,3463185667&fm=26&gp=0.jpg'}, {'id': '希某某', 'img': 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=941443254,970138554&fm=179&app=42&f=JPEG?w=121&h=140'}, {'id': '赵某某', 'img': '../static/img/peo.png'}, {'id': '万某某', 'img': '../static/img/peo.png'}, {'id': '王某某', 'img': '../static/img/peo.png'}, {'id': '秦某某', 'img': '../static/img/peo.png'}, {'id': '特某某', 'img': 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2013153191,1019776135&fm=26&gp=0.jpg'}, {'id': '谢某某', 'img': '../static/img/peo.png'}, {'id': '本某某', 'img': 'https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=3565236029,2292350226&fm=179&app=42&f=PNG?w=121&h=140&s=FD19A9574433B384949139070300E0E1'}, {'id': '崔某某', 'img': '../static/img/peo.png'}, {'id': '陈某某', 'img': '../static/img/peo.png'}, {'id': '单某某', 'img': '../static/img/peo.png'}, {'id': '孙某某', 'img': '../static/img/peo.png'}]
+    var prisoners = [{'id': '李海伟', 'img': '../static/img/prisoner1.png'}, {'id': '王大民', 'img': '../static/img/prisoner2.png'}, {'id': '肖某某', 'img': '../static/img/peo.png'}, {'id': '刘某某', 'img': '../static/img/peo.png'}, {'id': '高某某', 'img': '../static/img/peo.png'}, {'id': '李某某', 'img': '../static/img/peo.png'}, ]
     var selected_prisoner = {'id': 'null'}
     var row_num = 4
     function setPrisonersTable(data, filter) {
@@ -918,7 +916,7 @@
             if(count % row_num == 0) {
                 table_string += "</tr><tr>"
             }
-            table_string += '<td><div class="cardBox"><div style="vertical-align:middle;text-align: center;display: table-cell;border: 0px;height: 120px;"><img src="' + prisoner.img + '" style="vertical-align: middle;width:100%;max-height: 100%;"/></div><a href="#">' + prisoner.id + "</a></div></td>"
+            table_string += '<td><div class="cardBox"><div style="vertical-align:middle;text-align: center;display: table-cell;border: 0px;width:20%;height: 120px;"><img src="' + prisoner.img + '" style="text-align: center;vertical-align: middle;max-width:100%;max-height:90%;"/></div><a href="#">' + prisoner.id + "</a></div></td>"
             //table_string += '<th><a href="#">' + prisoner.id + "</a></th>"
             count += 1
         })
@@ -934,8 +932,20 @@
         });
         
     }
+    function setPrisonerInfo(prisoner) {
+        $('prisoner-name').html(prisoner.name)
+        $('prisoner-age').html(prisoner.age)
+        $('prisoner-sex').html(prisoner.sex)
+        $('prisoner-education').html(prisoner.education)
+        $('prisoner-height').html(prisoner.height)
+        $('prisoner-weight').html(prisoner.weight)
+        $('prisoner-bodyfat').html(prisoner.bodyfat)
+        $('prisoner-crime').html(prisoner.crime)
+        $('prisoner-record').html(prisoner.record)
+        $('prisoner-remark').html(prisoner.remark)
+        document.getElementById('prisoner-photo').src = prisoner.img
+    }
     function showPrisonerInfo(){
-     	console.log('prisoner-avatar')
         // $('#prisoner').html(selected_prisoner.id);
         $('#prisonerInfoModal').modal('show')
     };
@@ -1005,7 +1015,7 @@
 		})
 		$('#task-table tbody').html(tasks_string)
 	}
-	setTasks(tasks)
+	setTasks(tasks.sort((a,b) => {return a.level - b.level}))
 
     function switchVideo(videoId, url) {
         var video = new EZUIKit.EZUIPlayer(videoId);
@@ -1030,9 +1040,40 @@
             switchVideo('video3', '../static/img/16.mp4');
         	$('#carInfoModal').modal('show')
         }
+        clearInterval(taskTableScollTimer);
+        canTaskScroll = false
     });
+    $('#taskInfoModal').on('hide.bs.modal', function () {
+	 	taskTableScollTimer = setInterval(moveTaskScoll, 50);
+	 	canTaskScroll = true
+	});
+	$('#carInfoModal').on('hide.bs.modal', function () {
+	 	taskTableScollTimer = setInterval(moveTaskScoll, 50);
+	 	canTaskScroll = true
+	});
 
-    var alerts = [{'id': '1', 'name': '押解车辆肇事', 'location': '西土城路', 'state': '1', 'level': '1'}, {'id': '2', 'name': '押解车辆抛锚', 'location': '学院南路', 'state': '2', 'level': '1'}, {'id': '3', 'name': '矫正人员越界', 'location': 'xxx社区', 'state': '1', 'level': '2'}, {'id': '4', 'name': '手环状态异常', 'location': '女子监狱', 'state': '2', 'level': '2'},{'id': '1', 'name': '押解车辆肇事', 'location': '西土城路', 'state': '1', 'level': '1'}, {'id': '2', 'name': '押解车辆抛锚', 'location': '学院南路', 'state': '2', 'level': '1'}, {'id': '3', 'name': '矫正人员越界', 'location': 'xxx社区', 'state': '1', 'level': '2'}, {'id': '4', 'name': '手环状态异常', 'location': '女子监狱', 'state': '2', 'level': '2'},{'id': '1', 'name': '押解车辆肇事', 'location': '西土城路', 'state': '1', 'level': '1'}, {'id': '2', 'name': '押解车辆抛锚', 'location': '学院南路', 'state': '2', 'level': '1'}, {'id': '3', 'name': '矫正人员越界', 'location': 'xxx社区', 'state': '1', 'level': '2'}, {'id': '4', 'name': '手环状态异常', 'location': '女子监狱', 'state': '2', 'level': '2'},{'id': '1', 'name': '押解车辆肇事', 'location': '西土城路', 'state': '1', 'level': '1'}, {'id': '2', 'name': '押解车辆抛锚', 'location': '学院南路', 'state': '2', 'level': '1'}, {'id': '3', 'name': '矫正人员越界', 'location': 'xxx社区', 'state': '1', 'level': '2'}, {'id': '4', 'name': '手环状态异常', 'location': '女子监狱', 'state': '2', 'level': '2'}]
+    function setTaskInfo(task) {
+        $('task-id').html(task.id)
+        $('task-cars').html(task.cars)
+        $('task-prisoners').html(task.prisoners)
+        $('task-polices').html(task.polices)
+        $('task-level').html(task.level)
+        $('task-detail').html(task.detail)
+    }
+
+    function setCarInfo(car) {
+        $('car-task').html(car.task)
+        $('car-id').html(car.id)
+        $('car-type').html(car.type)
+        $('car-brand').html(car.brand)
+        $('car-prisoners').html(car.prisoners)
+        $('car-polices').html(car.polices)
+        $('car-level').html(car.level)
+        document.getElementById('car-photo').src = car.img
+        document.getElementById('car-url').src = car.url
+    }
+
+    var alerts = [{'id': '1', 'name': '押解车辆肇事', 'location': '西土城路', 'state': '1', 'level': '1'}, {'id': '2', 'name': '押解车辆抛锚', 'location': '学院南路', 'state': '2', 'level': '1'}, {'id': '3', 'name': '矫正人员越界', 'location': 'xxx社区', 'state': '1', 'level': '2'}, {'id': '4', 'name': '手持机状态异常', 'location': '女子监狱', 'state': '2', 'level': '2'},{'id': '1', 'name': '押解车辆肇事', 'location': '西土城路', 'state': '1', 'level': '1'}, {'id': '2', 'name': '押解车辆抛锚', 'location': '学院南路', 'state': '2', 'level': '1'}, {'id': '3', 'name': '矫正人员越界', 'location': 'xxx社区', 'state': '1', 'level': '2'}, {'id': '4', 'name': '手持机状态异常', 'location': '女子监狱', 'state': '2', 'level': '2'},{'id': '1', 'name': '押解车辆肇事', 'location': '西土城路', 'state': '1', 'level': '1'}, {'id': '2', 'name': '押解车辆抛锚', 'location': '学院南路', 'state': '2', 'level': '1'}, {'id': '3', 'name': '矫正人员越界', 'location': 'xxx社区', 'state': '1', 'level': '2'}, {'id': '4', 'name': '手持机状态异常', 'location': '女子监狱', 'state': '2', 'level': '2'},{'id': '1', 'name': '押解车辆肇事', 'location': '西土城路', 'state': '1', 'level': '1'}, {'id': '2', 'name': '押解车辆抛锚', 'location': '学院南路', 'state': '2', 'level': '1'}, {'id': '3', 'name': '矫正人员越界', 'location': 'xxx社区', 'state': '1', 'level': '2'}, {'id': '4', 'name': '手持机状态异常', 'location': '女子监狱', 'state': '2', 'level': '2'}]
     var selected_alert
 
     function setAlerts(alerts) {
@@ -1058,6 +1099,8 @@
                 } else if(alert.state == '2') {
                     color = "#FFFFB9"
                     state = '处理中'
+                } else {
+                    state = '处理完'
                 }
             }
             alerts_string += "<tr title='点击查看事件详情'><td>" + alert.name + "</td><td>" + "<img src='../static/img/locate.png' style='height:50%'/>" + alert.location  
@@ -1065,14 +1108,31 @@
         })
         $('#alert-table tbody').html(alerts_string)
     }
-    setAlerts(alerts)
+    setAlerts(alerts.sort((a, b) =>{return (a.state - b.state) * 2 + a.level - b.level}))
     $("#alert-table td").click(function(){
         var thSeq = $(this).parent().find("td").index($(this)[0]);
         var trSeq = $(this).parent().parent().find("tr").index($(this).parent()[0]) - 1;
         selected_alert = alerts[row_num * trSeq + thSeq];
         // $('#prisoner').html(selected_prisoner.id);
         $('#alertInfoModal').modal('show')
+        clearInterval(alertTableScollTimer);
+        canAlertScroll = false
     });
+
+    function setAlertInfo(alert) {
+        $('alert-task').html(alert.task)
+        $('alert-detail').html(alert.detail)
+        $('alert-level').html(alert.level)
+        $('alert-state').html(alert.state)
+        $('alert-time').html(alert.time)
+        $('alert-location').html(alert.location)
+        $('alert-prisoners').html(alert.prisoners)
+        $('alert-polices').html(alert.polices)
+    }
+    $('#alertInfoModal').on('hide.bs.modal', function () {
+	 	alertTableScollTimer = setInterval(moveAlertScoll, 50);
+	 	canAlertScroll = true
+	});
 </script>
 
 <script type="text/javascript">
@@ -1086,6 +1146,10 @@
             orient:'vertical',
             symbol: 'circle',
             symbolSize: 30,
+            top: '5%', //距离上
+            left: '20%', //左
+            bottom: '20%', //下
+            right: '20%', //右的距离
             itemStyle: {
                 normal: {
                     label: {
@@ -1173,19 +1237,12 @@
     	})
     	return res
     }
-    deviceOption.series.data = setDeviceTree([{'name': '云端', 'device_id': '213', 'kind': 'cloud','children':[{'name': '服务器1', 'device_id': '321', 'kind': 'server','children':[{'name': '手持机1', 'device_id': '312', 'kind': 'device', 'state': '1'},{'name': '手持机2', 'device_id': '555', 'kind': 'device', 'state': '1'},{'name': '手环1', 'device_id': '53', 'kind': 'device', 'state': '0'},{'name': '手环2', 'device_id': '53', 'kind': 'device', 'state': '1'}],}],}])
+    deviceOption.series.data = setDeviceTree([{'name': '云端', 'device_id': '213', 'kind': 'cloud','children':[{'name': '服务器1', 'device_id': '321', 'kind': 'server','children':[{'name': '手持机1', 'device_id': '312', 'kind': 'device', 'state': '1'},{'name': '手持机2', 'device_id': '555', 'kind': 'device', 'state': '1'},{'name': '手持机3', 'device_id': '53', 'kind': 'device', 'state': '0'},{'name': '手持机4', 'device_id': '53', 'kind': 'device', 'state': '1'}],}],}])
     deviceChart.setOption(deviceOption);
 
 
     deviceInfoChart=echarts.init(document.getElementById("deviceInfo-chart"));
     deviceInfoOption={
-        title:{
-            show: true,
-            text: currentDevice.name,
-            textStyle: {//主标题文本样式{"fontSize": 18,"fontWeight": "bolder","color": "#333"}
-                color: '#fff',
-            },
-        },
         tooltip : {
             formatter: "{a} <br/>{c}%"
         },
@@ -1200,7 +1257,7 @@
                 // endAngle: 0,
                 splitNumber: 10,
                 radius: '80%',
-                center: ['50%', '70%'],
+                center: ['50%', '40%'],
 
                 axisLine: {            // 坐标轴线
                     lineStyle: {       // 属性lineStyle控制线条样式
@@ -1264,7 +1321,7 @@
             {
                 name: '内存占用率',
                 type: 'gauge',
-                center: ['20%', '70%'],    // 默认全局居中
+                center: ['20%', '40%'],    // 默认全局居中
                 radius: '80%',
                 min:0,
                 max:100,
@@ -1333,7 +1390,7 @@
             {
                 name: '耗电量',
                 type: 'gauge',
-                center: ['80%', '70%'],    // 默认全局居中
+                center: ['80%', '40%'],    // 默认全局居中
                 radius: '80%',
                 min: 0,
                 max: 100,
@@ -1409,6 +1466,7 @@
     	if(params.value === 2 && currentDevice.id != params.data.device_id) {
     		currentDevice.id = params.data.device_id
     		currentDevice.name = params.name
+    		$('#device-title').html(params.name)
     		
     		deviceInfoOption.title.text = params.name
     		deviceInfoChart.setOption(deviceInfoOption);
@@ -1433,6 +1491,8 @@
         var deviceInfo_chart = document.getElementById("deviceInfo-chart");
         deviceInfo_chart.style.height = "" + (deviceInfo_chart.parentNode.offsetHeight) + "px";
         deviceInfoChart.resize()
+
+        realtimeChart.resize();
     }
 
 	function getDeviceStates() {

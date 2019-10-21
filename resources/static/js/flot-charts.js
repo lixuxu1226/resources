@@ -78,8 +78,8 @@
                    show: true,
                    xAxisIndex: [0],
                    left: '7%',
-                   bottom: '13%',
-                   height:'10%',
+                   bottom: '10%',
+                   height:'5%',
                    start: 90,
                    end: 100 //初始化滚动条
                }],
@@ -102,7 +102,7 @@
                    hoverAnimation: false,
                    data: data,
                    lineStyle: {
-                       color: 'rgba(255, 255, 255, 0.8)'
+                       color: 'rgba(132,193,255,0.8)'
                    }
                }
                ]
