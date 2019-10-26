@@ -160,7 +160,7 @@
 <script type="text/javascript" src="../static/js/device.js"></script>
 <script src="../static/js/jquery.datatables.js"></script>
 <!-- <script type="text/javascript" src="../static/js/input.js"></script> -->
-<script type="text/javascript" src="../static/js/logout.js"></script>
+<script type="text/javascript" src="../static/js/constants.js"></script>
 <script type="text/javascript">
 
     // window.addEventListener('resize', function() {
@@ -170,178 +170,203 @@
     $(document).ready(function() {
         var main = document.getElementsByClassName("clearfix")[0];
         main.style.height = "" + (window.innerHeight * 0.9) + "px";
-            var data=[
-                {
-                    "id": "手持机1",
-                    "deviceStatus": true,
-                    "prisoner": {
-                        "prisonerName": "张某某",
-                    },
-                    "user": {
-                        "userName": "李警官",
-                    },
+        var data=[
+            {
+                "id": "手持机1",
+                "deviceStatus": true,
+                "prisoner": {
+                    "prisonerName": "张某某",
                 },
-                {
-                    "id": "手持机2",
-                    "deviceStatus": true,
-                    "prisoner": {
-                        "prisonerName": "李某某",
-                    },
-                    "user": {
-                        "userName": "刘警官",
-                    },
+                "user": {
+                    "userName": "李警官",
                 },
-                {
-                    "id": "手持机3",
-                    "deviceStatus": false,
-                    "prisoner": {
-                        "prisonerName": "高某某",
-                    },
-                    "user": {
-                        "userName": "秦警官",
-                    },
+            },
+            {
+                "id": "手持机2",
+                "deviceStatus": true,
+                "prisoner": {
+                    "prisonerName": "李某某",
                 },
-                {
-                    "id": "手持机4",
-                    "deviceStatus": true,
-                    "prisoner": {
-                        "prisonerName": "陆某某",
-                    },
-                    "user": {
-                        "userName": "武警官",
-                    },
+                "user": {
+                    "userName": "刘警官",
+                },
+            },
+            {
+                "id": "手持机3",
+                "deviceStatus": false,
+                "prisoner": {
+                    "prisonerName": "高某某",
+                },
+                "user": {
+                    "userName": "秦警官",
+                },
+            },
+            {
+                "id": "手持机4",
+                "deviceStatus": true,
+                "prisoner": {
+                    "prisonerName": "陆某某",
+                },
+                "user": {
+                    "userName": "武警官",
+                },
+            }
+        ]
+        //var data;
+        // $.ajax({
+        //         url:"http://10.108.122.144:8089/devices/get_all",
+        //         type: "GET",
+        //         dataType:"JSON",
+        //         async:false,
+        //         success: function(msg) {
+        //             // console.log(msg);
+        //             data = msg;
+
+
+        //         }
+
+        //     });
+        // console.log(data);
+
+
+    $('#datatables').DataTable({
+        "pagingType": "full_numbers",
+        "searching": true,
+        "lengthChange": false,
+        "info": false,
+        destroy:true,
+        language: {
+            "paging": {
+                "first": "首页",
+                "previous": "前一页",
+                "next": "后一页",
+                "last": "尾页"
+            },
+            "zeroRecords": "没有检索到数据"
+        },
+        "processing": true,//DataTables载入数据时，是否显示‘进度’提示
+        // "serverSide": true,//启动服务器端数据导入
+        "pagingType":'full_numbers',
+        // "ajax.urlOption":"http://10.108.122.144:8089/devices/get_all",
+        "ajax": {
+            "data": function (d) {
+                var info = $('#datatables').DataTable().page.info();
+                d.pageNo = info.page;
+                var filter = $('#filter-device').val();
+                //指定检索参数名称，后台参数名为extraSerach
+                d.extraSerach=filter;
+            }
+        },
+        "dom": '<l<t>ip>',
+
+        columns: [
+            { data: 'id', 
+                render:function (data,type,full) {
+                    return "手机" + data
+                } 
+            },
+            { data: 'user.userName' , defaultContent: ""},
+            { data: 'user.prisonerName', defaultContent: "" },
+            { data:'deviceStatus',
+                render:function (data,type,full) {
+                    if(data==true){
+                        return '<label></label><span device-online></span>'
+                    }else {
+                        return '<label></label><span device-offline></span>'
+                    }
                 }
-            ]
-            //var data;
-            // $.ajax({
-            //         url:"http://10.108.122.144:8089/devices/get_all",
-            //         type: "GET",
-            //         dataType:"JSON",
-            //         async:false,
-            //         success: function(msg) {
-            //             // console.log(msg);
-            //             data = msg;
+            }
+        ],
 
+    });
+    $('#filter-device').bind("input propertychange",function(event) {
+        var filter = $('#filter-device').val();
+        var table = $('#datatables').DataTable();
+        table.search(filter).draw();
+    });
 
-            //         }
-
-            //     });
-            // console.log(data);
-
-
-            $('#datatables').DataTable({
-                "pagingType": "full_numbers",
-                "searching": true,
-                "lengthChange": false,
-                "info": false,
-                destroy:true,
-                language: {
-                    "paging": {
-                        "first": "首页",
-                        "previous": "前一页",
-                        "next": "后一页",
-                        "last": "尾页"
-                    },
-                    "zeroRecords": "没有检索到数据"
-                },
-                "processing": true,//DataTables载入数据时，是否显示‘进度’提示
-                // "serverSide": true,//启动服务器端数据导入
-                "pagingType":'full_numbers',
-                // "ajax.urlOption":"http://10.108.122.144:8089/devices/get_all",
-                "ajax": {
-                    "data": function (d) {
-                        var info = $('#datatables').DataTable().page.info();
-                        d.pageNo = info.page;
-                        var filter = $('#filter-device').val();
-                        //指定检索参数名称，后台参数名为extraSerach
-                        d.extraSerach=filter;
-                    }
-                },
-                "dom": '<l<t>ip>',
-
-
-                data:data,
-
-                columns: [
-                    { data: 'id' },
-                    { data: 'user.userName' , defaultContent: ""},
-                    { data: 'prisoner.prisonerName', defaultContent: "" },
-                    { data:'deviceStatus',
-                        render:function (data,type,full) {
-                            if(data==true){
-                                return '<label></label><span device-online></span>'
-                            }else {
-                                return '<label></label><span device-offline></span>'
-                            }
-                        }
-                    }
-                ],
-
+    var getAllDevicesTimer = setInterval(function () {
+        $.ajax({
+            url:'http://' + server_ip_port + '/dvcM/devices/get_all',
+            type:'GET',
+            dataType:'json',
+            async:true,
+            success:function (msg) {
+                if(!isDeviceNew(msg, data)) {
+                    data = msg
+                    initDetailTableData(msg)
+                }
+            }
         });
-        $('#filter-device').bind("input propertychange",function(event) {
-            var filter = $('#filter-device').val();
-            var table = $('#datatables').DataTable();
-            table.search(filter).draw();
-        });
+    }, 2000)
 
-        var table=$('#datatables').DataTable();
+    function initDetailTableData(dataArr) { //dataArr是表格数据数组，和初始化配置需一样的结构
+        var table = $('#datatables').dataTable();
+        var oSettings = table.fnSettings(); //这里获取表格的配置
+        table.fnClearTable(this); //动态刷新关键部分语句，先清空数据
+        for (var i = 0, l = dataArr.length; i < l; i++) {
+            table.oApi._fnAddData(oSettings, dataArr[i]); //这里添加一行数据
+        }
+        oSettings.aiDisplay = oSettings.aiDisplayMaster.slice();
+        table.fnDraw();//绘制表格
+    }
 
         //设备登出
-        var lout = "您确定断开与此台设备的连接吗？";
-        var lin = "您确定恢复与此台设备的连接吗？";
-        var del="您确定移除此台设备吗？";
-        $("#datatables tbody").on('click', '.remove', function(e) {
-            // console.log( table.row(this).data() );
-            // $tr = $(this).closest('tr');
-            // console.log(table.row($tr).data())
-            if(confirm(del)){
-                $tr = $(this).closest('tr');
-                // console.log(table.row(this));
-                // table.row($tr).remove().draw();
-                var id=table.row($tr).data().id;
-                console.log(id);
-                device.deviceDelete(id);
-                table.row($tr).remove().draw();
-                // table.draw(true);
-                // e.preventDefault();
-            }
+        // var lout = "您确定断开与此台设备的连接吗？";
+        // var lin = "您确定恢复与此台设备的连接吗？";
+        // var del="您确定移除此台设备吗？";
+        // $("#datatables tbody").on('click', '.remove', function(e) {
+        //     // console.log( table.row(this).data() );
+        //     // $tr = $(this).closest('tr');
+        //     // console.log(table.row($tr).data())
+        //     if(confirm(del)){
+        //         $tr = $(this).closest('tr');
+        //         // console.log(table.row(this));
+        //         // table.row($tr).remove().draw();
+        //         var id=table.row($tr).data().id;
+        //         console.log(id);
+        //         device.deviceDelete(id);
+        //         table.row($tr).remove().draw();
+        //         // table.draw(true);
+        //         // e.preventDefault();
+        //     }
 
-        });
-        $("#datatables tbody").on('click', '.logout', function(e) {
-            // console.log( table.row(this).data() );
-            // $tr = $(this).closest('tr');
-            // console.log(table.row($tr).data())
-            if(confirm(lout)){
-                $tr = $(this).closest('tr');
-                // console.log(table.row(this));
-                // table.row($tr).remove().draw();
-                var id=table.row($tr).data().id;
-                console.log(id);
-                device.deviceLogout(id);
-                table.ajax.reload();
-                table.draw(true)
-                // e.preventDefault();
-            }
+        // });
+        // $("#datatables tbody").on('click', '.logout', function(e) {
+        //     // console.log( table.row(this).data() );
+        //     // $tr = $(this).closest('tr');
+        //     // console.log(table.row($tr).data())
+        //     if(confirm(lout)){
+        //         $tr = $(this).closest('tr');
+        //         // console.log(table.row(this));
+        //         // table.row($tr).remove().draw();
+        //         var id=table.row($tr).data().id;
+        //         console.log(id);
+        //         device.deviceLogout(id);
+        //         table.ajax.reload();
+        //         table.draw(true)
+        //         // e.preventDefault();
+        //     }
 
-        });
-        $("#datatables tbody").on('click', '.login', function(e) {
-            // console.log( table.row(this).data() );
-            // $tr = $(this).closest('tr');
-            // console.log(table.row($tr).data())
-            if(confirm(lin)){
-                $tr = $(this).closest('tr');
-                // console.log(table.row(this));
-                // table.row($tr).remove().draw();
-                var id=table.row($tr).data().id;
-                console.log(id);
-                device.deviceLogin(id);
-                table.draw(true);
-                // e.preventDefault();
-            }
-        });
-        $("#addDeviceBtn").click(function() {
-            $("#addNewDeviceModal").modal("show")
-        });
+        // });
+        // $("#datatables tbody").on('click', '.login', function(e) {
+        //     // console.log( table.row(this).data() );
+        //     // $tr = $(this).closest('tr');
+        //     // console.log(table.row($tr).data())
+        //     if(confirm(lin)){
+        //         $tr = $(this).closest('tr');
+        //         // console.log(table.row(this));
+        //         // table.row($tr).remove().draw();
+        //         var id=table.row($tr).data().id;
+        //         console.log(id);
+        //         device.deviceLogin(id);
+        //         table.draw(true);
+        //         // e.preventDefault();
+        //     }
+        // });
+        // $("#addDeviceBtn").click(function() {
+        //     $("#addNewDeviceModal").modal("show")
+        // });
     });
 </script>
 

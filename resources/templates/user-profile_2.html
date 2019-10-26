@@ -52,7 +52,8 @@
         <nav class="nav nav5">
             <ul>
                 <li>
-                    <a href="checkDevice_2.html">设备管理</a>
+                    <li><a href="#">个人信息</a></li>
+                    <!-- <a href="checkDevice_2.html">设备管理</a> -->
                 </li>
             </ul>
         </nav>
@@ -61,11 +62,11 @@
         <nav class="nav nav5">
             <ul>
                 <li>
-                    <a href="#">个人管理</a>
-                    <ul>
+                    <li><a href="#" id="logout">注销</a></li>
+<!--                     <ul>
                         <li><a href="#">管理员信息</a></li>
                         <li><a href="#" id="logout">注销</a></li>
-                    </ul>
+                    </ul> -->
                 </li>
             </ul>
         </nav>
@@ -147,34 +148,45 @@
 <!--<script src="../static/js/flot-charts.js"></script>-->
 <!--<script type="text/javascript" src="../static/js/echarts.js"></script>-->
 <!-- <script type="text/javascript" src="../static/js/device.js"></script> -->
-<script type="text/javascript" src="../static/js/logout.js"></script>
+<script type="text/javascript" src="../static/js/constants.js"></script>
 <script type="text/javascript">
     // window.addEventListener('resize', function() {
     //     var canvas = document.getElementsByClassName("canvas")[0];
     //     canvas.style.height = "" + document.body.scrollHeight + "px";
     // });
 
+    var getNetworkDelayTimer = setInterval(function () {
+        $.ajax({
+            url:'http://' + server_ip_port + '/dvcM/networkCondition',
+            type:'GET',
+            dataType:'json',
+            async:true,
+            success:function (msg) {
+                $('#delay').html(msg.delay + "ms")
+            }
+        });
+    }, 2000)
+
     $(document).ready(function () {
         var main = document.getElementsByClassName("clearfix")[0];
         main.style.height = "" + (window.innerHeight * 0.9) + "px";
-        // var user={'id':'', 'name':'', 'occupation','department','phone':'','mobile':'','email':'', 'phone':''};
-        // $.ajax({
-        //     type:'GET',
-        //     url:'http://' + server_ip_port + '/user/get_info',
-        //     data:{},
-        //     dataType:'json',
-        //     success:function (msg) {
-        //         user = msg.data.;
-        //         $("#department").html(user.department)
-        //         $("#name").html(user.name)
-        //         $("#occupation").html(user.occupation)
-        //         $("#phone").html(user.phone)
-        //         $("#mobile").html(user.mobile)
-        //         $("#email").html(user.email)
-        //         var photo = document.getElementById('photo')
-        //         photo.src = user.photo
-        //     }
-        // })
+
+        $.ajax({
+            type:'GET',
+            url:'http://' + server_ip_port + '/usrM/admins/getAboutInformation?adminId=' + Cookies.get('uid'),
+            dataType:'json',
+            async:true,
+            success:function (msg) {
+                var user = msg;
+                $("#department").html(user.ministry)
+                $("#name").html(user.admin_name)
+                $("#occupation").html(user.position)
+                $("#phone").html(user.landline)
+                $("#mobile").html(user.mobile)
+                $("#email").html(user.email)
+                document.getElementById('photo').src = user.adminPhotoUri
+            }
+        })
     })
 </script>
 

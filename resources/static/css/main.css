@@ -1,3 +1,9 @@
+.legend {
+    position: absolute;
+    bottom: 1%;
+    right: 1%;
+}
+
 #task-table tr:nth-child(2n){
     background-color: rgba(208,208,208,0.2);
 }
@@ -24,6 +30,37 @@
 
 #alert-table tr:nth-child(2n){
     background-color: rgba(142,142,142,0.2);
+}
+
+@-webkit-keyframes alertColor{
+    0%{
+        background-color: rgba(204,0,0,0.8)
+    }
+    49%{
+        background-color:rgba(204,0,0,0.8)
+    }
+    50%{
+        background-color: rgba(255,153,102,0.8)
+    }
+    99%{
+        background-color: rgba(255,153,102,0.8)
+    }
+}
+
+#alert-table tr.currentAlert {
+    -webkit-animation-name: alertColor;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: 10;
+    background-color: rgba(255,153,102,0.3)
+}
+
+#alert-table tr.workingAlert:nth-child(2n) {
+    background-color: rgba(255,255,51,0.3)
+}
+
+#alert-table tr.workingAlert:nth-child(2n+1) {
+    background-color: rgba(255,153,102,0.3)
 }
 
 #alert-table th {
@@ -86,10 +123,15 @@ ul.profile li ul.profile-text li:nth-child(1){
     vertical-align:top;
     width: 20%;
 }
+
 ul.profile li ul.profile-text li a {
-    color: #fff;
-    text-decoration:none;
+    margin-left: 35px;
+    border: 2px solid #5E6C77;
+    border-radius: .25em;
+    padding: 2px;
+    background-color: #5E6C77;
 }
-ul.profile li ul.profile-text li a:hover{
-    color: #0FF;
+
+ul.profile li ul.profile-text li a:hover {
+    background-color: rgba(105,105,105,0.8);
 }

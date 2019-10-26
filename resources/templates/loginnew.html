@@ -35,7 +35,6 @@
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <script src="../static/js/constants.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -45,25 +44,21 @@
 
             // alert(userName+'/'+userPassword);
             // console.log(userName+'/'+userPassword);
-            var oDate = new Date();
-            oDate.setDate(oDate.getDate() + 7);//保存7天
-
             if(userName==''||userPassword==''){
                 alert("用户名或密码不能为空");
             }else {
                 $.ajax({
-                    url:"http://" + server_ip_port + "/users/login",
+                    url:"http://" + server_ip_port + "/usrM/admins/login?adminId=" + userName + "&password=" + userPassword,
                     type:"POST",
                     dataType:'json',
-                    data:{userName:userName,password:userPassword},
 
                     success:function (msg){
                         console.log(msg)
                         if(msg.code==200){
-                            var userName=msg.data.userName;
-                            var token=msg.data.loginToken;
-                            Cookies.set('userName',userName,oDate);
-                            Cookies.set('token',token,oDate);
+                            //var token=msg.data.loginToken;
+                            Cookies.set('uid',userName, { expires: 7 });
+                            Cookies.set('token',msg.data.loginToken, { expires: 7 });
+                            //console.log(Cookies.get('token'));
                             window.location.href='cool.html';
                         }else {
                             alert("用户名或密码不正确，请重新登录");
