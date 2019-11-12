@@ -11,25 +11,59 @@
 
 .device-table th,td {
      padding: .65em;
+     text-align: center;
 }
 
-.device-table th,td {
-	border-bottom: 1px solid #ddd;
-	border-top: 1px solid #ddd;
-	text-align: center;
+.device-table th {
+	border-bottom: 0.5px solid #ddd;
+	border-top: 0.5px solid #ddd;
+}
+
+.device-table td {
+  border-bottom: 0.1px solid #ddd;
 }
 
 .device-table tbody tr:hover {
-    font-size: 17px;
+    background-color: rgba(0,255,255,0.1);
+}
+
+.device-table tr:nth-child(2n+1){
+    background-color: rgba(208,208,208,0.05);
+}
+
+.device-table tr:nth-child(2n){
+    background-color: rgba(142,142,142,0.05);
+}
+
+.device-chart {
+  width: 360px;
+}
+
+table.task-list {
+    margin: auto;
+    width: 60%;
+}
+
+table.task-list tr {
+    background-color: rgba(208,208,208,0.05);
+    border-top: 0.02px solid #ddd;
+    border-right: 0.02px solid #ddd;
+}
+
+table.task-list td {
+    padding: .1em;
+    border-bottom: 0.02px solid #ddd;
+    border-left: 0.02px solid #ddd;
+    font-size: .9em;
 }
 
 label {
   display: block;
-  width: 80%;
+/*  width: 80%;
   height: 100%;
   position: relative;
   background: #1F2736; /*#121823*/
-    background: linear-gradient(#121823, #161d2b);
+    background: linear-gradient(#121823, #161d2b);*/
   border-radius: 30px 30px 30px 30px;
   box-shadow:
         inset 0 3px 8px 1px rgba(0,0,0,0.5),
@@ -86,50 +120,70 @@ box-shadow:
  }
 
 a.button {
-  margin-left: 3%;
-  position: relative;
+  margin-left: 1%;
+  border: 2px solid #5E6C77;
+  border-radius: .25em;
+  padding: .5em;
+  background-color: rgba(0,255,255,0.8);
+  color: #0000CC;
   display: inline-block;
-  padding: 1.2em 2em;
-  text-decoration: none;
-  text-align: center;
-  cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  color: white;
 }
 
-a.button::before {
-  content: '';
+a.button:hover {
+  background-color: rgba(0,102,255,0.9);
+}
+
+.bubbly-button:focus {
+  outline: 0;
+}
+.bubbly-button:before, .bubbly-button:after {
   position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: linear-gradient(135deg, #6e8efb, #a777e3);
-  border-radius: 4px;
-  transition: box-shadow .5s ease, -webkit-transform .2s ease;
-  transition: box-shadow .5s ease, transform .2s ease;
-  transition: box-shadow .5s ease, transform .2s ease, -webkit-transform .2s ease;
-  will-change: transform;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  -webkit-transform: translateY(var(--ty, 0)) rotateX(var(--rx, 0)) rotateY(var(--ry, 0)) translateZ(var(--tz, -12px));
-          transform: translateY(var(--ty, 0)) rotateX(var(--rx, 0)) rotateY(var(--ry, 0)) translateZ(var(--tz, -12px));
+  content: '';
+  display: block;
+  width: 140%;
+  height: 100%;
+  left: -20%;
+  z-index: -1000;
+  transition: all ease-in-out 0.5s;
+  background-repeat: no-repeat;
 }
-a.button:hover::before {
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+.bubbly-button:before {
+  display: none;
+  top: -75%;
+  background-image: radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, transparent 20%, #ff0081 20%, transparent 30%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, transparent 10%, #ff0081 15%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%);
+  background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
 }
-a.button::after {
-  position: relative;
-  display: inline-block;
-  content: attr(data-title);
-  transition: -webkit-transform .2s ease;
-  transition: transform .2s ease;
-  transition: transform .2s ease, -webkit-transform .2s ease;
-  font-weight: bold;
-  letter-spacing: .01em;
-  will-change: transform;
-  -webkit-transform: translateY(var(--ty, 0)) rotateX(var(--rx, 0)) rotateY(var(--ry, 0));
-          transform: translateY(var(--ty, 0)) rotateX(var(--rx, 0)) rotateY(var(--ry, 0));
+.bubbly-button:after {
+  display: none;
+  bottom: -75%;
+  background-image: radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, transparent 10%, #ff0081 15%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%);
+  background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
 }
+.bubbly-button:active {
+  transform: scale(0.9);
+  background-color: #e60074;
+  box-shadow: 0 2px 25px rgba(255, 0, 130, 0.2);
+}
+
+.cardBox {
+    width: 100px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    float: left;
+    margin-right: 1%;
+    padding-top: 1%;
+}
+.modal-dialog {
+    width: 540px;
+}
+.modal-dialog .modal-content {
+    content: "";
+    background: #282E33;
+    width: 100%;
+    border-radius: 12px 12px 12px 12px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+

@@ -52,52 +52,36 @@
         <nav class="nav nav5">
             <ul>
                 <li>
-                    <li><a href="#">个人信息</a></li>
-                    <!-- <a href="checkDevice_2.html">设备管理</a> -->
-                </li>
-            </ul>
-        </nav>
-    </div>
-    <div class="function" style="left:4.1rem; ">
-        <nav class="nav nav5">
-            <ul>
-                <li>
-                    <li><a href="#" id="logout">注销</a></li>
+                    <a href="deviceManager.html">设备管理</a>
 <!--                     <ul>
-                        <li><a href="#">管理员信息</a></li>
-                        <li><a href="#" id="logout">注销</a></li>
+                        <li><a href="checkDevice_2.html">查看设备信息</a></li>
+                        <li><a href="useDeviceLog.html">操作日志</a></li>
                     </ul> -->
                 </li>
             </ul>
         </nav>
     </div>
+    <div class="function" style="left:4.1rem;">
+        <nav class="nav nav5">
+            <ul>
+                <li>
+                    <a href="#" style="color: #68B3C8">个人管理</a>
+                    <ul>
+                        <li><a href="#" style="color: #68B3C8">管理员信息</a></li>
+                        <li><a href="#" id="logout">注销</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
     <div class="weather"><img src="../static/img/wifi.png" style="width: 6%;"><span id="delay">40ms</span><span id="showTime"></span></div>
-
-    <script>
-        var t = null;
-        t = setTimeout(time,1000);//開始运行
-        function time()
-        {
-            clearTimeout(t);//清除定时器
-            dt = new Date();
-            var y=dt.getFullYear();
-            var mt=dt.getMonth()+1;
-            var day=dt.getDate();
-            var h=dt.getHours();//获取时
-            var m=dt.getMinutes();//获取分
-            var s=dt.getSeconds();//获取秒
-            document.getElementById("showTime").innerHTML = y+"年"+mt+"月"+day+"日"+h+"时"+m+"分"+s+"秒";
-            t = setTimeout(time,1000); //设定定时器，循环运行
-        }
-
-    </script>
 </div>
 <div class="boxall clearfix" style="padding-top: 10%">
     <div class="left">
         <img id="photo" src="../static/img/police.jpeg" style="max-width:60%;max-height:60%;" alt=""/>
     </div>
     <div class="right">
-        <h1 style="margin-top: 3%;" id="name">吴英</h1>
+        <h1 style="margin-top: 3%;" id="admin_name">吴英</h1>
         <ul class="profile">
             <li>
                 <ul class="profile-text">
@@ -149,6 +133,24 @@
 <!--<script type="text/javascript" src="../static/js/echarts.js"></script>-->
 <!-- <script type="text/javascript" src="../static/js/device.js"></script> -->
 <script type="text/javascript" src="../static/js/constants.js"></script>
+<script>
+    var t = null;
+    t = setTimeout(time,1000);//開始运行
+    function time()
+    {
+        clearTimeout(t);//清除定时器
+        dt = new Date();
+        var y=dt.getFullYear();
+        var mt=dt.getMonth()+1;
+        var day=dt.getDate();
+        var h=dt.getHours();//获取时
+        var m=dt.getMinutes();//获取分
+        var s=dt.getSeconds();//获取秒
+
+        document.getElementById("showTime").innerHTML = " " + timeFormat(y) + "-" + timeFormat(mt) + "-" + timeFormat(day) + " " + timeFormat(h) + ":" + timeFormat(m) + ":" + timeFormat(s) + "";
+        t = setTimeout(time,1000); //设定定时器，循环运行
+    }
+</script>
 <script type="text/javascript">
     // window.addEventListener('resize', function() {
     //     var canvas = document.getElementsByClassName("canvas")[0];
@@ -157,12 +159,15 @@
 
     var getNetworkDelayTimer = setInterval(function () {
         $.ajax({
-            url:'http://' + server_ip_port + '/dvcM/networkCondition',
+            url:'http://' + server_ip_port_dvc + '/networkCondition',
             type:'GET',
             dataType:'json',
             async:true,
             success:function (msg) {
                 $('#delay').html(msg.delay + "ms")
+            },
+            error: function () {
+                $('#delay').html("网络异常")
             }
         });
     }, 2000)
@@ -173,13 +178,13 @@
 
         $.ajax({
             type:'GET',
-            url:'http://' + server_ip_port + '/usrM/admins/getAboutInformation?adminId=' + Cookies.get('uid'),
+            url:'http://' + server_ip_port_usr + '/admins/getAboutInformation?adminId=' + Cookies.get('uid'),
             dataType:'json',
             async:true,
             success:function (msg) {
                 var user = msg;
                 $("#department").html(user.ministry)
-                $("#name").html(user.admin_name)
+                $("#admin_name").html(user.adminName)
                 $("#occupation").html(user.position)
                 $("#phone").html(user.landline)
                 $("#mobile").html(user.mobile)

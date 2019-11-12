@@ -1,0 +1,644 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>index</title>
+    <script type="text/javascript" src="../static/js/jquery.js"></script>
+    <link rel="stylesheet" href="../static/css/comon0.css">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport' >
+    <meta name="viewport" content="width=device-width" >
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+    <link href="../static/css/amaze.css" rel="stylesheet" >
+    <link href="../static/css/jquery-ui.css" rel="stylesheet">
+    <link href="../static/css/themify-icons.css" rel="stylesheet">
+    <link href="../static/css/device.css" rel="stylesheet">
+    <link href="../static/css/input.css" rel="stylesheet" >
+</head>
+<script>
+    // $(window).load(function(){
+    //     $(".loading").fadeOut()
+    // })
+
+    /****/
+// 各种设备，包括手持机，监控，手环，脚环
+    
+    $(document).ready(function(){
+        var whei=$(window).width()
+        $("html").css({fontSize:whei/20})
+        $(window).resize(function(){
+            var whei=$(window).width()
+            $("html").css({fontSize:whei/20})
+        });
+    });
+</script>
+<body>
+<!-- <div class="canvas" style="opacity: .2">
+    <iframe frameborder="0" src="../static/js/index.html" style="width: 100%; height: 100%"></iframe>
+</div> -->
+<!-- <div class="loading">
+    <div class="loadbox"> <img src="../static/img/loading.gif"> 页面加载中... </div>
+</div> -->
+<div class="head">
+    <h1 style="margin-top: 5px">跨区域押解边缘风险预警平台</h1>
+    <div class="function" style="left:.1rem; ">
+        <nav class="nav nav5">
+            <ul>
+                <li>
+                    <a href="cool.html">实时监控</a>
+
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="function" style="left:2.1rem; ">
+        <nav class="nav nav5">
+            <ul>
+                <li>
+                    <a href="#" style="color: #68B3C8">设备管理</a>
+<!--                     <ul>
+                        <li><a href="checkDevice_2.html">查看设备信息</a></li>
+                        <li><a href="useDeviceLog.html">操作日志</a></li>
+                    </ul> -->
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="function" style="left:4.1rem;">
+        <nav class="nav nav5">
+            <ul>
+                <li>
+                    <a href="#">个人管理</a>
+                    <ul>
+                        <li><a href="user-profile_2.html">管理员信息</a></li>
+                        <li><a href="#" id="logout">注销</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="weather"><img src="../static/img/wifi.png" style="width: 6%;"><span id="delay">40ms</span><span id="showTime"></span></div>
+</div>
+<div class="boxall clearfix" style="height:100%;overflow:auto">
+    <input id="filter-device" type="text" placeholder="搜索" style="width:85%;margin-left:2%;"></input>
+    <a id="clear-filter" href="#" class="button bubbly-button">清空</a>
+    <a id="select-prisoner" href="#" class="button bubbly-button">选择犯人</a>
+    <table id="datatables" class="device-table" style="width:99%;" >
+        <thead>
+        <tr>
+            <th style="text-align: center">设备状态</th>
+            <th style="text-align: center">设备</th>
+            <th style="text-align: center">设备信息</th>
+            <th style="text-align: center">子设备信息</th>
+            <th style="text-align: center">任务信息</th>
+        </tr>
+        </thead>
+        <tbody style="" align="center" id="deviceInfo">
+        </tbody>
+        <tfoot>
+        <tr>
+            <th style="text-align: center">设备状态</th>
+            <th style="text-align: center">设备</th>
+            <th style="text-align: center">设备信息</th>
+            <th style="text-align: center">子设备信息</th>
+            <th style="text-align: center">任务信息</th>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+<div class="back"></div>
+
+<div class="modal fade" id="choosePrisonerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <table id="prisoner-table" style="margin: auto; border-collapse: separate; border-spacing:8px 5px;">
+                    <caption text="top" style="text-align: center;font-size:2em;color:#68B3C8">犯人列表</caption>
+                    <tbody>
+                        <tr><td>暂无</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deviceLogModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body" style="max-height:540px;width: 100%;overflow:auto; margin-top:3%;margin-right:3%">
+                <table id="log-table" class="log-table" style="margin: auto; border-collapse: separate; border-spacing:8px 5px;">
+                    <caption text="top" id="log-caption" style="text-align: center;font-size:2em;color:#68B3C8">日志</caption>
+                    <thead>
+				        <tr>
+				            <th style="text-align: center">设备名</th>
+				            <th style="text-align: center">操作者</th>
+				            <th style="text-align: center">所压犯人</th>
+				            <th style="text-align: center">操作时间</th>
+				            <th style="text-align: center">操作记录</th>
+				        </tr>
+				        </thead>
+				        <tbody style="" align="center" id="deviceLog">
+				        	<tr><td>暂无记录</td></tr>
+				        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--   Core JS Files   -->
+<script src="../static/js/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script src="../static/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../static/js/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
+<!--<script src="https://webapi.amap.com/maps?v=1.4.14&key=7dd5769916609fcc5c889c1797c4ebd7"></script>-->
+<script src="../static/js/moment-with-locales.js"></script>
+<script src="../static/js/jquery.flot.js"></script>
+<!--<script src="../static/js/bootstrap-datetimepicker.min.js"></script>-->
+<!--<script src="../static/js/bootstrap-datetimepicker.zh-CN.js" type="text/javascript"></script>-->
+<script src="../static/js/amaze.js"></script>
+<!--<script src="../static/js/flot-charts.js"></script>-->
+<script type="text/javascript" src="../static/js/echarts.js"></script>
+<script type="text/javascript" src="../static/js/device.js"></script>
+<!-- <script src="../static/js/jquery.datatables.js"></script> -->
+<!-- <script type="text/javascript" src="../static/js/input.js"></script> -->
+<script type="text/javascript" src="../static/js/constants.js"></script>
+<script>
+    var t = null;
+    t = setTimeout(time,1000);//開始运行
+    function time()
+    {
+        clearTimeout(t);//清除定时器
+        dt = new Date();
+        var y=dt.getFullYear();
+        var mt=dt.getMonth()+1;
+        var day=dt.getDate();
+        var h=dt.getHours();//获取时
+        var m=dt.getMinutes();//获取分
+        var s=dt.getSeconds();//获取秒
+
+        document.getElementById("showTime").innerHTML = " " + timeFormat(y) + "-" + timeFormat(mt) + "-" + timeFormat(day) + " " + timeFormat(h) + ":" + timeFormat(m) + ":" + timeFormat(s) + "";
+        t = setTimeout(time,1000); //设定定时器，循环运行
+    }
+</script>
+<script type="text/javascript">
+
+    var getNetworkDelayTimer = setInterval(function () {
+        $.ajax({
+            url:'http://' + server_ip_port_dvc + '/networkCondition',
+            type:'GET',
+            dataType:'json',
+            async:true,
+            success:function (msg) {
+                $('#delay').html(msg.delay + "ms")
+            },
+            error: function () {
+                $('#delay').html("网络异常")
+            }
+        });
+    }, 2000)
+
+    var all_devices = []
+    var real_data = []
+    var device_status_charts = []
+    var device_chart_options = []
+    var filter = ''
+    $('#filter-device').bind("input propertychange",function(event) {
+        filter = $('#filter-device').val();
+        initDetailTableData(all_devices, filter);
+    });
+
+    $('#clear-filter').click(function() {
+    	document.getElementById("filter-device").value = ''
+    	filter = ''
+    	initDetailTableData(all_devices, filter);
+    })
+
+    $("#select-prisoner").click(function(){
+        $.ajax({
+            url:'http://' + server_ip_port_usr + '/prisoners/get_all',
+            type:'GET',
+            dataType:'json',
+            async:true,
+            success:function (msg) {
+                prisoners = []
+                msg.forEach(prisoner => {
+                    var current_prisoner = prisoner.prisoner
+                    current_prisoner.taskNo = prisoner.task.taskNo
+                    current_prisoner.carNo = prisoner.task.carNo
+                    current_prisoner.userName = prisoner.task.userName
+                    prisoners.push(current_prisoner)
+                })
+                setPrisonersTable(prisoners)
+            },
+            error: function () {
+                console.log("获取犯人信息失败")
+            }
+        });
+    });
+
+    //犯人列表每行4个
+    var row_num = 4
+    //设置犯人列表
+    function setPrisonersTable(data) {
+        var table_string = "<tr>";
+        var count = 0;
+        if(data.length === 0) {
+    		table_string += '<td>暂无犯人</td>'
+    	}
+        data.forEach(prisoner => {
+            if(count % row_num == 0) {
+                table_string += "</tr><tr>"
+            }
+            var prisoner_photo = prisoner.prisonerPhotoUri
+            if(prisoner_photo == undefined || prisoner_photo == null) {
+                prisoner_photo = "../static/img/peo.png"
+            }
+            table_string += '<td><div class="cardBox"><div style="vertical-align:middle;text-align: center;display: table-cell;border: 0px;width:20%;height: 120px;"><img src="' + prisoner_photo + '" style="text-align: center;vertical-align: middle;max-width:100%;max-height:80%;"/></div><a href="#">' + prisoner.prisonerName + '</a></div></td>'
+            //table_string += '<th><a href="#">' + prisoner.id + "</a></th>"
+            count += 1
+        })
+        table_string += "</tr>"
+        $('#prisoner-table tbody').html(table_string)
+        $('#choosePrisonerModal').modal('show')
+        $("#prisoner-table td").click(function(){
+            var thSeq = $(this).parent().find("td").index($(this)[0]);
+            var trSeq = $(this).parent().parent().find("tr").index($(this).parent()[0]) - 1;
+            document.getElementById("filter-device").value = data[row_num * trSeq + thSeq].prisonerName;
+            filter = data[row_num * trSeq + thSeq].prisonerName;
+            $('#choosePrisonerModal').modal('hide')
+            initDetailTableData(all_devices, filter);
+        });
+    }
+
+    var getAllDevicesTimer = setInterval(getAllDevices, 5000)
+
+    function getAllDevices() {
+        $.ajax({
+            url:'http://' + server_ip_port_dvc + '/devices/get_all',
+            type:'GET',
+            dataType:'json',
+            async:true,
+            success:function (msg) {
+            	if(isDeviceNew(msg, all_devices)) {
+            		initDetailTableData(msg, filter)
+                	all_devices = msg
+            	}
+            }
+        });
+    }
+    getAllDevices()
+    
+    function initDetailTableData(dataArr, filter) {
+        var devices_string = ""
+        real_data = []
+        device_status_charts = []
+        device_chart_options = []
+        if(dataArr.length === 0) {
+    		devices_string = '<tr><td>暂无设备</td></tr>'
+    	}
+        for(var i = 0; i < dataArr.length; i++) {
+            var device = dataArr[i]
+            dataArr[i].filter = ''
+            var state = '获取失败'
+            var name = ''
+            if(device.device.deviceStatus===true){
+                state = '<label></label><span device-online></span>'
+                name = '<a href="#" id="phone_' + '手持机' + device.device.id + '_' + device.device.deviceNo + '"><img src="../static/img/phone.png" style="width: 50%;"><h5>手持机' + device.device.id + '</h5></a>'
+            }else {
+                state = '<label></label><span device-offline></span>'
+                name = '<a href="#" id="phone_' + '手持机' + device.device.id + '_' + device.device.deviceNo + '"><img src="../static/img/re_phone.png" style="width: 50%;"><h5>手持机' + device.device.id + '</h5></a>'
+            }
+            
+            dataArr[i].filter += ' 手持机' + device.device.id
+            var children = '<ul>'
+            if(device.bracelet != undefined) {
+                var braceletState = device.bracelet.deviceStatus ? '在线' : '离线'
+                var braceletImg = device.bracelet.deviceStatus ? 'bracelet.png' : 'bracelet_error.png'
+                children += '<li><a href="#" id="bracelet_' + '手持机' + device.device.id + '_'  + device.bracelet.braceletNo + '"><img src="../static/img/' + braceletImg + '" style="width: 25%;"> 手环 ' + braceletState + '</a></li>'
+                dataArr[i].filter += ' 手环'
+            }
+            if(device.vervel != undefined) {
+                var vervelState = device.vervel.deviceStatus ? '在线' : '离线'
+                var vervelImg = device.vervel.deviceStatus ? 'vervel.png' : 'vervel_error.png'
+                children += '<li><a href="#" id="vervel_' + '手持机' + device.device.id + '_'  + device.vervel.vervelNo + '"><img src="../static/img/' + vervelImg + '" style="width: 25%;"> 脚环 ' + vervelState + '</a></li>'
+                dataArr[i].filter += ' 脚环'
+            }
+            if(children === '<ul>') {
+                children += '<li>暂无</li>'
+            }
+            children += '</ul>'
+            var level = device.task.level === 1 ? '一级' : '二级'
+            var task = '<table class="task-list"><tbody><tr><td>任务号</td><td>' + device.task.taskNo + '</td></tr><tr><td>车牌号</td><td>' + device.task.carNo + '</td></tr><tr><td>犯人</td><td>' + device.task.prisonerName + '</td></tr><tr><td>警官</td><td>' + device.task.userName + '</td></tr><tr><td>级别</td><td>' + level + '</td></tr><tr><td>详情</td><td>' + device.task.detail + '</td></tr></tbody></table>'
+            dataArr[i].filter += ' ' + device.task.prisonerName
+            dataArr[i].filter += ' ' + device.task.userName
+            dataArr[i].filter += ' ' + device.task.taskNo
+            dataArr[i].filter += ' ' + device.task.carNo
+            dataArr[i].filter += ' ' + level
+            if(dataArr[i].filter.indexOf(filter) > -1) {
+                var info = '<div id="device-info-chart-' + real_data.length + '" style="vertical-align:middle;"></div>'
+                devices_string += "<tr title='点击设备，查看设备日志'><td>" + state + "</td><td>" + name + "</td><td class='device-chart'>" + info + "</td><td>" + children + "</td><td><div style='text-align: center'>" + task + "</div></td></tr>"
+                real_data.push(dataArr[i])
+            }
+        }
+        $('#deviceInfo').html(devices_string)
+        $("#deviceInfo td a").click(function(){
+            var device = $(this)[0].id.split("_")
+            $.ajax({
+	            url:'http://' + server_ip_port_dvc + '/logs/getLog?deviceNo=' + device[2],
+	            type:'GET',
+	            dataType:'json',
+	            async:true,
+	            success:function (msg) {
+	            	setDeviceLog(msg)
+	            	var type = device[0]
+	            	var name = device[1]
+	            	if(type === 'bracelet') {
+	            		name += '的手环'
+	            	} else if(type === 'vervel') {
+	            		name += '的脚环'
+	            	}
+	            	$('#log-caption').html(name)
+	            	$('#deviceLogModal').modal('show')
+	            },
+	            error: function () {
+	                console.log("获取日志信息失败")
+	            }
+	        });
+        });
+        for(var i = 0; i < real_data.length; i++) {
+            var chart = document.getElementById('device-info-chart-' + i)
+            chart.style.width = "" + (chart.parentNode.offsetWidth * 0.9) + "px";
+            chart.style.height = "" + (chart.parentNode.offsetHeight * 0.8) + "px";
+            var deviceInfoChart = echarts.init(chart)
+            var deviceInfoOption={
+                tooltip : {
+                    formatter: "{a} <br/>{c}%"
+                },
+                series : [
+                    {
+                        name: 'cpu占用率',
+                        type: 'gauge',
+                        z: 3,
+                        min: 0,
+                        max: 100,
+                        // startAngle: 180,
+                        // endAngle: 0,
+                        splitNumber: 10,
+                        radius: '80%',
+                        center: ['50%', '40%'],
+
+                        axisLine: {            // 坐标轴线
+                            lineStyle: {       // 属性lineStyle控制线条样式
+                                width: 5,
+                                color : [ //表盘颜色
+                                    [ 0.2, "#0de9ff"],//0-50%处的颜色
+                                    // [ 0.7, "#fffe9b" ],//51%-70%处的颜色
+                                    [ 0.8, "#ff8018" ],//70%-90%处的颜色
+                                    [ 1,"#ff1701" ],//90%-100%处的颜色
+                                ],
+                            }
+
+                        },
+
+                        axisTick: {            // 坐标轴小标记
+                            length: 10,        // 属性length控制线长
+                            lineStyle: {       // 属性lineStyle控制线条样式
+                                color: 'auto'
+                            }
+                        },
+                        splitLine: {           // 分隔线
+                            length: 15,         // 属性length控制线长
+                            lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                                color: 'auto'
+                            }
+                        },
+                        axisLabel: {
+                            show:false
+                        },
+
+                        title : {
+                            color: '#fff',
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: '#fff'
+                            },
+                        },
+                        pointer:{
+                            length:'80%',
+                            width:4
+                        },
+                        detail : {
+                            formatter:'{value}%',
+                            fontSize:12,
+                            color:'#fff',
+
+                            offsetCenter:['0','50%'],
+
+                            rich: {}
+                        },
+                        data:[{value: 0, name: 'cpu'}]
+                    },
+                    {
+                        name: '内存占用率',
+                        type: 'gauge',
+                        center: ['20%', '40%'],    // 默认全局居中
+                        radius: '80%',
+                        min:0,
+                        max:100,
+                        splitNumber:10,
+                        axisLine: {            // 坐标轴线
+                            lineStyle: {       // 属性lineStyle控制线条样式
+                                width: 5,
+                                color : [ //表盘颜色
+                                    [ 0.2, "#0de9ff"],//0-50%处的颜色
+                                    // [ 0.7, "#fffe9b" ],//51%-70%处的颜色
+                                    [ 0.8, "#ff8018" ],//70%-90%处的颜色
+                                    [ 1,"#ff1701" ],//90%-100%处的颜色
+                                ],
+                            }
+
+                        },
+                        pointer:{
+                            length:'80%',
+                            width:4
+                        },
+                        axisTick: {            // 坐标轴小标记
+                            length: 10,        // 属性length控制线长
+                            lineStyle: {       // 属性lineStyle控制线条样式
+                                color: 'auto'
+                            }
+                        },
+                        splitLine: {           // 分隔线
+                            length: 15,         // 属性length控制线长
+                            lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                                color: 'auto'
+                            }
+                        },
+                        axisLabel: {
+                            show:false
+                        },
+
+                        title : {
+                            // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                            // fontWeight: 'bolder',
+                            fontSize: 12,
+                            color: '#fff',
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: '#fff'
+                            },
+                        },
+                        detail : {
+                            formatter:'{value}%',
+                            fontSize:12,
+                            color:'#fff',
+
+                            offsetCenter:['0%','50%'],
+
+                            rich: {}
+                        },
+                        data:[{value: 0, name: '内存'}]
+                    },
+                    {
+                        name: '耗电量',
+                        type: 'gauge',
+                        center: ['80%', '40%'],    // 默认全局居中
+                        radius: '80%',
+                        min: 0,
+                        max: 100,
+
+                        splitNumber: 10,
+                        axisLine: {            // 坐标轴线
+                            lineStyle: {       // 属性lineStyle控制线条样式
+                                width: 5,
+                                color : [ //表盘颜色
+                                    [ 0.2, "#0de9ff"],//0-50%处的颜色
+                                    // [ 0.7, "#fffe9b" ],//51%-70%处的颜色
+                                    [ 0.8, "#ff8018" ],//70%-90%处的颜色
+                                    [ 1,"#ff1701" ],//90%-100%处的颜色
+                                ],
+                            }
+
+                        },
+                        axisTick: {            // 坐标轴小标记
+                            length: 10,        // 属性length控制线长
+                            lineStyle: {       // 属性lineStyle控制线条样式
+                                color: 'auto'
+                            }
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: '#fff'
+                            },
+                        },
+                        splitLine: {           // 分隔线
+                            length: 15,         // 属性length控制线长
+                            lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                                color: 'auto'
+                            }
+                        },
+                        axisLabel: {
+                            show:false
+                        },
+                        pointer:{
+                            length:'80%',
+                            width:4
+                        },
+
+                        title : {
+                            // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                            // fontWeight: 'bolder',
+                            fontSize: 12,
+                            color: '#fff',
+                        },
+                        detail : {
+                            formatter:'{value}%',
+                            fontSize:12,
+                            color:'#fff',
+
+                            offsetCenter:['0%','50%'],
+
+                            rich: {}
+                        },
+                        data:[{value: 0, name: '耗电量'}]
+                    }
+                ]
+
+            };
+            deviceInfoChart.setOption(deviceInfoOption);
+            device_status_charts.push(deviceInfoChart);
+            device_chart_options.push(deviceInfoOption)
+        }
+    }
+
+    function setDeviceLog(logs) {
+    	var log_string = ''
+    	if(logs.length === 0) {
+    		log_string = '<tr><td>暂无日志</td></tr>'
+    	}
+    	logs.forEach(log => {
+    		var name = log.deviceName
+    		var now = new Date(log.dealTime);
+            var y=now.getFullYear();
+            var mt=now.getMonth()+1;
+            var day=now.getDate();
+            var h=now.getHours();//获取时
+            var m=now.getMinutes();//获取分
+            var s=now.getSeconds();//获取秒
+            var time = timeFormat(y) + "-" + timeFormat(mt) + "-" + timeFormat(day) + " " + timeFormat(h) + ":" + timeFormat(m) + ":" + timeFormat(s)
+    		log_string = "<tr><td>" + name + "</td><td>" + log.userName + "</td><td>" + log.prisonerName + "</td><td>" + time + "</td><td>" + log.record + "</td></tr>" + log_string
+    	})
+    	$('#deviceLog').html(log_string)
+    }
+
+    var getDeviceStatusTimer = setInterval(getDeviceStatus, 5000)
+    function getDeviceStatus() {
+        $.ajax({
+            url:'http://' + server_ip_port_dvc + '/deviceRunInfo/getAllRunInfo',
+            type:'GET',
+            dataType:'json',
+            async:true,
+            success:function (msg) {
+            	setDeviceStatus(msg)
+            }
+        });
+    }
+    function getDeviceIndexByNo(index) {
+    	for(var i = 0; i < real_data.length; i++) {
+    		if(real_data[i].device.deviceNo === index) {
+    			return i
+    		}
+    	}
+    	return -1
+    }
+    function setDeviceStatus(devices) {
+    	devices.forEach(device => {
+    		var index = getDeviceIndexByNo(device.deviceNo)
+    		if(index != -1 && real_data[index].device.deviceStatus) {
+    			device_chart_options[index].series[0].data[0].value = Number(device.memoryUsageRate);
+				device_chart_options[index].series[1].data[0].value = Number(device.cpuUsageRate);
+				device_chart_options[index].series[2].data[0].value = Number(device.dumpEnergyRate);
+				device_status_charts[index].setOption(device_chart_options[index], true);
+    		}
+    	})
+    }
+    window.addEventListener('resize', function() {
+        chartResize();
+    });
+
+    function chartResize() {
+        for(var i = 0; i < real_data.length; i++) {
+            var chart = document.getElementById('device-info-chart-' + i)
+            chart.style.width = "" + (chart.parentNode.offsetWidth * 0.9) + "px";
+            chart.style.maxHeight = "" + (chart.parentNode.offsetHeight * 0.7) + "px";
+            device_status_charts[i].resize();
+        }
+    }
+</script>
+
+</body>
+</html>

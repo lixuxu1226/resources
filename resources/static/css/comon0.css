@@ -47,7 +47,7 @@ a:hover{ color: #0e334a; text-decoration: none!important}
 .head h1 img{ width:1.5rem; display: inline-block; vertical-align: middle; margin-right: .2rem}
 .function{ position:absolute; top: 3%; line-height: .75rem;}
 .function nav{color:rgba(255,255,255,.7); font-size: .24rem; padding-left: .1rem;}
-.weather{ width:20%;position:absolute;display: inline-block; right:.3rem; top:0; line-height: .75rem;}
+.weather{ width:20%;position:absolute;display: inline-block; right:.1rem; top:0; line-height: .75rem;}
 .weather img{ display: inline-block; padding-bottom: 2%;padding-right:1%}
 .weather span{color:rgba(255,255,255,.7); font-size: .18rem;display: inline-block;padding-right: 2%}
 .mainbox{ padding:.1rem .1rem 0rem .1rem;}

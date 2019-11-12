@@ -48,7 +48,7 @@
                 alert("用户名或密码不能为空");
             }else {
                 $.ajax({
-                    url:"http://" + server_ip_port + "/usrM/admins/login?adminId=" + userName + "&password=" + userPassword,
+                    url:"http://" + server_ip_port_usr + "/admins/login?adminId=" + userName + "&password=" + userPassword,
                     type:"POST",
                     dataType:'json',
 
