@@ -1,0 +1,189 @@
+.device-table {
+     border-collapse: collapse;
+     font-family: Futura, Arial, sans-serif;
+     margin: auto;
+}
+
+.device-table caption {
+     font-size: larger;
+     margin: 1em auto;
+}
+
+.device-table th,td {
+     padding: .65em;
+     text-align: center;
+}
+
+.device-table th {
+	border-bottom: 0.5px solid #ddd;
+	border-top: 0.5px solid #ddd;
+}
+
+.device-table td {
+  border-bottom: 0.1px solid #ddd;
+}
+
+.device-table tbody tr:hover {
+    background-color: rgba(0,255,255,0.1);
+}
+
+.device-table tr:nth-child(2n+1){
+    background-color: rgba(208,208,208,0.05);
+}
+
+.device-table tr:nth-child(2n){
+    background-color: rgba(142,142,142,0.05);
+}
+
+.device-chart {
+  width: 360px;
+}
+
+table.task-list {
+    margin: auto;
+    width: 60%;
+}
+
+table.task-list tr {
+    background-color: rgba(208,208,208,0.05);
+    border-top: 0.02px solid #ddd;
+    border-right: 0.02px solid #ddd;
+}
+
+table.task-list td {
+    padding: .1em;
+    border-bottom: 0.02px solid #ddd;
+    border-left: 0.02px solid #ddd;
+    font-size: .9em;
+}
+
+label {
+  display: block;
+/*  width: 80%;
+  height: 100%;
+  position: relative;
+  background: #1F2736; /*#121823*/
+    background: linear-gradient(#121823, #161d2b);*/
+  border-radius: 30px 30px 30px 30px;
+  box-shadow:
+        inset 0 3px 8px 1px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(0,0,0,0.5),
+        0 1px 0 rgba(255,255,255,0.2);
+    -webkit-transition: all .5s ease;
+transition: all .5s ease;
+
+}
+
+label + span[device-offline] {
+  content: "";
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  width: 15px;
+  height: 15px;
+  border-radius: 10px;
+  background: #283446; 
+background: gradient-gradient(#36455b, #283446);
+box-shadow:
+      inset 0 1px 0 rgba(0,0,0,0.2),
+      0 1px 0 rgba(255,255,255,0.1),
+      0 0 10px rgba(185,231,253,0),
+  inset 0 0 8px rgba(0,0,0,0.9),
+  inset 0 -2px 5px rgba(0,0,0,0.3),
+  inset 0 -5px 5px rgba(0,0,0,0.5);
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
+  z-index: 2;
+}
+
+label + span[device-online] { 
+  content: "";
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  width: 15px;
+  height: 15px;
+  border-radius: 10px;
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
+  z-index: 2;
+  background: #b9f3fe; 
+background: gradient-gradient(#ffffff, #77a1b9);
+box-shadow:        
+      inset 0 1px 0 rgba(0,0,0,0.1),
+      0 1px 0 rgba(255,255,255,0.1),
+      0 0 10px rgba(100,231,253,1),
+      inset 0 0 8px rgba( 61,157,247,0.8),
+  inset 0 -2px 5px rgba(185,231,253,0.3),
+  inset 0 -3px 8px rgba(185,231,253,0.5);
+
+ }
+
+a.button {
+  margin-left: 1%;
+  border: 2px solid #5E6C77;
+  border-radius: .25em;
+  padding: .5em;
+  background-color: rgba(0,255,255,0.8);
+  color: #0000CC;
+  display: inline-block;
+}
+
+a.button:hover {
+  background-color: rgba(0,102,255,0.9);
+}
+
+.bubbly-button:focus {
+  outline: 0;
+}
+.bubbly-button:before, .bubbly-button:after {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 140%;
+  height: 100%;
+  left: -20%;
+  z-index: -1000;
+  transition: all ease-in-out 0.5s;
+  background-repeat: no-repeat;
+}
+.bubbly-button:before {
+  display: none;
+  top: -75%;
+  background-image: radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, transparent 20%, #ff0081 20%, transparent 30%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, transparent 10%, #ff0081 15%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%);
+  background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
+}
+.bubbly-button:after {
+  display: none;
+  bottom: -75%;
+  background-image: radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, transparent 10%, #ff0081 15%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%);
+  background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
+}
+.bubbly-button:active {
+  transform: scale(0.9);
+  background-color: #e60074;
+  box-shadow: 0 2px 25px rgba(255, 0, 130, 0.2);
+}
+
+.cardBox {
+    width: 100px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    float: left;
+    margin-right: 1%;
+    padding-top: 1%;
+}
+.modal-dialog {
+    width: 540px;
+}
+.modal-dialog .modal-content {
+    content: "";
+    background: #282E33;
+    width: 100%;
+    border-radius: 12px 12px 12px 12px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+

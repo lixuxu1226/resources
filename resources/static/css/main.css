@@ -1,0 +1,169 @@
+.legend {
+    position: absolute;
+    bottom: 1%;
+    right: 4%;
+}
+
+#task-table tr:nth-child(2n){
+    background-color: rgba(208,208,208,0.2);
+}
+
+#task-table tr:nth-child(2n+1){
+    background-color: rgba(142,142,142,0.2);
+}
+
+#task-table th {
+    text-align: center;
+    padding: 1%;
+    color: #FFFF6F;
+}
+
+#task-table td {
+    text-align: center;
+    padding: 1%;
+    color: #ffffff;
+}
+
+#alert-table tr:nth-child(2n+1){
+    background-color: rgba(208,208,208,0.2);
+}
+
+#alert-table tr:nth-child(2n){
+    background-color: rgba(142,142,142,0.2);
+}
+
+@-webkit-keyframes alertColor{
+    0%{
+        background-color: rgba(204,0,0,0.8)
+    }
+    49%{
+        background-color:rgba(204,0,0,0.8)
+    }
+    50%{
+        background-color: rgba(255,153,102,0.8)
+    }
+    99%{
+        background-color: rgba(255,153,102,0.8)
+    }
+}
+
+#alert-table tr.currentAlert {
+    -webkit-animation-name: alertColor;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: 10;
+    background-color: rgba(255,153,102,0.3)
+}
+
+#alert-table tr.workingAlert {
+    background-color: rgba(255,153,102,0.3)
+}
+
+
+#alert-table th {
+    text-align: center;
+    padding: 1%;
+    color: #FFFF6F;
+}
+
+#alert-table td {
+    text-align: center;
+    padding: 1%;
+    color: #ffffff;
+}
+
+.cardBox {
+    width: 110px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    float: left;
+    margin-right: 10px;
+    padding-top: 10px;
+}
+
+.modal-dialog {
+    width: 540px;
+}
+.modal-dialog .modal-content {
+    content: "";
+    background: #282E33;
+    width: 100%;
+    border-radius: 12px 12px 12px 12px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.left {
+    float: left;
+    margin-left: 2%;
+    width: 30%;
+    margin-top:20%;
+}
+.right {
+    padding-left: 40%;
+}
+
+ul.profile li {
+    display: block;
+}
+ul.profile li ul.profile-text li {
+    display: inline-block;
+    font-size: 1.2em;
+    color: #fff;
+    margin-top: 1em;
+    font-weight: 100;
+    max-width:78%;
+}
+ul.profile li ul.profile-text li:nth-child(1){
+    vertical-align:top;
+    width: 20%;
+}
+
+ul.profile li ul.profile-text li a {
+    margin-left: 35px;
+    border: 2px solid #5E6C77;
+    border-radius: .25em;
+    padding: 2px;
+    background-color: #5E6C77;
+}
+
+ul.profile li ul.profile-text li a:hover {
+    background-color: rgba(0,255,255,0.9);
+}
+
+
+.bubbly-button:focus {
+  outline: 0;
+}
+.bubbly-button:before, .bubbly-button:after {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 140%;
+  height: 100%;
+  left: -20%;
+  z-index: -1000;
+  transition: all ease-in-out 0.5s;
+  background-repeat: no-repeat;
+}
+.bubbly-button:before {
+  display: none;
+  top: -75%;
+  background-image: radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, transparent 20%, #ff0081 20%, transparent 30%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, transparent 10%, #ff0081 15%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%);
+  background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
+}
+.bubbly-button:after {
+  display: none;
+  bottom: -75%;
+  background-image: radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, transparent 10%, #ff0081 15%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%);
+  background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
+}
+.bubbly-button:active {
+  transform: scale(0.9);
+  background-color: #e60074;
+  box-shadow: 0 2px 25px rgba(255, 0, 130, 0.2);
+}
+
+

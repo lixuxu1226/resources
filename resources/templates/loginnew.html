@@ -22,9 +22,9 @@
                 </div>
                 <div class="password">
                     <img src="../static/img/password.png" alt="">
-                    <input id="userPassword" type="text" placeholder="请输入密码">
+                    <input id="userPassword" type="password" placeholder="请输入密码">
                 </div>
-                <button type="submit" style="width: 340px;margin-left: 50px;height: 40px;background-color: #0064c8;color: white;font-size: larger;" id="userLogin">登  录</button>
+                <button style="width: 340px;margin-left: 50px;height: 40px;background-color: #0064c8;color: white;font-size: larger;" id="userLogin">登  录</button>
 
 
                 <!--                <button class="yes_login" id="userLogin"><button>登&nbsp;&nbsp;&nbsp;&nbsp;录</button></button>-->
@@ -34,39 +34,35 @@
     </div>
 
 </div>
+
+<script src="../static/js/constants.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-
         $('#userLogin').click(function () {
             var userName = $('#userName').val().toString();
             var userPassword = $('#userPassword').val().toString();
 
             // alert(userName+'/'+userPassword);
             // console.log(userName+'/'+userPassword);
-            var oDate = new Date();
-            oDate.setDate(oDate.getDate() + 7);//保存7天
-
             if(userName==''||userPassword==''){
                 alert("用户名或密码不能为空");
-
             }else {
-
                 $.ajax({
-                    url:"http://10.108.122.144:8089/users/login",
+                    url:"http://" + server_ip_port_usr + "/admins/login?adminId=" + userName + "&password=" + userPassword,
                     type:"POST",
                     dataType:'json',
-                    data:{userName:userName,password:userPassword},
 
                     success:function (msg){
+                        console.log(msg)
                         if(msg.code==200){
-                            var userName=msg.data.userName;
-                            var token=msg.data.loginToken;
-                            docCookies.setItem(userName,token,oDate);
-                            window.location.href=encodeURI('home.html?userName='+userName);
+                            //var token=msg.data.loginToken;
+                            Cookies.set('uid',userName, { expires: 7 });
+                            Cookies.set('token',msg.data.loginToken, { expires: 7 });
+                            //console.log(Cookies.get('token'));
+                            window.location.href='cool.html';
                         }else {
                             alert("用户名或密码不正确，请重新登录");
                         }
-
                     },
                     complete:function (XMLHttpRequest, textStatus) {
                         // alert(textStatus);
@@ -74,12 +70,9 @@
                     error: function (XMLHttpRequest, textStatus, thrownError) {
                         // console.log("aaaaa")
                     }
-
-
-
                 })
             }
-
+            return false;
         })
     })
 

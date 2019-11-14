@@ -1,0 +1,42 @@
+
+h1,h2,h3,h4,h5,h6{
+	margin:5px;	
+	font-family: 'Overlock', cursive;
+}
+p {
+	margin:0;
+}
+.left {
+    float: left;
+    margin-left: 10%;
+    margin-top: 2.5%;
+    width: 30%;
+    height: 100%;
+}
+.right {
+    margin-left: 10%;
+}
+ul,label{
+	margin:0;
+	padding:0;
+}
+ul.profile li {
+    display: block;
+}
+ul.profile li ul.profile-text li {
+    display: inline-block;
+    font-size: 1.2em;
+    color: #fff;
+    margin-top: 1em;
+	font-weight: 100;
+}
+ul.profile li ul.profile-text li:nth-child(1){
+	width: 20%;
+}
+ul.profile li ul.profile-text li a {
+    color: #fff;
+	text-decoration:none;
+}
+ul.profile li ul.profile-text li a:hover{
+    color: #0FF;
+}

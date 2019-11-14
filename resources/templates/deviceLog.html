@@ -1,0 +1,332 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>index</title>
+    <script type="text/javascript" src="../static/js/jquery.js"></script>
+    <link rel="stylesheet" href="../static/css/comon0.css">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport' >
+    <meta name="viewport" content="width=device-width" >
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+    <link href="../static/css/amaze.css" rel="stylesheet" >
+    <link href="../static/css/jquery-ui.css" rel="stylesheet">
+    <link href="../static/css/themify-icons.css" rel="stylesheet">
+    <link href="../static/css/device.css" rel="stylesheet">
+    <link href="../static/css/input.css" rel="stylesheet" >
+</head>
+<script>
+    // $(window).load(function(){
+    //     $(".loading").fadeOut()
+    // })
+
+    /****/
+// 各种设备，包括手持机，监控，手环，脚环
+    
+    $(document).ready(function(){
+        var whei=$(window).width()
+        $("html").css({fontSize:whei/20})
+        $(window).resize(function(){
+            var whei=$(window).width()
+            $("html").css({fontSize:whei/20})
+        });
+    });
+</script>
+<body>
+<!-- <div class="canvas" style="opacity: .2">
+    <iframe frameborder="0" src="../static/js/index.html" style="width: 100%; height: 100%"></iframe>
+</div> -->
+<!-- <div class="loading">
+    <div class="loadbox"> <img src="../static/img/loading.gif"> 页面加载中... </div>
+</div> -->
+<div class="head">
+    <h1 style="margin-top: 5px">跨区域押解边缘风险预警平台</h1>
+    <div class="function" style="left:.1rem; ">
+        <nav class="nav nav5">
+            <ul>
+                <li>
+                    <a href="cool.html">实时监控</a>
+
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="function" style="left:2.1rem; ">
+        <nav class="nav nav5">
+            <ul>
+                <li>
+                    <a href="deviceLog.html" style="color: #68B3C8">日志管理</a>
+<!--                     <ul>
+                        <li><a href="checkDevice_2.html">查看设备信息</a></li>
+                        <li><a href="useDeviceLog.html">操作日志</a></li>
+                    </ul> -->
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="function" style="left:4.1rem;">
+        <nav class="nav nav5">
+            <ul>
+                <li>
+                    <a href="#">个人管理</a>
+                    <ul>
+                        <li><a href="user-profile_2.html">管理员信息</a></li>
+                        <li><a href="#" id="logout">注销</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="weather"><img src="../static/img/wifi.png" style="width: 6%;"><span id="delay">40ms</span><span id="showTime"></span></div>
+
+    <script>
+        var t = null;
+        t = setTimeout(time,1000);//開始运行
+        function time()
+        {
+            clearTimeout(t);//清除定时器
+            dt = new Date();
+            var y=dt.getFullYear();
+            var mt=dt.getMonth()+1;
+            var day=dt.getDate();
+            var h=dt.getHours();//获取时
+            var m=dt.getMinutes();//获取分
+            var s=dt.getSeconds();//获取秒
+            
+            document.getElementById("showTime").innerHTML = " " + timeFormat(y) + "-" + timeFormat(mt) + "-" + timeFormat(day) + " " + timeFormat(h) + ":" + timeFormat(m) + ":" + timeFormat(s) + "";
+            t = setTimeout(time,1000); //设定定时器，循环运行
+        }
+
+    </script>
+</div>
+<div class="boxall clearfix">
+    <input id="filter-device" type="text" placeholder="搜索" style="width:100%;"></input>
+    <!-- <a id="addDeviceBtn" href="#" class="button" data-title="添加新设备"></a> -->
+    <table id="datatables" class="device-table" style="width:99%;" >
+        <thead >
+        <tr>
+            <th style="text-align: center">设备名</th>
+            <th style="text-align: center">操作者</th>
+            <th style="text-align: center">所压犯人</th>
+            <th style="text-align: center">操作时间</th>
+            <th class="disabled-sorting" style="text-align: center">操作记录</th>
+        </tr>
+        </thead>
+        <tbody style="" align="center" id="deviceInfo">
+        <!--<tr>-->
+            <!--<td>1</td>-->
+            <!--<td>PH156231</td>-->
+            <!--<td>手持机</td>-->
+            <!--<td>张三</td>-->
+            <!--<td>接入</td>-->
+
+            <!--<td class="btn-group">-->
+                    <!--<button type="button" class="btn btn-white">接入</button>-->
+                    <!--<button type="button" class="btn btn-white">登出</button>-->
+                    <!--<button type="button" class="btn btn-white">移除</button>-->
+            <!--</td>-->
+        <!--</tr>-->
+
+        </tbody>
+        <tfoot>
+        <tr>
+            <th style="text-align: center">设备名</th>
+            <th style="text-align: center">操作者</th>
+            <th style="text-align: center">所压犯人</th>
+            <th style="text-align: center">操作时间</th>
+            <th style="text-align: center">操作记录</th>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+<div class="back"></div>
+
+<!--   Core JS Files   -->
+<script src="../static/js/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script src="../static/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../static/js/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
+<!--<script src="https://webapi.amap.com/maps?v=1.4.14&key=7dd5769916609fcc5c889c1797c4ebd7"></script>-->
+<script src="../static/js/moment-with-locales.js"></script>
+<script src="../static/js/jquery.flot.js"></script>
+<!--<script src="../static/js/bootstrap-datetimepicker.min.js"></script>-->
+<!--<script src="../static/js/bootstrap-datetimepicker.zh-CN.js" type="text/javascript"></script>-->
+<script src="../static/js/amaze.js"></script>
+<!--<script src="../static/js/flot-charts.js"></script>-->
+<!--<script type="text/javascript" src="../static/js/echarts.js"></script>-->
+<script type="text/javascript" src="../static/js/device.js"></script>
+<script src="../static/js/jquery.datatables.js"></script>
+<!-- <script type="text/javascript" src="../static/js/input.js"></script> -->
+<script type="text/javascript" src="../static/js/constants.js"></script>
+<script type="text/javascript">
+
+    var getNetworkDelayTimer = setInterval(function () {
+        $.ajax({
+            url:'http://' + server_ip_port + '/dvcM/networkCondition',
+            type:'GET',
+            dataType:'json',
+            async:true,
+            success:function (msg) {
+                $('#delay').html(msg.delay + "ms")
+            },
+            error: function () {
+                $('#delay').html("网络异常")
+            }
+        });
+    }, 2000)
+
+    // window.addEventListener('resize', function() {
+    //     var canvas = document.getElementsByClassName("canvas")[0];
+    //     canvas.style.height = "" + document.body.scrollHeight + "px";
+    // });
+    $(document).ready(function() {
+        var main = document.getElementsByClassName("clearfix")[0];
+        main.style.height = "" + (window.innerHeight * 0.95) + "px";
+
+    $('#datatables').DataTable({
+        "stateSave":true,
+        "pagingType": "full_numbers",
+        "searching": true,
+        "lengthChange": false,
+        "info": false,
+        destroy:true,
+        language: {
+            "paging": {
+                "first": "首页",
+                "previous": "前一页",
+                "next": "后一页",
+                "last": "尾页"
+            },
+            "zeroRecords": "没有检索到数据"
+        },
+        "processing": true,//DataTables载入数据时，是否显示‘进度’提示
+        // "serverSide": true,//启动服务器端数据导入
+        "pagingType":'full_numbers',
+        // "ajax.urlOption":"http://10.108.122.144:8089/devices/get_all",
+        "ajax": {
+            "data": function (d) {
+                var info = $('#datatables').DataTable().page.info();
+                d.pageNo = info.page;
+                var filter = $('#filter-device').val();
+                //指定检索参数名称，后台参数名为extraSerach
+                d.extraSerach=filter;
+            }
+        },
+        "dom": '<l<t>ip>',
+
+        columns: [
+            { data: 'deviceName' , defaultContent: ""},
+            { data: 'userName' , defaultContent: ""},
+            { data: 'prisonerName', defaultContent: ""},
+            { data:'dealTime',
+                render:function (data,type,full) {
+                    var now = new Date(data);
+                    var y=now.getFullYear();
+                    var mt=now.getMonth()+1;
+                    var day=now.getDate();
+                    var h=now.getHours();//获取时
+                    var m=now.getMinutes();//获取分
+                    var s=now.getSeconds();//获取秒
+                    return timeFormat(y) + "-" + timeFormat(mt) + "-" + timeFormat(day) + " " + timeFormat(h) + ":" + timeFormat(m) + ":" + timeFormat(s) 
+                }
+            },
+            { data:'record', defaultContent: ""}
+        ],
+
+    });
+    $('#filter-device').bind("input propertychange",function(event) {
+        var filter = $('#filter-device').val();
+        var table = $('#datatables').DataTable();
+        table.search(filter).draw();
+    });
+
+    var data = []
+    var getAllDevicesTimer = setInterval(function () {
+        getAllDeviceLogs()
+    }, 5000)
+
+    function getAllDeviceLogs() {
+        $.ajax({
+            url:'http://' + server_ip_port + '/dvcM/logs/getLogs',
+            type:'GET',
+            dataType:'json',
+            async:true,
+            success:function (msg) {
+                initDetailTableData(msg)
+            }
+        });
+    }
+    getAllDeviceLogs()
+    
+    function initDetailTableData(dataArr) { //dataArr是表格数据数组，和初始化配置需一样的结构
+        var table = $('#datatables').dataTable();
+        var oSettings = table.fnSettings(); //这里获取表格的配置
+        for (var i = data.length, l = dataArr.length; i < l; i++) {
+            table.oApi._fnAddData(oSettings, dataArr[i]); //这里添加一行数据
+        }
+        oSettings.aiDisplay = oSettings.aiDisplayMaster.slice();
+        table.fnDraw(false);//绘制表格
+        data = dataArr
+    }
+
+        //设备登出
+        // var lout = "您确定断开与此台设备的连接吗？";
+        // var lin = "您确定恢复与此台设备的连接吗？";
+        // var del="您确定移除此台设备吗？";
+        // $("#datatables tbody").on('click', '.remove', function(e) {
+        //     // console.log( table.row(this).data() );
+        //     // $tr = $(this).closest('tr');
+        //     // console.log(table.row($tr).data())
+        //     if(confirm(del)){
+        //         $tr = $(this).closest('tr');
+        //         // console.log(table.row(this));
+        //         // table.row($tr).remove().draw();
+        //         var id=table.row($tr).data().id;
+        //         console.log(id);
+        //         device.deviceDelete(id);
+        //         table.row($tr).remove().draw();
+        //         // table.draw(true);
+        //         // e.preventDefault();
+        //     }
+
+        // });
+        // $("#datatables tbody").on('click', '.logout', function(e) {
+        //     // console.log( table.row(this).data() );
+        //     // $tr = $(this).closest('tr');
+        //     // console.log(table.row($tr).data())
+        //     if(confirm(lout)){
+        //         $tr = $(this).closest('tr');
+        //         // console.log(table.row(this));
+        //         // table.row($tr).remove().draw();
+        //         var id=table.row($tr).data().id;
+        //         console.log(id);
+        //         device.deviceLogout(id);
+        //         table.ajax.reload();
+        //         table.draw(true)
+        //         // e.preventDefault();
+        //     }
+
+        // });
+        // $("#datatables tbody").on('click', '.login', function(e) {
+        //     // console.log( table.row(this).data() );
+        //     // $tr = $(this).closest('tr');
+        //     // console.log(table.row($tr).data())
+        //     if(confirm(lin)){
+        //         $tr = $(this).closest('tr');
+        //         // console.log(table.row(this));
+        //         // table.row($tr).remove().draw();
+        //         var id=table.row($tr).data().id;
+        //         console.log(id);
+        //         device.deviceLogin(id);
+        //         table.draw(true);
+        //         // e.preventDefault();
+        //     }
+        // });
+        // $("#addDeviceBtn").click(function() {
+        //     $("#addNewDeviceModal").modal("show")
+        // });
+    });
+</script>
+
+</body>
+</html>

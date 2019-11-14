@@ -12,6 +12,8 @@
     <link href="../static/css/amaze.css" rel="stylesheet" >
     <link href="../static/css/jquery-ui.css" rel="stylesheet">
     <link href="../static/css/themify-icons.css" rel="stylesheet">
+    <link href="../static/css/main.css" rel="stylesheet">
+    <link href="../static/css/input.css" rel="stylesheet">
     <style>
 
         .demo-placeholder {
@@ -20,7 +22,7 @@
             font-size: 14px;
             line-height: 1.2em;
             position: relative;
-            margin-top: 20px;
+            margin-top: 8px;
             /*background-color: floralwhite;*/
 
         }
@@ -36,9 +38,9 @@
     </style>
 </head>
 <script>
-    $(window).load(function(){
-        $(".loading").fadeOut()
-    })
+    // $(window).load(function(){
+    //     $(".loading").fadeOut()
+    // })
 
     /****/
     $(document).ready(function(){
@@ -51,20 +53,19 @@
     });
 </script>
 <body>
-<div class="canvas" style="opacity: .2">
+<!-- <div class="canvas" style="opacity: .2">
     <iframe frameborder="0" src="../static/js/index.html" style="width: 100%; height: 100%"></iframe>
-</div>
-<div class="loading">
+</div> -->
+<!-- <div class="loading">
     <div class="loadbox"> <img src="../static/img/loading.gif"> 页面加载中... </div>
-</div>
+</div> -->
 <div class="head">
     <h1 style="margin-top: 5px">跨区域押解边缘风险预警平台</h1>
     <div class="function" style="left:.1rem; ">
         <nav class="nav nav5">
             <ul>
                 <li>
-                    <a href="#">实时监控</a>
-
+                    <a href="#" style="color: #68B3C8">实时监控</a>
                 </li>
             </ul>
         </nav>
@@ -73,130 +74,109 @@
         <nav class="nav nav5">
             <ul>
                 <li>
-                    <a href="#">设备管理</a>
-                    <ul>
-                        <li><a href="checkDevice.html">查看设备信息</a></li>
-                        <li><a href="addDevice.html">设备注册</a></li>
-                    </ul>
+                    <a href="deviceManager.html">设备管理</a>
+<!--                     <ul>
+                        <li><a href="checkDevice_2.html">查看设备信息</a></li>
+                        <li><a href="useDeviceLog.html">操作日志</a></li>
+                    </ul> -->
                 </li>
             </ul>
         </nav>
     </div>
-    <div class="function" style="left:4.1rem; ">
+    <div class="function" style="left:4.1rem;">
         <nav class="nav nav5">
             <ul>
                 <li>
-                    <a href="#">用户管理</a>
+                	<a href="#">个人管理</a>
                     <ul>
-                        <li><a href="user-profile.html">查看用户信息</a></li>
-                        <li><a href="register.html">用户注册</a></li>
+                        <li><a href="user-profile_2.html">管理员信息</a></li>
                         <li><a href="#" id="logout">注销</a></li>
                     </ul>
                 </li>
             </ul>
         </nav>
     </div>
-    <div class="weather"><!--<img src="picture/weather.png"><span>多云转小雨</span>--><span id="showTime"></span></div>
-
-    <script>
-        var t = null;
-        t = setTimeout(time,1000);//開始运行
-        function time()
-        {
-            clearTimeout(t);//清除定时器
-            dt = new Date();
-            var y=dt.getFullYear();
-            var mt=dt.getMonth()+1;
-            var day=dt.getDate();
-            var h=dt.getHours();//获取时
-            var m=dt.getMinutes();//获取分
-            var s=dt.getSeconds();//获取秒
-            document.getElementById("showTime").innerHTML = y+"年"+mt+"月"+day+"日"+h+"时"+m+"分"+s+"秒";
-            t = setTimeout(time,1000); //设定定时器，循环运行
-        }
-
-    </script>
-
-
+    <div class="weather"><img src="../static/img/wifi.png" style="width: 6%;"><span id="delay">40ms</span><span id="showTime"></span></div>
 </div>
 <div class="mainbox">
     <ul class="clearfix">
         <li>
-            <div class="boxall" style="height: 4.3rem">
+            <div class="boxall" style="height: 4.8rem">
                 <!--<div class="alltitle">边缘设备</div>-->
 <!--                <div id='deviceFullScreen' class="inner-placeholder" style="background: url(../static/img/fullScreen.png);z-index: 4"></div>-->
                 <!--background: url(../static/img/fullScreen.png)-->
-
-                <div class="content" style="height: 500px" id="device">
+                <div class="content" style="height: 100%" id="device">
+                	<div class="alltitle">设备云图</div>
                         <!--<div class="row" style="height: 350px">-->
-                    <div id="device-chart" class="demo-placeholder" style="height: 350px"></div>
+                    <div id="device-chart" class="demo-placeholder" style="height: 290px"></div>
+                    <!-- <div id='refresh-device-chart' class="inner-placeholder" style="background: url(../static/img/refresh.png)"></div> -->
                 </div>
             </div>
-            <div class="boxall" style="height: 2rem">
+            <div class="boxall" style="height: 2.5rem">
                 <!--<div class="alltitle">设备状态</div>-->
-                <div class="content">
-                    <div id="deviceInfo-chart" class="demo-placeholder" style="height: 100px"></div>
+                <div class="content" style="height: 100%">
+                	<div class="alltitle" id="device-title">无设备</div>
+                    <div id="deviceInfo-chart" class="demo-placeholder" style="height: 125px;width: 100%"></div>
                 </div>
             </div>
-            <div class="boxall" style="height: 3.15rem">
-                <!--<div class="alltitle">统计数据</div>-->
-                <div class="content">
-                    <div class="demo-placeholder" style="height: 150px">
-                        <table style="text-align: center">
-                            <thead>
+            <div class="boxall" style="height: 3.65rem">
+                <div class="alltitle">押解信息</div>
+                <div class="demo-placeholder" id="rollingTaskDiv" style="overflow: auto;height:90%">
+                    <table id="task-table" style="text-align: center; border-collapse: separate;width:99%;max-height:98%;">
+                        <thead>
                             <tr>
-                                <th style="text-align: center"><p>ID</p></th>
-                                <th style="text-align: center"><p>任务</p></th>
+                                <th>任务号</th>
+                                <th>车牌号</th>
+                                <th>犯人数</th>
+                                <th>警员数</th>
+                                <th>级别</th>
                             </tr>
-                            </thead>
-                            <tbody>
+                        </thead>
+                        <tbody>
                             <tr>
-                                <th>1</th>
-                                <th>risk prediction</th>
-
+                                <td>暂无</td>
                             </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </li>
         <li>
-            <div class="map" style="height:6.4rem">
+            <div class="map" style="height:7.3rem">
                 <div class="card" style="height:100%; width: 100%;">
-
                     <div class="content" style="height:100%; width: 100%;">
                         <div id="map-chart" class="demo-placeholder" style="height: 100%"></div>
-                        <div id='location' class="inner-placeholder" style="right:60px;background: url(../static/img/location.png)"></div>
-
+                        <div id='location' class="inner-placeholder" style="right: 60px;background: url(../static/img/location.png)"></div>
                         <div id='mapFullScreen' class="inner-placeholder" style="background: url(../static/img/fullScreen.png)"></div>
+                        <div class="legend" style="background-color: #ffffff; border: 1px solid #000000;">
+                            <b style="color:blue">红色地标表示人群密集区域</b><br>
+                            <b style="color:blue">深蓝色地标表示交通枢纽</b><br>
+                            <img src="../static/img/car.png" style="width: 15%;"/>
+                            <b style="color:blue">押解车</b><br>
+                            <img src="../static/img/red_car.png" style="width: 15%;"/>
+                            <b style="color:blue">高风险犯人所在车辆</b><br>
+                            <img src="../static/img/yellow_car.png" style="width: 15%;"/>
+                            <b style="color:blue">当前犯人所在车辆</b>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="boxall" style="margin-top:14px;height: 3.15rem">
-                <div class="alltitle">风险指数以及犯人数据</div>
+            <div class="boxall" style="margin-top:14px;height: 3.65rem">
+                <div class="alltitle">犯人风险指数</div>
                 <div class="card" style="height:100%; width: 100%;">
-                    <div id="realtime-chart" class="demo-placeholder"></div>
-                    <div class="inner-placeholder" style="width:100px;height:116px;background:url(../static/img/peo.png);margin-right: 15px;margin-top: -10px">
-
-                    </div>
-                    <div class="inner-placeholder" style="margin-top: 110px;margin-right: 15px;width: 100px;height:50px">
-                        <nav class="nav nav5">
-                            <ul>
-                                <li>
-                                    <a href="#">张三</a>
-                                    <ul id="selectPrisoner">
-                                    </ul>
-                                </li>
-                            </ul>
-                        </nav>
+                    <div id="realtime-chart" class="demo-placeholder" style="height: 100%"></div>
+                    <div class="inner-placeholder" style="width:20%;height: 100%;text-align: center;">
+                        <img id="prisoner-avatar" src="../static/img/peo.png" onclick="showPrisonerInfo()" title="点击查看犯人详情" style="cursor:pointer;text-align: center;vertical-align: middle;max-width:100%;max-height:50%;"/>
+                        <a href="#" id="prisoner" title="点击选择犯人" style="text-align: center;display: inline-block;width: 100%;">选择</a>
+                        <a href="#" id="prisoner_risk" style="padding-left:10%;text-align: left;display: inline-block;width: 100%;">风险：0</a>
+                        <a href="#" id="prisoner_heartbeat" style="padding-left:10%;text-align: left;display: inline-block;width: 100%;">心率：0</a>
                     </div>
                 </div>
             </div>
         </li>
         <li>
-            <div class="boxall" style="height:3.15rem">
+            <div class="boxall" style="height:3.65rem">
+            	<div class="alltitle" id="video1_title">车内监控</div>
 <!--                <nav class="nav nav5" style="margin-left: 30%;margin-right: 30%; height: .5rem;">-->
 <!--                    <ul>-->
 <!--                        <li>-->
@@ -208,10 +188,11 @@
 <!--                        </li>-->
 <!--                    </ul>-->
 <!--                </nav>-->
-                <video id="video1" src="http://ivi.bupt.edu.cn/hls/cctv14.m3u8" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 5px">
+                <video id="video1" title="车内监控" src="" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 1%;text-align: center;">
                 </video>
             </div>
-            <div class="boxall" style="height: 3.15rem">
+            <div class="boxall" style="height: 3.65rem">
+            	<div class="alltitle">周围环境</div>
 <!--                <nav class="nav nav5" style="margin-left: 30%;margin-right: 30%; height: .5rem;">-->
 <!--                    <ul>-->
 <!--                        <li>-->
@@ -223,29 +204,342 @@
 <!--                        </li>-->
 <!--                    </ul>-->
 <!--                </nav>-->
-                <video id="video2" src="http://ivi.bupt.edu.cn/hls/cctv6.m3u8" width=100%;  controls playsInline webkit-playsinline [autoplay] style="padding-top: 5px">
+                <video id="video2" title="周围环境" src="" width=100%;  controls playsInline webkit-playsinline [autoplay] style="padding-top: 1%;text-align: center;">
                 </video>
             </div>
-            <div class="boxall" style="height: 3.15rem">
-<!--                <nav class="nav nav5" style="margin-left: 30%;margin-right: 30%; height: .5rem;">-->
-<!--                    <ul>-->
-<!--                        <li>-->
-<!--                            <a href="#">C车摄像头1号</a>-->
-<!--                            <ul>-->
-<!--                                <li><a id="C车摄像头2号" onclick="changeCamera(this)">C车摄像头2号</a></li>-->
-<!--                            </ul>-->
-<!--                        </li>-->
-<!--                    </ul>-->
-<!--                </nav>-->
-                <video id="video3" src="../static/img/16.mp4" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 5px">
-                </video>
+            <div class="boxall" style="height: 3.65rem">
+                <div class="alltitle">异常事件列表</div>
+                <div class="demo-placeholder" id="rollingAlertDiv" style="overflow: auto;height:90%">
+                    <table id="alert-table" style="text-align: center; border-collapse: separate;width:99%;max-height:98%;">
+                        <thead>
+                            <tr>
+                            	<th>时间</th>
+                                <th>犯人</th>
+                                <th>车辆</th>
+                                <th>状态</th>
+                                <th>级别</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>暂无</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </li>
     </ul>
 </div>
 <div class="back"></div>
-
-
+<!-- Modal -->
+<div class="modal fade" id="showInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p id="info_modal">网络异常</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="showNewAlertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p style="color: red;">发生新的异常，请尽快处理</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="choosePrisonerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <input id="filter-prisoner" type="text" placeholder="搜索" style="color:#ffffff;width: 90%;display:block;margin-left:auto;margin-right:auto;"></input>
+                <table id="prisoner-table" style="margin: auto; border-collapse: separate; border-spacing:8px 5px">
+                    <tbody>
+                        <tr><td>暂无</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="taskInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <ul class="profile">
+		            <li>
+		                <ul class="profile-text">
+		                    <li><b>任务号</b></li>
+		                    <li id="task-id">YJ1235</li>
+		                </ul>
+		            </li>
+		            <li>
+		                <ul class="profile-text">
+		                    <li><b>押解车</b></li>
+		                    <li id="task-cars">京A1234、京A1234、京A1234、京A1234</li>
+		                </ul>
+		            </li>
+		            <li>
+		                <ul class="profile-text">
+		                    <li><b>犯人</b></li>
+		                    <li id="task-prisoners">张某某、李某某、王某某、赵某某、陈某某</li>
+		                </ul>
+		            </li>
+		            <li>
+		                <ul class="profile-text">
+		                    <li><b>警员</b></li>
+		                    <li id="task-polices">张警官、李警官、王警官、刘警官</li>
+		                </ul>
+		            </li>
+		            <li>
+		                <ul class="profile-text">
+		                    <li><b>级别</b></li>
+		                    <li id="task-level">一级</li>
+		                </ul>
+		            </li>
+		            <li>
+		                <ul class="profile-text">
+		                    <li><b>详情</b></li>
+		                    <li id="task-detail">押解犯人从A监狱到B监狱</li>
+		                </ul>
+		            </li>
+		        </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="carInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <video id="video3" src="../static/img/indoor.mp4" width=100%; controls playsInline webkit-playsinline [autoplay] style="padding-top: 1%;width: 100%;">
+                </video>
+            	<div class="left">
+			        <img id="car-photo" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4190027971,3083551657&fm=26&gp=0.jpg" style="width:100%;height:auto;" alt=""/>
+			    </div>
+			    <div class="right">
+	                <ul class="profile">
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>任务号</b></li>
+			                    <li id="car-task">YJ1235</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>车牌号</b></li>
+			                    <li id="car-id">京A1234</li>
+			                </ul>
+			            </li>
+                        <li>
+                            <ul class="profile-text">
+                                <li><b>车型</b></li>
+                                <li id="car-type">单厢车</li>
+                            </ul>
+                        </li>
+<!-- 			            <li>
+			                <ul class="profile-text">
+			                    <li><b>品牌</b></li>
+			                    <li id="car-brand">一汽大众</li>
+			                </ul>
+			            </li> -->
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>颜色</b></li>
+			                    <li id="car-color">黑色</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>犯人</b></li>
+			                    <li id="car-prisoners">张某某、李某某、王某某、赵某某、陈某某</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>警员</b></li>
+			                    <li id="car-polices">张警官、李警官、王警官、刘警官</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>级别</b></li>
+			                    <li id="car-level">一级</li>
+			                </ul>
+			            </li>
+			        </ul>
+		    	</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="alertInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width:450px">
+            <div class="modal-body">
+                <ul class="profile" style="margin-left:4%">
+                    <!-- <li>
+                        <ul class="profile-text">
+                            <li><b>任务号</b></li>
+                            <li id="alert-task">YJ1235</li>
+                        </ul>
+                    </li> -->
+		            <li>
+                        <ul class="profile-text">
+                            <li><b>时间</b></li>
+                            <li id="alert-time">2019年10月19日13点25分</li>
+                        </ul>
+                    </li>
+                    <!-- <li>
+                        <ul class="profile-text">
+                            <li><b>地点</b></li>
+                            <li id="alert-location">女子监狱</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="profile-text">
+                            <li><b>经纬度</b></li>
+                            <li id="alert-location">(116.2312, 39.2132)</li>
+                        </ul>
+                    </li> -->
+		            <li>
+		                <ul class="profile-text">
+		                    <li><b>事件描述</b></li>
+                            <li>
+                                <input id="alert-detail" type="text" value="手持机状态异常" style="margin:0;font-size:1em;padding: 3px;width: 240px;"></input>
+                                <a id="alert-save" href="#" class="bubbly-button" style="margin-left: 10px">保存</a>
+                            </li>
+		                </ul>
+		            </li>
+		            <li>
+		                <ul class="profile-text">
+		                    <li><b>风险值</b></li>
+		                    <li id="alert-level">一般</li>
+		                </ul>
+		            </li>
+		            <li>
+		                <ul class="profile-text">
+		                    <li><b>处理状态</b></li>
+		                    <li>
+                                <b id="alert-state">未处理</b>
+                                <a id="alert-deal" class="bubbly-button" href="#">设为已处理</a>
+                                <a id="alert-error" class="bubbly-button" href="#">设为误报</a>
+                            </li>
+		                </ul>
+		            </li>
+		            <li>
+                        <ul class="profile-text">
+                            <li><b>涉及车辆</b></li>
+                            <li id="alert-car">京A1234</li>
+                        </ul>
+                    </li>
+		            <li>
+		                <ul class="profile-text">
+		                    <li><b>涉及犯人</b></li>
+		                    <li id="alert-prisoners">张三</li>
+		                </ul>
+		            </li>
+		            <!-- <li>
+		                <ul class="profile-text">
+		                    <li><b>涉及警察</b></li>
+		                    <li id="alert-polices">张卫国</li>
+		                </ul>
+		            </li> -->
+		        </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="prisonerInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+            	<div class="left">
+			        <img id="prisoner-photo" src="http://img2.imgtn.bdimg.com/it/u=1973309565,2827282113&fm=26&gp=0.jpg" style="width:100%;height:auto;" alt=""/>
+			    </div>
+			    <div class="right">
+	                <ul class="profile">
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>犯人</b></li>
+			                    <li id="prisoner-name">张某某</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>年龄</b></li>
+			                    <li id="prisoner-age">23</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>性别</b></li>
+			                    <li id="prisoner-sex">男</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>学历</b></li>
+			                    <li id="prisoner-education">高中</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>身高</b></li>
+			                    <li id="prisoner-height">178cm</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>体重</b></li>
+			                    <li id="prisoner-weight">74kg</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>体脂率</b></li>
+			                    <li id="prisoner-bodyfat">15.2%</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>罪行</b></li>
+			                    <li id="prisoner-crime">使用炸药袭击五角大楼</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>前科</b></li>
+			                    <li id="prisoner-record">使用炸药袭击白宫，窃取FBI机密情报，组织针对好莱坞的恐怖袭击</li>
+			                </ul>
+			            </li>
+			            <li>
+			                <ul class="profile-text">
+			                    <li><b>备注</b></li>
+			                    <li id="prisoner-remark">擅长炸药制作</li>
+			                </ul>
+			            </li>
+                        <li>
+                            <ul class="profile-text">
+                                <li style="width:30%"><b>所在车辆</b></li>
+                                <li id="prisoner-car">京PFT838</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="profile-text">
+                                <li style="width:30%"><b>负责警官</b></li>
+                                <li id="prisoner-police">张卫国</li>
+                            </ul>
+                        </li>
+			        </ul>
+			    </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!--   Core JS Files   -->
 <script src="../static/js/jquery-3.1.1.min.js" type="text/javascript"></script>
@@ -261,10 +555,31 @@
 <script src="../static/js/cookie.js"></script>
 <!--<script src="../static/js/bootstrap-submenu.js"></script>-->
 <script src="../static/js/ezuikit.js"></script>
-<script src="../static/js/flot-charts.js"></script>
 <script type="text/javascript" src="../static/js/echarts.js"></script>
 <script src="../static/js/device.js"></script>
+<script src="../static/js/constants.js"></script>
+<!-- <script type="text/javascript" src="../static/js/input.js"></script> 加了这个会出现底部滚动条，有bug -->
+<!-- <script type="text/javascript" src="../static/js/rolling.js"></script> -->
+<script type="text/javascript" src="../static/js/route.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script>
+    var t = null;
+    t = setTimeout(time,1000);//開始运行
+    function time()
+    {
+        clearTimeout(t);//清除定时器
+        dt = new Date();
+        var y=dt.getFullYear();
+        var mt=dt.getMonth()+1;
+        var day=dt.getDate();
+        var h=dt.getHours();//获取时
+        var m=dt.getMinutes();//获取分
+        var s=dt.getSeconds();//获取秒
 
+        document.getElementById("showTime").innerHTML = " " + timeFormat(y) + "-" + timeFormat(mt) + "-" + timeFormat(day) + " " + timeFormat(h) + ":" + timeFormat(m) + ":" + timeFormat(s) + "";
+        t = setTimeout(time,1000); //设定定时器，循环运行
+    }
+</script>
 <script type="text/javascript">
     // 监控
     // var video1=new EZUIPlayer({
@@ -278,16 +593,54 @@
     //     // handleError: handleError,
     // });
     $(document).ready(function () {
-        var video1 = new EZUIKit.EZUIPlayer('video1');
-        video1.play();
-        var video2 = new EZUIKit.EZUIPlayer('video2');
-        video2.play();
-        var video3 = new EZUIKit.EZUIPlayer('video3');
-        video3.play();
-    })
+        // var video1 = new EZUIKit.EZUIPlayer('video1');
+        // video1.play();
+        // var video2 = new EZUIKit.EZUIPlayer('video2');
+        // video2.play();
 
+        //使得新模态框放在最前面
+        $(document).on('show.bs.modal', '.modal', function() {
+            var zIndex = 1040 + (10 * $('.modal:visible').length);
+            $(this).css('z-index', zIndex);
+            setTimeout(function() {
+                $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+            }, 0);
+        });
+    });
+    //获取右上角的网络时延
+    var getNetworkDelayTimer = setInterval(function () {
+		$.ajax({
+	        url:'http://' + server_ip_port_dvc + '/networkCondition',
+	        type:'GET',
+	        dataType:'json',
+	        async:true,
+	        success:function (msg) {
+	        	$('#delay').html(msg.delay + "ms")
+	        },
+	        error: function () {
+	        	$('#delay').html("网络异常")
+	        }
+	    });
+	}, 2000)
+
+    //一次只能显示一个提示框
+    var show_info_modal = true
+    function showInfoModal(info, time) {
+    	if(!show_info_modal) {
+    		return
+    	}
+    	show_info_modal = false
+        $('#info_modal').html(info)
+        $('#showInfoModal').modal('show')
+        setTimeout(function(){
+            $("#showInfoModal").modal("hide")
+        },time);
+    }
+    $('#showInfoModal').on('hide.bs.modal', function () {
+	 	show_info_modal = true
+	});
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     // $(function () {
     $(".datetimePicker").datetimepicker({
         language:'zh-CN',
@@ -298,44 +651,34 @@
         minView:2,
         initialDate:new Date()
     });//当在日期表中选择完时间后日期表就会自动关闭
-    //初始化
 
-    window.addEventListener("resize", function () {
-
-        // mobileDeviceChart.resize();
-        realtimeChart.resize();
-
-    });
     //changeCamera
     function changeCamera(obj) {
         console.log(obj.id);
         $('#myDropdown1').html(obj.id);
     }
 
-
-</script>
+</script> -->
 <script type="text/javascript">
     //全屏浏览
     $(document).ready(function () {
-        var deviceFullScreen = document.getElementById("deviceFullScreen");
-        deviceFullScreen.onclick = function () {
-            // mobileDevice-chart
-            // var mobileDevice=document.getElementById('mobileDevice-chart');
-            var deviceInfo=document.getElementById('deviceInfo-chart');
-            // mobileDevice.style.height='70vh';
-            deviceInfo.style.height='30vh';
-            var deviceScreen = document.getElementById('device');
-            requestFullScreen(deviceScreen)
-        };
+        // var deviceFullScreen = document.getElementById("deviceFullScreen");
+        // deviceFullScreen.onclick = function () {
+        //     // mobileDevice-chart
+        //     // var mobileDevice=document.getElementById('mobileDevice-chart');
+        //     var deviceInfo=document.getElementById('deviceInfo-chart');
+        //     // mobileDevice.style.height='70vh';
+        //     deviceInfo.style.height='30vh';
+        //     var deviceScreen = document.getElementById('device');
+        //     requestFullScreen(deviceScreen)
+        // };
         var mapFullScreen = document.getElementById("mapFullScreen");
         mapFullScreen.onclick = function () {
             var deviceScreen = document.getElementById('map-chart');
+            console.log('fullScreen')
             requestFullScreen(deviceScreen);
-
         };
-
-
-
+        
         var requestFullScreen = function (element) {
             var requestMethod = element.requestFullScreen
                 || element.webkitRequestFullScreen //谷歌
@@ -352,276 +695,285 @@
             }
         };
 
-
-
     })
 </script>
 
 <script type="text/javascript">
-    // window.init = function(){
-    $(document).ready(function () {
-        var marker,lineArr = [[116.478935,39.997761],[116.478939,39.997825],[116.478912,39.998549],[116.478912,39.998549],[116.478998,39.998555],[116.478998,39.998555],[116.479282,39.99856],[116.479658,39.998528],[116.480151,39.998453],[116.480784,39.998302],[116.480784,39.998302],[116.481149,39.998184],[116.481573,39.997997],[116.481863,39.997846],[116.482072,39.997718],[116.482362,39.997718],[116.483633,39.998935],[116.48367,39.998968],[116.484648,39.999861]];
+	// window.init = function(){
+    var markers = []
+    var map
+    var nearby_location = new Map()
+    var location_types = new Set()
 
-        var map = new AMap.Map('map-chart', {
+	// 高德地图查询周边
+	function aMapSearchNearBy(centerPoint, city) {
+	    AMap.service(["AMap.PlaceSearch"], function() {
+	        var placeSearch = new AMap.PlaceSearch({
+	            type: '汽车服务|汽车销售|汽车维修|摩托车服务|餐饮服务|购物服务|生活服务|体育休闲服务|医疗保健服务|住宿服务|风景名胜|商务住宅|政府机构及社会团体|科教文化服务|交通设施服务|金融保险服务|公司企业|道路附属设施|地名地址信息|公共设施',
+	            //city: city       // 指定城市名(如果你获取不到城市名称，这个参数也可以不传，注释掉)
+	        });
+
+	        // 第一个参数是关键字，这里传入的空表示不需要根据关键字过滤
+	        // 第二个参数是经纬度，数组类型
+	        // 第三个参数是半径，周边的范围
+	        // 第四个参数为回调函数
+	        placeSearch.searchNearBy('', centerPoint, 1000, function(status, result) {
+	            if(result.info === 'OK') {
+	                var locationList = result.poiList.pois; 
+	                // 周边地标建筑列表
+	                // // 将 icon 传入 marker
+	                locationList.forEach(location => {
+	                	var key = "lng:" + location.location.lng + ",lat:" + location.location.lat
+	                	var img_src = markLocation(location.type)
+	                	if(location.distance < nearby_distance && !nearby_location.has(key) && img_src != '') {
+	                		var phIcon = new AMap.Icon({
+					            // 图标尺寸
+					            size: new AMap.Size(25, 30),
+					            // 图标的取图地址
+					            image: img_src,
+					            // 图标所用图片大小
+					            imageSize: new AMap.Size(25, 30),
+					            // 图标取图偏移量
+					            imageOffset: new AMap.Pixel(0, 0)
+					        });
+		                	var startMarker = new AMap.Marker({
+					            position: new AMap.LngLat(location.location.lng,location.location.lat),
+					            icon: phIcon,
+					            offset: new AMap.Pixel(-13, -30),
+					            zIndex: 90,
+					        });
+					        map.add(startMarker);
+					        nearby_location.set(key, startMarker);
+	                	}
+	                })
+	            } else {
+	                 console.log('获取位置信息失败!');
+	            }
+	        });
+	   });
+	    //检查所有的nearby_location如果真实距离大于nearby_distance则移除
+	    for(let key of nearby_location.keys()) {
+	    	var lng = new RegExp('lng:(.*),lat' , "g").exec(key)[1]
+	    	var lat = new RegExp('lat:(.*)' , "g").exec(key)[1]
+	    	var distance = AMap.GeometryUtil.distance([lng, lat],centerPoint)
+	    	if(distance >= nearby_distance) {
+	    		map.remove(nearby_location.get(key));
+	            nearby_location.delete(key);
+	    	}
+	    }
+	}
+
+    $(document).ready(function () {
+        map = new AMap.Map('map-chart', {
                 resizeEnable:true,
                 center: [116.397428, 39.90923],
                 zoom: 17,
-                mapStyle:"amap://styles/darkblue"
+                mapStyle:"amap://styles/normal"
             }
         );
-        // var polyline = new AMap.Polyline({
-        //     map: map,
-        //     path: lineArr,
-        //     showDir:true,
-        //     strokeColor: "#364150",  //线颜色
-        //     // strokeOpacity: 1,     //线透明度
-        //     strokeWeight: 6,      //线宽
-        //     // strokeStyle: "solid"  //线样式
-        // });
+        //设置地图中心
+        var timer_frequency = 0;
+        var mapCenterTimer=setInterval(function () {
+            if(markers.length > 0) {
+                map.setCenter(markers[0].getPosition());
+                if(timer_frequency % 5 === 0) {
+                	aMapSearchNearBy(markers[0].getPosition(), '')
+                }
+                timer_frequency++;
+            }
+        },200);
 
-
-        //动态轨迹
-        marker = new AMap.Marker({
-            map: map,
-            position: [116.478935,39.997761],
-            icon: "https://webapi.amap.com/images/car.png",
-            offset: new AMap.Pixel(-26, -13),
-            autoRotation: true,
-            angle:-90,
-        });
-        var passedPolyline = new AMap.Polyline({
-            map: map,
-            // path: lineArr,
-            strokeColor: "#47dbd4",  //线颜色
-            // strokeOpacity: 1,     //线透明度
-            strokeWeight: 6,      //线宽
-            // strokeStyle: "solid"  //线样式
-        });
-
-
-        marker.on('moving', function (e) {
-            passedPolyline.setPath(e.passedPath);
-        });
-        marker.moveAlong(lineArr, 200);
-        var inter=setInterval(function () {
-            map.setCenter(marker.getPosition());
-        },500);
-        marker.on('click', function (e) {
-            switchVideo('video1', 'http://ivi.bupt.edu.cn/hls/cctv1.m3u8');
-        });
-        function switchVideo(videoId, url) {
-            var video = new EZUIKit.EZUIPlayer(videoId);
-            video.stop();
-            var video_dom = document.getElementById(videoId)
-            var parent = video_dom.parentElement;
-            parent.removeChild(video_dom);
-            video_dom.setAttribute('src', url);
-            parent.appendChild(video_dom);
-            video = new EZUIKit.EZUIPlayer(videoId);
-            video.play();
-        }
         //给location添加点击事件 点击之后停止计时，地图可平移；再次点击，回到车辆所在位置
         var location=document.getElementById("location");
         var flag=false;
         location.onclick = function () {
             if(flag==false){  //地图可平移
-                clearInterval(inter);
+                clearInterval(mapCenterTimer);
                 map.setStatus(true);
                 flag=true;
                 location.setAttribute('style','right:60px;background:url("../static/img/re_location.png")')
-                // console.log(flag);
             }else { //回到车辆位置
-                map.setCenter(marker.getPosition());
-                inter=setInterval(function () {
-                    map.setCenter(marker.getPosition());
+                mapCenterTimer=setInterval(function () {
+                    if(markers.length > 0) {
+		                map.setCenter(markers[0].getPosition());
+		            }
                 },500);
                 flag=false;
                 location.setAttribute('style','right:60px;background:url("../static/img/location.png")')
-
-                // console.log(flag);
-
             }
-
         };
-
-
-
-
 
         map.setFitView();
 
         // 创建一个 Icon
-        var startIcon = new AMap.Icon({
-            // 图标尺寸
-            size: new AMap.Size(25, 34),
-            // 图标的取图地址
-            image: '//a.amap.com/jsapi_demos/static/demo-center/icons/dir-marker.png',
-            // 图标所用图片大小
-            imageSize: new AMap.Size(135, 40),
-            // 图标取图偏移量
-            imageOffset: new AMap.Pixel(-9, -3)
-        });
+        // var startIcon = new AMap.Icon({
+        //     // 图标尺寸
+        //     size: new AMap.Size(25, 34),
+        //     // 图标的取图地址
+        //     image: '//a.amap.com/jsapi_demos/static/demo-center/icons/dir-marker.png',
+        //     // 图标所用图片大小
+        //     imageSize: new AMap.Size(135, 40),
+        //     // 图标取图偏移量
+        //     imageOffset: new AMap.Pixel(-9, -3)
+        // });
 
-        // 将 icon 传入 marker
-        var startMarker = new AMap.Marker({
-            position: new AMap.LngLat(116.478935,39.997761),
-            icon: startIcon,
-            offset: new AMap.Pixel(-13, -30)
-        });
-        map.add(startMarker);
-        //添加一个计算机设备图标
-        var pcIcon = new AMap.Icon({
-            // 图标尺寸
-            size: new AMap.Size(35, 41),
-            // 图标的取图地址
-            image: '../static/img/pc.png',
-            // 图标所用图片大小
-            imageSize: new AMap.Size(35, 41),
-            // 图标取图偏移量
-            imageOffset: new AMap.Pixel(0, 0)
-        });
+        // // 将 icon 传入 marker
+        // var startMarker = new AMap.Marker({
+        //     position: new AMap.LngLat(116.478935,39.997761),
+        //     icon: startIcon,
+        //     offset: new AMap.Pixel(-13, -30)
+        // });
+        // map.add(startMarker);
+        // //添加一个计算机设备图标
+        // var pcIcon = new AMap.Icon({
+        //     // 图标尺寸
+        //     size: new AMap.Size(35, 41),
+        //     // 图标的取图地址
+        //     image: '../static/img/pc.png',
+        //     // 图标所用图片大小
+        //     imageSize: new AMap.Size(35, 41),
+        //     // 图标取图偏移量
+        //     imageOffset: new AMap.Pixel(0, 0)
+        // });
 
-        // 将 icon 传入 marker
-        var pcMarker1 = new AMap.Marker({
-            position: new AMap.LngLat(116.485699,39.999761),
-            icon: pcIcon,
-            offset: new AMap.Pixel(-13, -30)
-        });
-        var pcMarker2 = new AMap.Marker({
-            position: new AMap.LngLat(116.485769,39.998861),
-            icon: pcIcon,
-            offset: new AMap.Pixel(-13, -30)
-        });
-        map.add(pcMarker1);
-        map.add(pcMarker2);
-        // 添加一个手机设备图标
-        var phIcon = new AMap.Icon({
-            // 图标尺寸
-            size: new AMap.Size(35, 43),
-            // 图标的取图地址
-            image: '../static/img/ph.png',
-            // 图标所用图片大小
-            imageSize: new AMap.Size(35, 43),
-            // 图标取图偏移量
-            imageOffset: new AMap.Pixel(0, 0)
-        });
+        // // 将 icon 传入 marker
+        // var pcMarker1 = new AMap.Marker({
+        //     position: new AMap.LngLat(116.485699,39.999761),
+        //     icon: pcIcon,
+        //     offset: new AMap.Pixel(-13, -30)
+        // });
+        // var pcMarker2 = new AMap.Marker({
+        //     position: new AMap.LngLat(116.485769,39.998861),
+        //     icon: pcIcon,
+        //     offset: new AMap.Pixel(-13, -30)
+        // });
+        // map.add(pcMarker1);
+        // map.add(pcMarker2);
+        // // 添加一个手持机设备图标
+        // var phIcon = new AMap.Icon({
+        //     // 图标尺寸
+        //     size: new AMap.Size(35, 43),
+        //     // 图标的取图地址
+        //     image: '../static/img/ph.png',
+        //     // 图标所用图片大小
+        //     imageSize: new AMap.Size(35, 43),
+        //     // 图标取图偏移量
+        //     imageOffset: new AMap.Pixel(0, 0)
+        // });
 
-        // 将 icon 传入 marker
-        var phMarker = new AMap.Marker({
-            position: new AMap.LngLat(116.480151,39.999453),
-            icon: phIcon,
-            offset: new AMap.Pixel(-13, -30)
-        });
-        var phMarker1 = new AMap.Marker({
-            position: new AMap.LngLat(116.483151,39.998453),
-            icon: phIcon,
-            offset: new AMap.Pixel(-13, -30)
-        });
-        map.add(phMarker1);
-        map.add(phMarker);
-        //添加平板设备图标
-        var paIcon = new AMap.Icon({
-            // 图标尺寸
-            size: new AMap.Size(35, 42),
-            // 图标的取图地址
-            image: '../static/img/pa.png',
-            // 图标所用图片大小
-            imageSize: new AMap.Size(35, 42),
-            // 图标取图偏移量
-            imageOffset: new AMap.Pixel(0, 0)
-        });
+        // // 将 icon 传入 marker
+        // var phMarker = new AMap.Marker({
+        //     position: new AMap.LngLat(116.480151,39.999453),
+        //     icon: phIcon,
+        //     offset: new AMap.Pixel(-13, -30)
+        // });
+        // var phMarker1 = new AMap.Marker({
+        //     position: new AMap.LngLat(116.483151,39.998453),
+        //     icon: phIcon,
+        //     offset: new AMap.Pixel(-13, -30)
+        // });
+        // map.add(phMarker1);
+        // map.add(phMarker);
+        // //添加平板设备图标
+        // var paIcon = new AMap.Icon({
+        //     // 图标尺寸
+        //     size: new AMap.Size(35, 42),
+        //     // 图标的取图地址
+        //     image: '../static/img/pa.png',
+        //     // 图标所用图片大小
+        //     imageSize: new AMap.Size(35, 42),
+        //     // 图标取图偏移量
+        //     imageOffset: new AMap.Pixel(0, 0)
+        // });
 
-        // 将 icon 传入 marker
-        var paMarker = new AMap.Marker({
-            position: new AMap.LngLat(116.478708,39.998555),
-            icon: paIcon,
-            offset: new AMap.Pixel(-13, -30)
-        });
-        map.add(paMarker);
-        //小型计算中心
-        var clIcon = new AMap.Icon({
-            // 图标尺寸
-            size: new AMap.Size(35, 42),
-            // 图标的取图地址
-            image: '../static/img/cl.png',
-            // 图标所用图片大小
-            imageSize: new AMap.Size(35, 42),
-            // 图标取图偏移量
-            imageOffset: new AMap.Pixel(0, 0)
-        });
+        // // 将 icon 传入 marker
+        // var paMarker = new AMap.Marker({
+        //     position: new AMap.LngLat(116.478708,39.998555),
+        //     icon: paIcon,
+        //     offset: new AMap.Pixel(-13, -30)
+        // });
+        // map.add(paMarker);
+        // //小型计算中心
+        // var clIcon = new AMap.Icon({
+        //     // 图标尺寸
+        //     size: new AMap.Size(35, 42),
+        //     // 图标的取图地址
+        //     image: '../static/img/cl.png',
+        //     // 图标所用图片大小
+        //     imageSize: new AMap.Size(35, 42),
+        //     // 图标取图偏移量
+        //     imageOffset: new AMap.Pixel(0, 0)
+        // });
 
-        // 将 icon 传入 marker
-        var clMarker = new AMap.Marker({
-            position: new AMap.LngLat(116.4845508,39.999555),
-            icon: clIcon,
-            offset: new AMap.Pixel(-13, -30)
-        });
-        map.add(clMarker);
-        //添加路由器
-        var lyIcon = new AMap.Icon({
-            // 图标尺寸
-            size: new AMap.Size(35, 42),
-            // 图标的取图地址
-            image: '../static/img/ly.png',
-            // 图标所用图片大小
-            imageSize: new AMap.Size(35, 42),
-            // 图标取图偏移量
-            imageOffset: new AMap.Pixel(0, 0)
-        });
+        // // 将 icon 传入 marker
+        // var clMarker = new AMap.Marker({
+        //     position: new AMap.LngLat(116.4845508,39.999555),
+        //     icon: clIcon,
+        //     offset: new AMap.Pixel(-13, -30)
+        // });
+        // map.add(clMarker);
+        // //添加路由器
+        // var lyIcon = new AMap.Icon({
+        //     // 图标尺寸
+        //     size: new AMap.Size(35, 42),
+        //     // 图标的取图地址
+        //     image: '../static/img/ly.png',
+        //     // 图标所用图片大小
+        //     imageSize: new AMap.Size(35, 42),
+        //     // 图标取图偏移量
+        //     imageOffset: new AMap.Pixel(0, 0)
+        // });
 
-        // 将 icon 传入 marker
-        var lyMarker1 = new AMap.Marker({
-            position: new AMap.LngLat(116.479708,39.998444),
-            icon: lyIcon,
-            offset: new AMap.Pixel(-13, -30)
-        });
-        var lyMarker2 = new AMap.Marker({
-            position: new AMap.LngLat(116.479998,39.9988444),
-            icon: lyIcon,
-            offset: new AMap.Pixel(-13, -30)
-        });
-        var lyMarker3 = new AMap.Marker({
-            position: new AMap.LngLat(116.4799998,39.997944),
-            icon: lyIcon,
-            offset: new AMap.Pixel(-13, -30)
-        });
-        var lyMarker4 = new AMap.Marker({
-            position: new AMap.LngLat(116.483509,39.997944),
-            icon: lyIcon,
-            offset: new AMap.Pixel(-13, -30)
-        });
-        var lyMarker5 = new AMap.Marker({
-            position: new AMap.LngLat(116.4823598,39.998944),
-            icon: lyIcon,
-            offset: new AMap.Pixel(-13, -30)
-        });
-        map.add(lyMarker5);
-        map.add(lyMarker4);
-        map.add(lyMarker1);
-        map.add(lyMarker2);
-        map.add(lyMarker3);
-        //基站
-        var jzIcon = new AMap.Icon({
-            // 图标尺寸
-            size: new AMap.Size(35, 42),
-            // 图标的取图地址
-            image: '../static/img/jz.png',
-            // 图标所用图片大小
-            imageSize: new AMap.Size(35, 42),
-            // 图标取图偏移量
-            imageOffset: new AMap.Pixel(0, 0)
-        });
+        // // 将 icon 传入 marker
+        // var lyMarker1 = new AMap.Marker({
+        //     position: new AMap.LngLat(116.479708,39.998444),
+        //     icon: lyIcon,
+        //     offset: new AMap.Pixel(-13, -30)
+        // });
+        // var lyMarker2 = new AMap.Marker({
+        //     position: new AMap.LngLat(116.479998,39.9988444),
+        //     icon: lyIcon,
+        //     offset: new AMap.Pixel(-13, -30)
+        // });
+        // var lyMarker3 = new AMap.Marker({
+        //     position: new AMap.LngLat(116.4799998,39.997944),
+        //     icon: lyIcon,
+        //     offset: new AMap.Pixel(-13, -30)
+        // });
+        // var lyMarker4 = new AMap.Marker({
+        //     position: new AMap.LngLat(116.483509,39.997944),
+        //     icon: lyIcon,
+        //     offset: new AMap.Pixel(-13, -30)
+        // });
+        // var lyMarker5 = new AMap.Marker({
+        //     position: new AMap.LngLat(116.4823598,39.998944),
+        //     icon: lyIcon,
+        //     offset: new AMap.Pixel(-13, -30)
+        // });
+        // map.add(lyMarker5);
+        // map.add(lyMarker4);
+        // map.add(lyMarker1);
+        // map.add(lyMarker2);
+        // map.add(lyMarker3);
+        // //基站
+        // var jzIcon = new AMap.Icon({
+        //     // 图标尺寸
+        //     size: new AMap.Size(35, 42),
+        //     // 图标的取图地址
+        //     image: '../static/img/jz.png',
+        //     // 图标所用图片大小
+        //     imageSize: new AMap.Size(35, 42),
+        //     // 图标取图偏移量
+        //     imageOffset: new AMap.Pixel(0, 0)
+        // });
 
-        // 将 icon 传入 marker
-        var jzMarker1 = new AMap.Marker({
-            position: new AMap.LngLat(116.482008,39.998000),
-            icon: jzIcon,
-            offset: new AMap.Pixel(-13, -30)
-        });
-        map.add(jzMarker1);
-
-
-
+        // // 将 icon 传入 marker
+        // var jzMarker1 = new AMap.Marker({
+        //     position: new AMap.LngLat(116.482008,39.998000),
+        //     icon: jzIcon,
+        //     offset: new AMap.Pixel(-13, -30)
+        // });
+        // map.add(jzMarker1);
 
 
         AMap.plugin(['AMap.ToolBar','AMap.Scale','AMap.Weather','AMap.OverView'],function(){//异步同时加载多个插件
@@ -634,99 +986,982 @@
             });
 
             map.addControl(overview);
-
-
-
-
         });
-
-        //犯人列表
-        // var getPrisoner=document.getElementById("selectPrisoner");
-        //
-        // $.ajax({
-        //     type:'GET',
-        //     url:'http://10.108.122.144:8089/prisoners/get_all',
-        //     data:{},
-        //     dataType:'json',
-        //     success:function (msg) {
-        //         allPrisoners = ""
-        //         $.each(msg,function (index,item){
-        //             allPrisoners += "<li><a>" + item.prisonerName + "</a></li>"
-        //         })
-        //         getPrisoner.innerHTML = allPrisoners
-        //     }
-        // })
     })
+</script>
 
-    // }
+<script type="text/javascript">
+	//关于犯人的信息获取
+    var prisoners = []
+    var selected_prisoner = {'id': ''}
+    //犯人列表每行4个
+    var row_num = 4
+    //设置犯人列表
+    function setPrisonersTable(data, filter) {
+        var table_string = "<tr>";
+        var count = 0;
+        var filter_data = []
+        data.forEach(prisoner => {
+            if(prisoner.prisonerName.indexOf(filter) > -1) {
+                filter_data.push(prisoner)
+            }
+        })
+        filter_data.forEach(prisoner => {
+            if(count % row_num == 0) {
+                table_string += "</tr><tr>"
+            }
+            var prisoner_photo = prisoner.prisonerPhotoUri
+            if(prisoner_photo == undefined || prisoner_photo == null) {
+                prisoner_photo = "../static/img/peo.png"
+            }
+            var risk_level = prisoner.risk_level
+            if(risk_level == undefined || risk_level == null) {
+                risk_level = "暂无"
+            } else {
+            	risk_level += "%"
+            }
+            var heart_rate = prisoner.heart_rate
+            if(heart_rate == undefined || heart_rate == null) {
+                heart_rate = "暂无"
+            }
+            table_string += '<td><div class="cardBox"><div style="vertical-align:middle;text-align: center;display: table-cell;border: 0px;width:20%;height: 120px;"><img src="' + prisoner_photo + '" style="text-align: center;vertical-align: middle;max-width:100%;max-height:80%;"/></div><a href="#">' + prisoner.prisonerName + '</a><br><a href="#">风险：' + risk_level + '</a><br><a href="#">心率：' + heart_rate + '</a></div></td>'
+            //table_string += '<th><a href="#">' + prisoner.id + "</a></th>"
+            count += 1
+        })
+        table_string += "</tr>"
+        $('#prisoner-table tbody').html(table_string)
+        $("#prisoner-table td").click(function(){
+            var thSeq = $(this).parent().find("td").index($(this)[0]);
+            var trSeq = $(this).parent().parent().find("tr").index($(this).parent()[0]) - 1;
+            selected_prisoner = filter_data[row_num * trSeq + thSeq];
+            setPrisonerNamePhoto()
+            if(selected_prisoner.record != undefined) {
+	        	showInfoModal('犯人' + selected_prisoner.prisonerName + '的手环断开连接！', 3000)
+	        }
+            
+            $('#choosePrisonerModal').modal('hide')
+        });
+    }
+
+    //根据犯人id获取下标
+    function getPrisonerById(prisonerId) {
+        for (var i = 0; i < prisoners.length; i++) {
+            if(prisoners[i].prisonerId === prisonerId) {
+                return i
+            }
+        }
+        return -1
+    }
+
+	var riskData = []	//所有历史风险指数
+    var riskDate = []
+	var filter_prisoner = ""
+
+	//设置当前犯人信息
+    function setPrisonerNamePhoto() {
+    	initRiskData()
+    	$('#prisoner').html(selected_prisoner.prisonerName);
+    	if(selected_prisoner.prisonerPhotoUri !== undefined && selected_prisoner.prisonerPhotoUri != null) {
+            document.getElementById('prisoner-avatar').src = selected_prisoner.prisonerPhotoUri
+        } else {
+            document.getElementById('prisoner-avatar').src = "../static/img/peo.png"
+        }
+        markers.forEach(marker => {
+        	if(marker.B.icon != "../static/img/red_car.png") {
+        		if(marker.B.title === selected_prisoner.carNo) {
+	        		marker.setIcon('../static/img/yellow_car.png')
+	        		marker.B.icon != "../static/img/car.png"
+	        	} else {
+	        		marker.setIcon('../static/img/car.png')
+	        		marker.B.icon != "../static/img/car.png"
+	        	}
+        	}
+        })
+    }
+    //设置犯人详细信息
+    function setPrisonerInfo(prisoner) {
+        $('#prisoner-name').html(prisoner.prisonerName)
+        $('#prisoner-age').html(prisoner.age)
+        $('#prisoner-sex').html(prisoner.gender)
+        $('#prisoner-education').html(prisoner.educationBackground)
+        $('#prisoner-height').html(prisoner.height)
+        $('#prisoner-weight').html(prisoner.weight)
+        $('#prisoner-bodyfat').html(prisoner.bodyFatRate)
+        $('#prisoner-crime').html(prisoner.crime)
+        $('#prisoner-record').html(prisoner.criminalRecord)
+        $('#prisoner-remark').html(prisoner.comment)
+        if(prisoner.prisonerPhotoUri != undefined && prisoner.prisonerPhotoUri != null) {
+            document.getElementById('prisoner-photo').src = prisoner.prisonerPhotoUri
+            document.getElementById('prisoner-avatar').src = prisoner.prisonerPhotoUri
+        } else {
+            document.getElementById('prisoner-photo').src = "../static/img/peo.png"
+        }
+    }
+    //展示犯人信息
+    function showPrisonerInfo(){
+    	if(selected_prisoner.prisonerId == undefined) {
+    		showInfoModal("请选择犯人", 2000)
+    		return
+    	}
+        // $('#prisoner').html(selected_prisoner.id);
+        $.ajax({
+	        url:'http://' + server_ip_port_usr + '/prisoners/get?prisonerId=' + selected_prisoner.prisonerId,
+	        type:'GET',
+	        dataType:'json',
+	        async:true,
+	        success:function (msg) {
+	        	setPrisonerInfo(msg)
+	        	$('#prisonerInfoModal').modal('show')
+	        },
+	        error: function () {
+	        	showInfoModal("获取犯人信息失败", 3000)
+	        }
+	    });
+    };
+
+    //犯人风险数据太少，先用随机数使得折线快速出来
+    function randomData() {
+       var now = new Date();
+       var value = Math.random() * 50;
+       return {
+           'value': [
+               [now.getHours(), now.getMinutes(), now.getSeconds()].join(':'),
+               Math.round(50),
+               Math.round(50)
+           ]
+       }
+   	}
+
+    var realtimeChart
+    var realtimeOption
+    var alerts = []
+    var selected_alert
+    var all_risk_data = []
+    //切换犯人时需要重新设置所有风险数据
+   	function initRiskData() {
+   		riskDate = []
+    	riskData = []
+	   	for (var i = 0; i < 1000; i++) {
+	       riskData.push(randomData());
+	       riskDate.push('')
+	   	}
+        all_risk_data.forEach(prisoner => {
+            if(prisoner.id === selected_prisoner.prisonerId) {
+                riskData.push(prisoner)
+                riskDate.push(prisoner.value[0]);
+            }
+        })
+        realtimeChart.setOption(realtimeOption, true);
+   	}
+
+   	var LoginTime = new Date();
+
+    $(document).ready(
+	   function () {
+	       // var device=device.deviceGetAll();
+           //realtimeChart 实时数据
+           realtimeChart = echarts.init(document.getElementById("realtime-chart"));
+
+           realtimeOption = {
+               // title: {
+               //     text: '动态数据 + 时间坐标轴'
+               // },
+               // legend: {
+               //     data:['心率','风险指数']
+               // },
+               grid:{
+                   x:'8%',
+                   y:'5%',
+                   x2:'30%',
+                   y2:'28%',
+               },
+               tooltip: {
+                   trigger: 'axis',
+                   formatter: function (params) {
+                       params = params[0];
+                       return params.value[0] + ' <br/>' + '风险指数：' + params.value[1] + '%' + '<br/>' + '心率：' + params.value[2];
+                   },
+                   axisPointer: {
+                       animation: false
+                   }
+               },
+               xAxis: {
+                   type: 'category',
+                   splitLine: {//控制网格的线条样式
+                       show:false,
+                   },
+                   axisLabel:{                 //设置数据的样式，这里设置的是白色
+                       textStyle:{
+                           color:'#fff'
+                       }
+                   },
+                   axisLine:{                 //设置X坐标的样式，这里设置的是白色
+                       lineStyle:{
+                           color:'#fff'
+                       }
+                   },
+                   data: riskDate
+               },
+               dataZoom: [{
+                   filterMode: 'empty',     //problem, 解决折线图重置时折现混乱的bug
+                   type: 'slider',
+                   show: true,
+                   xAxisIndex: [0],
+                   left: '7%',
+                   bottom: '10%',
+                   height:'5%',
+                   start: 99,
+                   end: 100 //初始化滚动条
+               }],
+               yAxis: {
+                   type: 'value',
+                   splitLine: {//控制网格的线条样式
+                       show:true,
+                   },
+                   axisLabel:{                 //设置数据的样式，这里设置的是白色
+                       textStyle:{
+                           color:'#fff'
+                       }
+                   },
+                   boundaryGap: [0, '100%'],
+                   min: 0,
+                   max: 100,
+               },
+               series: [{
+                   name: '实时数据',
+                   type: 'line',
+                   showSymbol: false,
+                   hoverAnimation: false,
+                   data: riskData,
+                   lineStyle: {
+                       color: 'rgba(132,193,255,0.8)'
+                   }
+               }
+               ]
+           };
+
+           var getRiskTimer = setInterval(function () {
+           		$.ajax({
+			        url:'http://' + server_ip_port_risk + '/prisonerData/getAll',
+			        type:'GET',
+			        dataType:'json',
+			        async:true,
+			        success:function (msg) {
+                        var now = new Date();
+                        msg.forEach(prisoner => {
+                        	if(prisoner.record === undefined) {
+                        		var temp_data = {'value': [[now.getHours(), now.getMinutes(), now.getSeconds()].join(':'),Math.round(prisoner.risk_level), prisoner.heart_rate], 'id': prisoner.prisonerId}
+	                            all_risk_data.push(temp_data)
+	                            
+	                            var prisoner_index = getPrisonerById(prisoner.prisonerId);
+	                            if(prisoner_index != -1) {
+	                                prisoners[prisoner_index].heart_rate = prisoner.heart_rate
+	                                prisoners[prisoner_index].risk_level = prisoner.risk_level
+	                                prisoners[prisoner_index].record = prisoner.record
+	                            }
+                        	}
+                            if(selected_prisoner.prisonerId != undefined && selected_prisoner.prisonerId != null && prisoner.prisonerId === selected_prisoner.prisonerId) {
+                                selected_prisoner.heart_rate = prisoner.heart_rate
+	                            selected_prisoner.risk_level = prisoner.risk_level
+	                            selected_prisoner.record = prisoner.record
+	                        }
+                        })
+                        setPrisonersTable(prisoners, filter_prisoner)
+                        if(selected_prisoner.record === undefined || selected_prisoner.record === null) {
+                        	var _data = {value: [[now.getHours(), now.getMinutes(), now.getSeconds()].join(':'),Math.round(selected_prisoner.risk_level), selected_prisoner.heart_rate]}
+			               	riskData.shift();
+			               	// data1.shift();
+			               	riskDate.shift();
+			               	riskData.push(_data);
+			               	// data1.push(_data*5);
+			               	riskDate.push(_data.value[0]);
+
+			               	realtimeChart.setOption({
+			                   xAxis: {
+			                       data: riskDate
+			                   },
+			                   series: [{
+			                       data: riskData
+			                   	}]
+	               			});
+                        }
+                        if(selected_prisoner.risk_level != undefined) {
+               				$('#prisoner_risk').html('风险：' + selected_prisoner.risk_level + '%')
+               			} else {
+               				$('#prisoner_risk').html('风险：暂无')
+               			}
+                        if(selected_prisoner.heart_rate != undefined && selected_prisoner.heart_rate.length < 3) {
+                            $('#prisoner_heartbeat').html('心率：' + selected_prisoner.heart_rate)
+                        } else {
+                            $('#prisoner_heartbeat').html('心率：暂无')
+                        }
+			        }
+			   	});
+           }, 5000);
+           //第二个参数是重新设置数据是否不合并
+           realtimeChart.setOption(realtimeOption, true);
+       })
+
 </script>
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#logout').click(function () {
-            var url =window.location.search;
-            var arrUrl=url.substr(1);
-            var userName=decodeURI(arrUrl.split('=')[1]);
-            var token=docCookies.getItem(userName).toString();
-
-            $.ajax({
-                url:'http://10.108.122.144:8089/users/logout' + "?token=" + token,
-                type:'DELETE',
-                dataType:'json',
-                data:{},
-
-                success:function (msg) {
-                    if(msg.code==200){
-                        alert("用户登出成功");
-                        window.location.href='login.html';
-                    }
+        $.ajax({
+            url:'http://' + server_ip_port_usr + '/prisoners/get_all',
+            type:'GET',
+            dataType:'json',
+            async:true,
+            success:function (msg) {
+                prisoners = []
+                msg.forEach(prisoner => {
+                    var current_prisoner = prisoner.prisoner
+                    current_prisoner.taskNo = prisoner.task.taskNo
+                    current_prisoner.carNo = prisoner.task.carNo
+                    current_prisoner.userName = prisoner.task.userName
+                    prisoners.push(current_prisoner)
+                })
+                setPrisonersTable(prisoners, '')
+                if(prisoners.length > 0){
+                    selected_prisoner = prisoners[0]
+                    setPrisonerNamePhoto()
                 }
-            })
-
-
+            },
+	        error: function () {
+	        	showInfoModal("获取犯人信息失败", 3000)
+	        }
+        });
+        $('#prisoner').click(function () {
+          //   $.ajax({
+		        // url:'http://' + server_ip_port_usr + '/prisoners/get_all',
+		        // type:'GET',
+		        // dataType:'json',
+		        // async:true,
+		        // success:function (msg) {
+          //           prisoners = []
+          //           msg.forEach(prisoner => {
+          //               var current_prisoner = prisoner.prisoner
+          //               current_prisoner.taskNo = prisoner.task.taskNo
+          //               current_prisoner.carNo = prisoner.task.carNo
+          //               current_prisoner.userName = prisoner.task.userName
+          //               prisoners.push(current_prisoner)
+          //           })
+		        	setPrisonersTable(prisoners, '')
+		        	$('#choosePrisonerModal').modal('show')
+		        // },
+		        // error: function () {
+		        // 	showInfoModal("获取失败", 3000)
+		        // }
+		    //});
         })
+        $("#filter-prisoner").bind("input propertychange",function(event){
+            filter_prisoner = $("#filter-prisoner").val()
+            setPrisonersTable(prisoners, filter_prisoner)
+        });
+        // $('#refresh-device-chart').click(function () {
+        //     getAllDevices()
+        // })
     })
 </script>
 
 <script type="text/javascript">
-    deviceALL=
-    $.ajax({
-        url:'http://10.108.122.144:8089/devices/get_all',
-        type:'GET',
-        dataType:'json',
-        async:false,
-        // data:{},
-        beforeSend: function() {
-            if(opts.init === 1) {
-                console.log('loading')
-                // $('.zh-loading').show();
+
+	var tasks = []
+	var selected_task
+
+	function setTasks(tasks) {
+		var tasks_string = ""
+		var task_title = []
+		tasks.forEach(task => {
+            var color = "#ffffff"
+            var level = "无"
+            if(task.level == '1') {
+                color = "#FF2D2D"
+                level = "一级"
+            } else if(task.level == '2') {
+                color = "#FFA042"
+                level = "二级"
+            } else if(task.level == '3') {
+                color = "#FFED97"
+                level = "三级"
+            } else if(task.level == '4') {
+                level = "四级"
             }
-            isLoaded = false;
-        },
-        success:function (msg) {
-            deviceAll=msg;
-            // console.log(deviceAll);
-        },
-        complete: function() {
-            if(opts.init === 1) {
-                // $('.zh-loading').hide();
-                console.log('loaded')
+			tasks_string += "<tr title='任务号，车牌号，犯人数，警员数，级别'><td><a href='#' title='点击查看任务详情'>" + task.taskNo + "</a></td><td><a href='#' title='点击查看警车详情'>" + task.carNo + "</a></td><td>" + task.prisonerSum  
+            + "</td><td>" + task.userSum + "</td><td style='color:" + color + "'>" + level + "</td></tr>"
+		})
+
+		var car_num = tasks.length
+        var current_car_num = 0;
+        var infoWindow
+        map.remove(markers);
+        
+        var setCarTimer = setInterval(function () {
+            if(current_car_num < car_num) {
+                var marker = new AMap.Marker({
+                    map: map,
+                    position: lineArr.data.path_list[0].path[0].segments[0].coor[0],
+                    //https://webapi.amap.com/images/car.png
+                    icon: "../static/img/car.png",
+                    offset: new AMap.Pixel(-26, -13),
+                    autoRotation: true,
+                    angle:-90,
+                    pointIndex: 1,
+                    pathIndex: 0,
+                    segmentIndex: 0,
+                    zIndex: 100,
+                    title:tasks[current_car_num].carNo,
+                    task: tasks[current_car_num],
+                    carIndex: current_car_num,
+                });
+                if(current_car_num === 0) {
+                	//在这里设置视频
+            		$('#video1').title = tasks[0].carNo
+	            	if(tasks[0].carVideoUri != undefined && tasks[0].carVideoUri != null) {
+	            		$('#video1_title').html(tasks[0].carNo + " 车内监控")
+		            	switchVideo('video1', tasks[0].carVideoUri);
+		        	} else {
+			        	$('#video1_title').html('请选择车辆')
+			        	switchVideo('video1', "");
+			        }
+			        switchVideo('video2', '../static/img/outdoor.mp4');
+
+			        //设置第一辆车的动态轨迹
+                	marker.on('moving', function (e) {
+                		//动态轨迹
+				        var passedPolyline = new AMap.Polyline({
+				            map: map,
+				            // path: lineArr.data,
+				            strokeColor: "#47dbd4",  //线颜色
+				            // strokeOpacity: 1,     //线透明度
+				            strokeWeight: 6,      //线宽
+				            // strokeStyle: "solid"  //线样式
+				        });
+	                	passedPolyline.setPath(e.passedPath)
+	                })
+                }
+                if(selected_prisoner.carNo != undefined && selected_prisoner.carNo != null&& tasks[current_car_num].carNo === selected_prisoner.carNo) {
+                    marker.setIcon('../static/img/yellow_car.png')
+                }
+                marker.on('moveend', function () {
+                	var last = lineArr.data.path_list[0].path[this.B.pathIndex].segments[this.B.segmentIndex].coor[this.B.pointIndex]
+                	getNextPoint(this.B)
+                	var target = lineArr.data.path_list[0].path[this.B.pathIndex].segments[this.B.segmentIndex].coor[this.B.pointIndex]
+                	while(last[0] == target[0] && last[1] == target[1]) {
+                		getNextPoint(this.B)
+                		last = target
+                		target = lineArr.data.path_list[0].path[this.B.pathIndex].segments[this.B.segmentIndex].coor[this.B.pointIndex]
+                	}
+                    var distance = this.B.pointIndex > 0 ? lineArr.data.path_list[0].path[this.B.pathIndex].segments[this.B.segmentIndex].distance[this.B.pointIndex-1] : 1;
+                    this.moveTo(target, carSpeed(distance))
+                    // if(this.B.carIndex == 0 && this.B.pointIndex <= 1 && markers.length == car_num) {
+                    // 	console.log("pauseMove")
+                    // 	markers.forEach(marker =>{
+                    // 		marker.pauseMove()
+                    // 	})
+                    // }
+                });
+                marker.on('click', function() {
+			        $.ajax({
+				        url:'http://' + server_ip_port_usr + '/task/getAboutCar?carNo=' + this.B.title,
+				        type:'GET',
+				        dataType:'json',
+				        async:true,
+				        success:function (msg) {
+				        	setCarInfo(msg)
+		        			$('#carInfoModal').modal('show')
+				        },
+				        error: function () {
+				        	showInfoModal("获取押解车信息失败", 3000)
+				        }
+				    });
+                });
+                marker.moveTo(lineArr.data.path_list[0].path[0].segments[0].coor[1], 500)
+                //marker.moveAlong(lineArr.data, 200);
+                markers.push(marker);
+                current_car_num++;
+                console.log(current_car_num)
+            } else {
+            	clearInterval(setCarTimer)
             }
-            isLoaded = true;
-        },
+        },4000);
+
+        // setInterval(function () {
+        // 	markers.forEach(marker => {
+        // 		marker.resumeMove()
+        // 	})
+        // }, 8000)
+
+		$('#task-table tbody').html(tasks_string)
+		$("#task-table td a").click(function(){
+	        var tdSeq = $(this).parent()[0].cellIndex;
+	        var trSeq = $(this).parent().parent()[0].rowIndex - 1;
+	        selected_task = tasks[trSeq];
+	        // $('#prisoner').html(selected_prisoner.id);
+	        if(tdSeq === 0) {
+	        	$.ajax({
+			        url:'http://' + server_ip_port_usr + '/task/getTask?taskNo=' + selected_task.taskNo,
+			        type:'GET',
+			        dataType:'json',
+			        async:true,
+			        success:function (msg) {
+			        	setTaskInfo(msg)
+			        	$('#taskInfoModal').modal('show')
+			        },
+			        error: function () {
+			        	showInfoModal("获取任务信息失败", 3000)
+			        }
+			    });
+	        } else {
+	        	$.ajax({
+			        url:'http://' + server_ip_port_usr + '/task/getAboutCar?carNo=' + selected_task.carNo,
+			        type:'GET',
+			        dataType:'json',
+			        async:true,
+			        success:function (msg) {
+			        	setCarInfo(msg)
+	        			$('#carInfoModal').modal('show')
+			        },
+			        error: function () {
+			        	showInfoModal("获取押解车信息失败", 3000)
+			        }
+			    });
+	        }
+	        // clearInterval(taskTableScollTimer);
+	        // canTaskScroll = false
+	    });	
+	}
+
+	function getNextPoint(next) {
+		if(next.pointIndex + 1 == lineArr.data.path_list[0].path[next.pathIndex].segments[next.segmentIndex].coor.length) {
+        	next.pointIndex = 0;
+        	if(next.segmentIndex + 1 == lineArr.data.path_list[0].path[next.pathIndex].segments.length) {
+            	next.segmentIndex = 0;
+            	if(next.pathIndex + 1 == lineArr.data.path_list[0].path.length) {
+                	next.pathIndex = 0;
+                	showInfoModal('抵达目的地', 2000)
+                } else {
+                	next.pathIndex++
+                }
+            } else {
+            	next.segmentIndex++
+            }
+        } else {
+        	next.pointIndex++
+        }
+	}
+	//setTasks(tasks.sort((a,b) => {return a.level - b.level}))
+
+    function switchVideo(videoId, url) {
+        var video = new EZUIKit.EZUIPlayer(videoId);
+        video.stop();
+        var video_dom = document.getElementById(videoId)
+        var parent = video_dom.parentElement;
+        parent.removeChild(video_dom);
+        video_dom.setAttribute('src', url);
+        parent.appendChild(video_dom);
+        video = new EZUIKit.EZUIPlayer(videoId);
+        video.play();
+    }
+
+    function getCarMarkerById(carNo) {
+        for (var i = 0; i < markers.length; i++) {
+            if(markers[i].B.title === carNo) {
+                return i
+            }
+        }
+        return -1
+    }
+
+    function getCarTaskById(carNo) {
+        for (var i = 0; i < tasks.length; i++) {
+            if(tasks[i].carNo === carNo) {
+                return i
+            }
+        }
+        return -1
+    }
+
+	var getAllCarInfoTimer = setInterval(function () {
+		$.ajax({
+	        url:'http://' + server_ip_port_usr + '/task/getAllTasks',
+	        type:'GET',
+	        dataType:'json',
+	        async:true,
+	        success:function (msg) {
+	        	if(!isEquals(msg, tasks)) {
+	        		tasks = msg.sort((a,b) => {return a.level - b.level});
+	            	setTasks(tasks)
+	        	}
+	        }
+	    });
+	}, 1000)
+
+    $('#taskInfoModal').on('hide.bs.modal', function () {
+	 	// taskTableScollTimer = setInterval(moveTaskScoll, 50);
+	 	// canTaskScroll = true
+	});
+	$('#carInfoModal').on('hide.bs.modal', function () {
+	 	// taskTableScollTimer = setInterval(moveTaskScoll, 50);
+	 	// canTaskScroll = true
+	 	switchVideo('video3', '')
+	});
+
+    function setTaskInfo(task) {
+        $('#task-id').html(task.taskNo)
+        $('#task-cars').html(task.carNo)
+        $('#task-prisoners').html(task.prisoner)
+        $('#task-polices').html(task.user)
+        var level = "无"
+        if(task.level == '1') {
+            level = "一级"
+        } else if(task.level == '2') {
+            level = "二级"
+        } else if(task.level == '3') {
+            level = "三级"
+        } else if(task.level == '4') {
+            level = "四级"
+        }
+        $('#task-level').html(level)
+        $('#task-detail').html(task.detail)
+    }
+
+    function setCarInfo(car) {
+        $('#car-task').html(car.taskNo)
+        $('#car-id').html(car.carNo)
+        $('#car-type').html(car.type)
+        // $('#car-brand').html(car.brand)
+        $('#car-color').html(car.color)
+        $('#car-prisoners').html(car.prisoner)
+        $('#car-polices').html(car.user)
+        var level = "无"
+        if(car.level == '1') {
+            level = "一级"
+        } else if(car.level == '2') {
+            level = "二级"
+        } else if(car.level == '3') {
+            level = "三级"
+        } else if(car.level == '4') {
+            level = "四级"
+        }
+        $('#car-level').html(level)
+        if(car.carPhoto == undefined || car.carPhoto == null) {
+        	document.getElementById('car-photo').src = '../static/img/no_img.jpeg'
+        } else {
+        	document.getElementById('car-photo').src = car.carPhoto
+        }
+        var car_index = getCarTaskById(car.carNo)
+        if(car_index != -1) {
+            var car = tasks[car_index]
+            $('#video3').title = car.carNo
+            $('#video1').title = car.carNo
+            if(car.carVideoUri != undefined && car.carVideoUri != null) {
+            	$('#video1_title').html(car.carNo + " 车内监控")
+	            switchVideo('video3', car.carVideoUri);
+	            switchVideo('video1', car.carVideoUri);
+	        } else {
+	        	$('#video1_title').html('请选择车辆')
+	        	switchVideo('video3', "");
+	        	switchVideo('video1', "");
+	        }
+        }
+    }
 
 
+	function getAlertsIndexById(id) {
+		for (var i = 0; i < alerts.length; i++) {
+			if(alerts[i].id === id) {
+				return i;
+			}
+		}
+		return -1
+	}
+
+	var is_new_alert = false;
+	function freshAlerts() {
+		$.ajax({
+	        url:'http://' + server_ip_port_risk + '/exceptions/getAllExceptions',
+	        type:'GET',
+	        dataType:'json',
+	        async:true,
+	        success:function (msg) {
+                var now = new Date();
+                msg.forEach(alert => {
+                	var index = getAlertsIndexById(alert.id);
+                	if(index > -1) {
+                		alerts[index].state = 1
+                		if(alert.dealState != null && alert.dealState === '1') {
+                        	alerts[index].state = 2
+                        }
+                		if(alert.misdeclaration) {
+                        	alerts[index].state = 3
+                        }
+                	} else {
+                        var state = 1
+                        if(alert.dealState != null && alert.dealState === '1') {
+                        	state = 2
+                        }
+                        if(alert.misdeclaration) {
+                        	state = 3
+                        }
+                        alerts.unshift({'id': alert.id, 'prisoners': [alert.prisonerId], 'time': alert.createAt, 'cars': [alert.carNo], 'state': state, 'level': alert.risk_level, 'comment': alert.comment})
+                        if(!is_new_alert) {
+                        	$('#showNewAlertModal').modal('show')
+                        	is_new_alert = true
+                        }
+                	}
+                })
+                setAlerts(alerts)
+            }
+		})
+	}
+	$('#showNewAlertModal').on('hide.bs.modal', function () {
+	 	is_new_alert = false
+	});
+	var getAlertTimer = setInterval(freshAlerts, 5000)
+
+    function setAlerts(alerts) {
+        var alerts_string = ""
+        alerts.forEach(alert => {
+            if(alert.state === 2) {
+                alert.cars.forEach(carNo => {
+                    var marker_index = getCarMarkerById(carNo)
+                    if(marker_index != -1) {
+                        if(carNo === selected_prisoner.carNo) {
+                            markers[marker_index].setIcon('../static/img/yellow_car.png')
+                            markers[marker_index].B.icon = '../static/img/yellow_car.png'
+                        } else {
+                            markers[marker_index].setIcon('../static/img/car.png')
+                            markers[marker_index].B.icon = '../static/img/car.png'
+                        }
+                    }
+                })
+            }
+        })
+        alerts.forEach(alert => {
+            if(alert.state === 1) {
+                alert.cars.forEach(carNo => {
+                    var marker_index = getCarMarkerById(carNo)
+                    if(marker_index != -1) {
+                        markers[marker_index].setIcon('../static/img/red_car.png')
+                        markers[marker_index].B.icon = '../static/img/red_car.png'
+                    }
+                })
+            }
+        })
+        alerts.forEach(alert => {
+            var color = "#ffffff"
+            var state = "处理完成"
+            var alert_class = ""
+            var level = alert.level >= 80 ? '1' : '2';
+            if(alert.state === 1) {
+                state = "未处理"
+                if(alerts_string === "") {
+                    alert_class = 'currentAlert'
+                } else {
+                    alert_class = 'workingAlert'
+                }
+                if(alert.level === '1') {
+                    color = "#FF2D2D"
+                    level = '紧急'
+                } else {
+                    color = "#FFA042"
+                    level = '一般'
+                }
+            } else if(alert.state === 2) {
+                state = "已处理"
+                if(alert.level === '1') {
+                    color = "#FFDC35"
+                    level = '紧急'
+                } else {
+                    level = '一般'
+                }
+            } else {
+            	state = "误报"
+                if(alert.level === '1') {
+                    level = '紧急'
+                } else {
+                    level = '一般'
+                }
+            }
+            
+            var prisonerNames = ""
+            alert.prisoners.forEach(prisonerNo => {
+                var prisoner_index = getPrisonerById(prisonerNo)
+                if(prisoner_index != -1) {
+                    prisonerNames += prisoners[prisoner_index].prisonerName + ","
+                }
+            })
+            if(prisonerNames.length > 0) {
+                prisonerNames = prisonerNames.substring(0, prisonerNames.length - 1)
+            }
+            var carNames = ""
+            alert.cars.forEach(carNo => {
+                carNames += carNo + ","
+            })
+            if(carNames.length > 0) {
+                carNames = carNames.substring(0, carNames.length - 1)
+            }
+
+    		var now = new Date(alert.time);
+        	var y=now.getFullYear();
+            var mt=now.getMonth()+1;
+            var day=now.getDate();
+            var h=now.getHours();//获取时
+            var m=now.getMinutes();//获取分
+            var s=now.getSeconds();//获取秒
+            
+            alerts_string += "<tr title='点击查看事件详情' class='" + alert_class + "'><td>" + timeFormat(mt) + "-" + timeFormat(day) + " " + timeFormat(h) + ":" + timeFormat(m) + "</td><td>" + prisonerNames + "</td><td>" + carNames + "</td><td style='color:" + color + "'>" + state + "</td><td style='color:" + color + "'>" + level + "</td></tr>"
+            //alerts_string += "<tr title='点击查看事件详情' class='" + alert_class + "'><td>" + alert.prisonerName + "</td><td>" + alert.time + "</td><td>" + "<img src='../static/img/locate.png' style='height:50%'/>" + alert.car + "</td><td style='color:" + color + "'>" + state + "</td><td style='color:" + color + "'>" + level + "</td></tr>"
+            
+        })
+        if(alerts_string.length > 0) {
+        	$('#alert-table tbody').html(alerts_string)
+        }
+        //只通过前端来修改状态可能会导致点击警告事件与获得所有警告函数冲突，两者同时访问alerts，存在异步问题
+        $("#alert-table td").click(function(){
+            //var tdSeq = $(this).parent().find("td").index($(this)[0]);
+            var trSeq = $(this).parent().parent().find("tr").index($(this).parent()[0]);
+            selected_alert = alerts[trSeq];
+            var prisoner_index = getPrisonerById(selected_alert.prisoners[0])
+            if(prisoner_index != -1) {
+                selected_prisoner = prisoners[prisoner_index]
+                setPrisonerNamePhoto()
+            }
+            setAlertInfo(selected_alert)
+            $('#alertInfoModal').modal('show')
+            //clearInterval(alertTableScollTimer);
+            //canAlertScroll = false
+        });
+    }
+    // var alertTimer = setInterval(function () {
+    //     setAlerts(alerts.sort((a, b) =>{return a.time.localeCompare(b.time)});
+    // }, 3000)
+
+    function setAlertInfo(selected_alert) {
+    	var alert = selected_alert
+        document.getElementById("alert-detail").value = alert.comment == null ? '' : alert.comment
+        $('#alert-level').html(alert.level)
+        if(alert.state === 1) {
+        	$('#alert-state').html("未处理")
+        } else if(alert.state === 2) {
+        	$('#alert-state').html("已处理")
+        } else {
+        	$('#alert-state').html("误报")
+        }
+        var now = new Date(alert.time);
+    	var y=now.getFullYear();
+        var mt=now.getMonth()+1;
+        var day=now.getDate();
+        var h=now.getHours();//获取时
+        var m=now.getMinutes();//获取分
+        var s=now.getSeconds();//获取秒
+        $('#alert-time').html(timeFormat(y) + "-" + timeFormat(mt) + "-" + timeFormat(day) + " " + timeFormat(h) + ":" + timeFormat(m) + ":" + timeFormat(s))
+        $('#alert-prisoners').html(selected_prisoner.prisonerName)
+        if(alert.state === 2) {
+        	$("#alert-deal").hide()
+        	$("#alert-error").show()
+        } else if(alert.state === 3) {
+        	$("#alert-deal").show()
+        	$("#alert-error").hide()
+        } else {
+        	$("#alert-error").show()
+        	$("#alert-deal").show()
+        }
+    }
+    $("#alert-save").click(function(){
+    	$.ajax({
+	        url:'http://' + server_ip_port_risk + '/exceptions/comment?id=' + selected_alert.id + '&comment=' + document.getElementById("alert-detail").value,
+	        type:'POST',
+	        dataType:'json',
+	        async:true,
+	        success:function (msg){
+            },
+            complete:function (XMLHttpRequest, textStatus) {
+            	if(XMLHttpRequest.status == 200) {
+	                showInfoModal("保存成功", 2000)
+	                selected_alert.comment = document.getElementById("alert-detail").value
+		        	freshAlerts()
+            	} else {
+            		showInfoModal("操作失败", 3000)
+            	}
+            },
+            error: function (XMLHttpRequest, textStatus, thrownError) {
+                	//showInfoModal("操作失败", 3000)
+            }
+		})
+		return false
     });
+    $("#alert-deal").click(function(){
+        $.ajax({
+	        url:'http://' + server_ip_port_risk + '/exceptions/changeState?id=' + selected_alert.id,
+	        type:'POST',
+	        dataType:'json',
+	        async:true,
+            success:function (msg){
+            },
+            complete:function (XMLHttpRequest, textStatus) {
+            	if(XMLHttpRequest.status == 200) {
+	                showInfoModal("成功设为已处理", 2000)
+	                selected_alert.state = 2
+	                selected_alert.comment = document.getElementById("alert-detail").value
+	                setAlertInfo(selected_alert)
+		        	freshAlerts()
+            	} else {
+            		showInfoModal("操作失败", 3000)
+            	}
+            },
+            error: function (XMLHttpRequest, textStatus, thrownError) {
+                	//showInfoModal("操作失败", 3000)
+            }
+		})
+		return false
+    });
+    $("#alert-error").click(function(){
+        $.ajax({
+	        url:'http://' + server_ip_port_risk + '/exceptions/misdeclaration?id=' + selected_alert.id,
+	        type:'POST',
+	        dataType:'json',
+	        async:true,
+	        success:function (msg){
+            },
+            complete:function (XMLHttpRequest, textStatus) {
+            	if(XMLHttpRequest.status == 200) {
+	                showInfoModal("成功设为误报", 2000)
+	                selected_alert.state = 3
+	                selected_alert.comment = document.getElementById("alert-detail").value
+	                setAlertInfo(selected_alert)
+		        	freshAlerts()
+            	} else {
+            		showInfoModal("操作失败", 3000)
+            	}
+            },
+            error: function (XMLHttpRequest, textStatus, thrownError) {
+                	//showInfoModal("操作失败", 3000)
+            }
+		})
+		return false
+    });
+ //    $('#alertInfoModal').on('hide.bs.modal', function () {
+	//  	// alertTableScollTimer = setInterval(moveAlertScoll, 50);
+	//  	// canAlertScroll = true
+	// });
+</script>
 
+<script type="text/javascript">
+	var deviceAll = [{'name': '云端', 'device_id': '213', 'kind': 'cloud','children':[{'name': '服务器1', 'device_id': '321', 'kind': 'server','children':[{'name': '手持机1', 'device_id': '312', 'kind': 'device', 'state': '1'},{'name': '手持机2', 'device_id': '555', 'kind': 'device', 'state': '1'},{'name': '手持机3', 'device_id': '53', 'kind': 'device', 'state': '0'},{'name': '手持机4', 'device_id': '53', 'kind': 'device', 'state': '1'}],}],}]
+	var currentDevice = {'device_id': '无设备','deviceNo': ''}
     deviceChart = echarts.init(document.getElementById('device-chart'));
     deviceOption={
         series:{
             name:'树图',
             type:'tree',
             orient:'vertical',
-            height:180,
             symbol: 'circle',
             symbolSize: 40,
+            top: '8%', //距离上
+            left: '1%', //左
+            bottom: '15%', //下
+            right: '3%', //右的距离
             itemStyle: {
                 normal: {
                     label: {
@@ -734,14 +1969,12 @@
                         position: 'bottom',
                         textStyle: {
                             color: '#fdfdff',
-                            fontSize: 10,
-
                         }
                     },
                     lineStyle: {
                         color: '#fdfdff',
                         width: 1,
-                        length:20,
+                        length:10,
                         type: 'broken' // 'curve'|'broken'|'solid'|'dotted'|'dashed'
                     }
                 },
@@ -751,123 +1984,131 @@
                     }
                 }
             },
-            data: [
-                {
-                    name: '云中心',
-                    value: 6,
-                    symbolSize: [48, 48],
-                    symbol: 'image://../static/img/cloud.png',
-                    itemStyle: {
-                        normal: {
-                            label: {
-                                show: false
-                            }
-                        }
-                    },
-                    children: [
-                        {
-                            name: '车载服务器',
-                            value: 4,
-                            symbol: 'image://../static/img/serverv3.png',
-                            itemStyle: {
-                                normal: {
-                                    label: {
-                                        show: false
-                                    }
-                                }
-                            },
-                            symbolSize: [48, 48],
-                            children: [
-                                {
-                                    name: '设备1',
-                                    symbol: 'image://../static/img/phone.png',
-                                    symbolSize: [60,60],
-                                    value: 4,
-                                    itemStyle: {
-                                        normal: {
-                                            color: '#fa6900',
-                                            label: {
-                                                show: true,
-                                                position: 'right'
-                                            },
-
-                                        },
-                                        emphasis: {
-                                            label: {
-                                                show: false
-                                            },
-                                            borderWidth: 0
-                                        }
-                                    }
-                                },
-                                {
-                                    name: '设备2',
-                                    value: 4,
-                                    symbol: 'image://../static/img/phone.png',
-                                    symbolSize: [48,48],
-                                    itemStyle: {
-                                        normal: {
-                                            label: {
-                                                show: true,
-                                                position: 'right',
-                                                formatter: "{b}"
-                                            },
-                                            color: '#fa6900',
-                                            borderWidth: 2,
-                                            borderColor: '#cc66ff'
-
-                                        },
-                                        emphasis: {
-                                            borderWidth: 0
-                                        }
-                                    }
-                                },
-                                {
-                                    name: '设备3',
-                                    value: 2,
-                                    symbol: 'image://../static/img/phone.png',
-                                    symbolSize: [48,48],
-                                    itemStyle: {
-                                        normal: {
-                                            label: {
-                                                position: 'right'
-                                            },
-                                            color: '#fa6900',
-                                            brushType: 'stroke',
-                                            borderWidth: 1,
-                                            borderColor: '#999966',
-                                        },
-                                        emphasis: {
-                                            borderWidth: 0
-                                        }
-                                    }
-                                }
-                            ]
-
-                        }
-                    ]
-                }
-            ]
-
-
-
-
-        }
+            data: []
+        },
+        tooltip: {
+	        trigger: 'item',
+	        formatter: function (params, ticket, callback) {
+	        	var res = ''
+	        	if(params.value <= 3) {
+	        		res += '<p>设备名：' + params.data.name + '</p>'
+	        	} else {
+	        		res += '<p>设备名：' + params.data.type + '</p>'
+	        	}
+	        	if (params.value == 2 || params.value == 3) {
+	        		res += '<p>持有者：' + (params.data.userName == null ? '无' : params.data.userName) + '</p>'
+	        		res += '<p>所压犯人：' + (params.data.prisonerName == null ? '无' : params.data.prisonerName) + '</p>'
+	        		res += '<p>所属任务：' + (params.data.taskNo == null ? '无' : params.data.taskNo) + '</p>'
+	        		res += '<p>所在车辆：' + (params.data.carNo == null ? '无' : params.data.carNo) + '</p>'
+	        	}
+	        	return res
+	        }
+	    }
     };
     deviceChart.setOption(deviceOption);
 
+    function setDeviceTree(devices) {
+    	var res = []
+    	devices.forEach(device => {
+    		var temp = {}
+    		
+    		if(device.device === undefined) {
+    			temp.deviceNo =  device.vervelNo === undefined ? device.braceletNo : device.vervelNo
+    			temp.device_id = device.vervelNo === undefined ? device.braceletNo : device.vervelNo
+    			temp.type =  device.vervelNo === undefined ? "手环" : "脚环"
+    			temp.symbolSize = 20
+    			if(device.deviceStatus == false) {
+	                temp.value = 4
+	                temp.symbol = device.vervelNo === undefined ? "image://../static/img/bracelet_error.png" : "image://../static/img/vervel_error.png"
+	                //temp.itemStyle = "{normal: {color: '#fa6900',label: {show: true,position: 'bottom',textStyle:{color: '#fdfdff',}},},emphasis: {label: {show: false}, borderWidth: 0}}"
+	            } else {
+	    			temp.value = 5
+	    			temp.symbol = device.vervelNo === undefined ? "image://../static/img/bracelet.png" : "image://../static/img/vervel.png"
+	    			// temp.itemStyle = "{normal: {color: '#fa6900',label: {show: true,position: 'bottom'},},emphasis: {label: {show: false}, borderWidth: 0}}"
+	    		}
+    		} else if(device.device.deviceType === 'cloud') {
+    			temp.device_id = device.device.id
+	    		temp.name = device.device.id
+	    		temp.deviceNo = device.device.deviceNo
+    			temp.value = 0
+    			temp.symbol = 'image://../static/img/cloud.png'
+    			temp.symbolSize = 50
+    			//temp.itemStyle = '{normal: {label: {show: false}}}'
+    			temp.type = 'cloud'
+    			if(device.children != undefined) {
+    				temp.children = setDeviceTree(device.children)
+    			}
+    		} else if(device.device.deviceType == 'server') {
+    			temp.device_id = device.device.id
+	    		temp.name = device.device.id
+	    		temp.deviceNo = device.device.deviceNo
+    			temp.value = 1
+    			temp.symbol = 'image://../static/img/serverv3.png'
+    			temp.symbolSize = 50
+    			//temp.itemStyle = '{normal: {label: {show: false}}}'
+    			temp.type = 'server'
+    			if(device.children != undefined) {
+    				temp.children = setDeviceTree(device.children)
+    			}
+    		} else if(device.device.deviceType == 'phone') {
+    			temp.device_id = device.device.id
+	    		temp.name = device.device.id
+	    		temp.deviceNo = device.device.deviceNo
+    			temp.name = "手持机" + temp.name
+    			temp.userName = device.device.user.userName
+    			temp.prisonerName = device.device.user.prisonerName
+    			temp.prisonerId = device.device.user.prisonerId
+    			temp.taskNo = device.task.taskNo
+    			temp.carNo = device.task.carNo
+    			temp.type = 'phone'
+    			temp.symbolSize = 30
+    			if(device.device.deviceStatus == false) {
+	                temp.value = 3
+	                temp.symbol = 'image://../static/img/re_phone.png'
+	                //temp.itemStyle = "{normal: {color: '#fa6900',label: {show: true,position: 'right'},},emphasis: {label: {show: false}, borderWidth: 0}}"
+	            } else {
+	    			temp.value = 2
+	    			temp.symbol = 'image://../static/img/phone.png'
+	    			//temp.itemStyle = "{normal: {color: '#fa6900',label: {show: true,position: 'right'},},emphasis: {label: {show: false}, borderWidth: 0}}"
+	    		}
+	    		var subtree = []
+	    		if(device.bracelet != undefined) {
+	    			subtree.push(device.bracelet)
+    			}
+    			if(device.vervel != undefined) {
+    				subtree.push(device.vervel)
+    			}
+    			temp.children = setDeviceTree(subtree)
+    		}
+    		res.push(temp)
+    	})
+    	return res
+    }
+
+    function getAllDevices() {
+    	$.ajax({
+	        url:'http://' + server_ip_port_dvc + '/devices/get_all',
+	        type:'GET',
+	        dataType:'json',
+	        async:true,
+	        success:function (msg) {
+	        	if(isDeviceNew(msg, deviceAll)) {
+	        		//console.log('NewDevices')
+	        		deviceAll=msg;
+	        		var deviceTree = [{'device':{'id': '边缘服务器', 'deviceNo': '321', 'deviceType': 'server'},'children': deviceAll,}]
+	            	deviceOption.series.data = setDeviceTree(deviceTree);
+    				deviceChart.setOption(deviceOption);
+    				setFirstDevice(deviceAll)
+	        	}
+	        }
+	    });
+    }
+
+    var getAllDevicesTimer = setInterval(getAllDevices, 3000)
+    getAllDevices()
+
     deviceInfoChart=echarts.init(document.getElementById("deviceInfo-chart"));
-
     deviceInfoOption={
-        title:{
-            show:true,
-            text:'设备1',
-            textStyle: {//主标题文本样式{"fontSize": 18,"fontWeight": "bolder","color": "#333"}
-                fontSize: 16,
-                color:'#fff',
-
-            },
-        },
         tooltip : {
             formatter: "{a} <br/>{c}%"
         },
@@ -881,7 +2122,8 @@
                 // startAngle: 180,
                 // endAngle: 0,
                 splitNumber: 10,
-                radius: '70%',
+                radius: '80%',
+                center: ['50%', '45%'],
 
                 axisLine: {            // 坐标轴线
                     lineStyle: {       // 属性lineStyle控制线条样式
@@ -913,11 +2155,7 @@
                 },
 
                 title : {
-                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    // fontWeight: 'bolder',
-                    fontSize: 12,
                     color: '#fff',
-                    offsetCenter:['-50%','110%'],
                 },
                 itemStyle: {
                     normal: {
@@ -940,17 +2178,17 @@
                     fontSize:12,
                     color:'#fff',
 
-                    offsetCenter:['100%','110%'],
+                    offsetCenter:['0','50%'],
 
                     rich: {}
                 },
-                data:[{value: 15.6, name: 'cpu占用率 :'}]
+                data:[{value: 0, name: 'cpu'}]
             },
             {
                 name: '内存占用率',
                 type: 'gauge',
-                center: ['20%', '50%'],    // 默认全局居中
-                radius: '70%',
+                center: ['20%', '45%'],    // 默认全局居中
+                radius: '80%',
                 min:0,
                 max:100,
                 splitNumber:10,
@@ -991,7 +2229,6 @@
                     // fontWeight: 'bolder',
                     fontSize: 12,
                     color: '#fff',
-                    offsetCenter:['-50%','110%'],
                 },
                 itemStyle: {
                     normal: {
@@ -1010,17 +2247,17 @@
                     fontSize:12,
                     color:'#fff',
 
-                    offsetCenter:['100%','110%'],
+                    offsetCenter:['0%','50%'],
 
                     rich: {}
                 },
-                data:[{value: 20.5, name: '内存占用率 :'}]
+                data:[{value: 0, name: '内存'}]
             },
             {
                 name: '耗电量',
                 type: 'gauge',
-                center: ['80%', '50%'],    // 默认全局居中
-                radius: '70%',
+                center: ['80%', '45%'],    // 默认全局居中
+                radius: '80%',
                 min: 0,
                 max: 100,
 
@@ -1067,7 +2304,6 @@
                     // fontWeight: 'bolder',
                     fontSize: 12,
                     color: '#fff',
-                    offsetCenter:['-50%','110%'],
                 },
                 detail : {
                     // 其余属性默认使用全局文本样式，详见TEXTSTYLE
@@ -1081,27 +2317,183 @@
                     fontSize:12,
                     color:'#fff',
 
-                    offsetCenter:['70%','110%'],
+                    offsetCenter:['0%','50%'],
 
                     rich: {}
                 },
-                data:[{value: 16.4, name: '耗电量 :'}]
+                data:[{value: 0, name: '耗电量'}]
             }
         ]
 
     };
     deviceInfoChart.setOption(deviceInfoOption);
-    setInterval(function (){
-        deviceInfoOption.series[0].data[0].value = (Math.random()*20).toFixed(1) - 0;
-        deviceInfoOption.series[1].data[0].value = (Math.random()*20).toFixed(1) - 0;
-        // deviceInfoOption.series[2].data[0].value = (Math.random()*8).toFixed(2) - 0;
-        // deviceInfoOption.series[3].data[0].value = (Math.random()*2).toFixed(2) - 0;
-        deviceInfoChart.setOption(deviceInfoOption,true);
-    },5000);
-
-
-
     var socket;
+    deviceChart.on('click', function(params) {
+    	if(params.value === 2 || params.value === 3) {
+    		setDeviceInfo(params.data)
+		}
+	})
+
+	function setDeviceInfo(device) {
+		if(device != null) {
+			currentDevice.device_id = device.device_id
+			currentDevice.deviceNo = device.deviceNo
+			if(device.prisonerId != undefined && device.prisonerId != null) {
+    			var prisoner_index = getPrisonerById(device.prisonerId)
+                if(prisoner_index != -1) {
+                    selected_prisoner = prisoners[prisoner_index]
+                    setPrisonerNamePhoto()
+                    if(selected_prisoner.record != undefined) {
+			        	showInfoModal('犯人' + selected_prisoner.prisonerName + '的手环断开连接！', 3000)
+			        }
+                }
+    		}
+    		$('#device-title').html("手持机" + currentDevice.device_id + "  性能监控")
+    		getDeviceStates()
+		}
+	}
+
+	function setFirstDevice(deviceAll) {
+    	var device = null
+    	for(var i = 0; i < deviceAll.length; i++) {
+    		if(deviceAll[i].device != undefined) {
+    			device = deviceAll[i];
+    			break;
+    		}
+    	}
+    	if(device != null) {
+    		setDeviceInfo({'deviceNo': device.device.deviceNo, 'device_id': device.device.id})
+    	}
+    	
+    	// for(var i = 0; i < deviceAll.length; i++) {
+    	// 	if(deviceAll[i].device.user.prisonerId != null) {
+    	// 		selected_prisoner.prisonerName = deviceAll[i].device.user.prisonerName
+    	// 		selected_prisoner.prisonerId = deviceAll[i].device.user.prisonerId
+    	// 		setPrisonerNamePhoto()
+    	// 		break;
+    	// 	}
+    	// }
+    }
+
+    window.addEventListener('resize', function() {
+        chartResize();
+        // var canvas = document.getElementsByClassName("canvas")[0];
+        // canvas.style.height = "" + document.body.scrollHeight + "px";
+    });
+
+    function chartResize() {
+        var device_chart = document.getElementById("device-chart");
+        device_chart.style.height = "" + (device_chart.parentNode.offsetHeight) + "px";
+        deviceOption.series.symbolSize = device_chart.parentNode.offsetHeight * 0.13
+        console.log(deviceOption.series.symbolSize)
+        deviceChart.setOption(deviceOption)
+        deviceChart.resize();
+
+        var deviceInfo_chart = document.getElementById("deviceInfo-chart");
+        //deviceInfo_chart.style.width = "" + (deviceInfo_chart.parentNode.offsetWidth * 0.99) + "px";
+        deviceInfo_chart.style.height = "" + (deviceInfo_chart.parentNode.offsetHeight * 0.93) + "px";
+        deviceInfoChart.resize()
+
+        realtimeChart.resize();
+    }
+
+    var deviceStateTimer = setInterval(function () {
+    	if(currentDevice.deviceNo != undefined && currentDevice.deviceNo != null && currentDevice.deviceNo != '') {
+    		if(currentDevice.deviceStatus) {
+    			$.ajax({
+			        url:'http://' + server_ip_port_dvc + '/deviceRunInfo/latestRunInfo?deviceNo=' + currentDevice.deviceNo,
+			        type:'GET',
+			        dataType:'json',
+			        async:true,
+			        success:function (msg) {
+			        	if(msg.memoryUsageRate != undefined) {
+			        		deviceInfoOption.series[0].data[0].value = Number(msg.memoryUsageRate);
+				            deviceInfoOption.series[1].data[0].value = Number(msg.cpuUsageRate);
+				            deviceInfoOption.series[2].data[0].value = Number(msg.dumpEnergyRate);
+				            deviceInfoChart.setOption(deviceInfoOption, true);
+				            $('#device-title').html("手持机" + currentDevice.device_id + "  性能监控")
+			        	} else {
+			        		$('#device-title').html("手持机" + currentDevice.device_id + "  断开连接")
+			        	}
+		            }
+				})
+				$('#device-title').html("手持机" + currentDevice.device_id + "  性能监控")
+    		} else {
+    			$('#device-title').html("手持机" + currentDevice.device_id + "  断开连接")
+    		}
+    	} else {
+    		$('#device-title').html("无设备")
+    	}
+    }, 3000)
+
+	function getDeviceStates() {
+		// if (typeof (WebSocket) == "undefined") {
+		//         console.log("遗憾：您的浏览器不支持WebSocket");
+		//         $('#device-title').html("手持机" + currentDevice.device_id + "  连接失败")
+		//     } else {
+		//         console.log("恭喜：您的浏览器支持WebSocket");
+
+		//         if(socket != undefined && socket.readyState == 1) {
+	 //    			socket.close();
+	 //    		}
+		//         socket = new WebSocket("ws://" + device_ip_port + "/ws/webSocket/1");
+		//         //socket = new WebSocket("ws://" + "10.108.122.144:8089" + "/ws/webSocket/1");
+		//         //连接打开事件
+		//         socket.onopen = function() {
+		//             console.log("Socket 已打开");
+		//             socket.send("消息发送测试(From Client)");
+		//         };
+		//         //收到消息事件
+		//         socket.onmessage = function(msg) {
+		//             // console.log(msg.data);
+		//             // var reg0 = new RegExp('{' , "g");
+		//             // var reg1 = new RegExp("}","g");
+		//             // var temp=new RegExp('delay: (.*), pack' , "g").exec(msg.data)[1];
+		//             //  console.log(temp);
+		//             //设备的实时数据
+		//             //var devId=temp[0].replace('device:','').split(';')[0].split(':')[1];
+		//             var battery = new RegExp('battery: (.*)%, cpuRate' , "g").exec(msg.data)[1]
+		//             var cpuRate = new RegExp('cpuRate: (.*)%, memRate' , "g").exec(msg.data)[1]
+		//             var memRate = new RegExp('memRate: (.*)%}' , "g").exec(msg.data)[1]
+		//             var netDelay = new RegExp('delay: (.*), pack' , "g").exec(msg.data)[1]
+
+		//             console.log(deviceInfoOption.series[0].data)
+		//             deviceInfoOption.series[0].data[0].value = Number(memRate);
+		//             deviceInfoOption.series[1].data[0].value = Number(cpuRate);
+		//             deviceInfoOption.series[2].data[0].value = Number(battery);
+		//             deviceInfoChart.setOption(deviceInfoOption, true);
+		//             //document.getElementById("delay").innerHTML=netDelay+'ms';
+		//             //得到select的
+		//             $('#device-title').html("手持机" + currentDevice.device_id + "  性能监控")
+		//         };
+		//         //连接关闭事件
+		//         socket.onclose = function() {
+		//             console.log("Socket已关闭");
+		//             $('#device-title').html("手持机" + currentDevice.device_id + "  连接关闭")
+		//         };
+		//         //发生了错误事件
+		//         socket.onerror = function() {
+		//             console.log("Socket发生了错误");
+		//             $('#device-title').html("手持机" + currentDevice.device_id + "  连接异常")
+		//         }
+
+		//         //窗口关闭时，关闭连接
+		//         window.unload=function() {
+		//             socket.close();
+		//         };
+		//     }
+	}
+    // setInterval(function (){
+    //     deviceInfoOption.series[0].data[0].value = (Math.random()*20).toFixed(1) - 0;
+    //     deviceInfoOption.series[1].data[0].value = (Math.random()*20).toFixed(1) - 0;
+    //     // deviceInfoOption.series[2].data[0].value = (Math.random()*8).toFixed(2) - 0;
+    //     // deviceInfoOption.series[3].data[0].value = (Math.random()*2).toFixed(2) - 0;
+    //     deviceInfoChart.setOption(deviceInfoOption,true);
+    // },5000);
+
+
+
+    /*var socket;
     var battery;
     var cpuRate ;
     var memRate ;
@@ -1111,7 +2503,7 @@
     } else {
         console.log("恭喜：您的浏览器支持WebSocket");
 
-        socket = new WebSocket("ws://10.108.122.144:8089//ws/webSocket/1");
+        socket = new WebSocket("ws://" + server_ip_port + "//ws/webSocket/1");
         //连接打开事件
         socket.onopen = function() {
             console.log("Socket 已打开");
@@ -1122,7 +2514,6 @@
             console.log(msg.data);
             var netDelay;
             var temp;
-
 
             var reg0 = new RegExp( '{' , "g" );
             var reg1 = new RegExp("}","g");
@@ -1135,21 +2526,10 @@
             // memRate=temp[0].replace('device:','').split(';')[3].split(':')[1];
             // console.log(devId);
             // mobileDeviceOption.series[0].data[].des = battery;
-
-
-
             //网络时延
             netDelay=temp[1].replace('Network:','').split(',')[0].split(':')[1];
             document.getElementById("delay").innerHTML=netDelay+'ms';
             //得到select的
-
-
-
-
-
-
-
-
         };
         //连接关闭事件
         socket.onclose = function() {
@@ -1157,16 +2537,15 @@
         };
         //发生了错误事件
         socket.onerror = function() {
-            alert("Socket发生了错误");
+            showInfoModal("Socket发生了错误");
         }
 
         //窗口关闭时，关闭连接
         window.unload=function() {
             socket.close();
         };
-    }
+    }*/
 </script>
-
 
 </body>
 </html>
